@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +18,18 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 */
+//Route::middleware["auth"]
+Route::group(["middleware" => ["guest"]], function () {
+    Route::get("authentication", function () {
+        return view("authentication");
+    })->name("authentication");
+});
+
+Route::get("/getCurrentUser", function () {
+    return (Auth::user());
+});
+
 Route::get("/", function () {
     return view("mainpage");
-}
-);
+});
 require __DIR__.'/auth.php';
