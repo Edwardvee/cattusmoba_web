@@ -29,6 +29,9 @@ Route::get("/getCurrentUser", function () {
     return (Auth::user());
 });
 
+//GET O POST. Cuando nostros accedamos a la ruta / del sitio.
+// Al lado le colocas una coma y definis una funcion sin nombre  (Funciones anonima)-
+// El view es una funcion normal, la cual tiene un parametro.
 Route::get("/", function () {
     return view("mainpage");
 });
