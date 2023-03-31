@@ -2,6 +2,10 @@
 
 @section("http_body")
 
+<head>
+  <title>Kyatsu</title>
+</head>
+
 <body>
   @php
   echo(auth()->user())
@@ -9,7 +13,7 @@
   <center>
     <h1 class=""> Aca comienza la buena vida</h1>
     <h2 class=""> Una aventura epica auspiciada por Dasomnya </h2>
-    <h3 class=""> ACCIÓN EN EQUIPOg • GRATIS </h3>
+    <h3 class=""> ACCIÓN EN EQUIPO • GRATIS </h3>
     <img src="img/divider.png">
     <form action="{{ route('login') }}">
       <input type="text" name="username" placeholder="Nombre de usuario" required></input>
@@ -24,7 +28,7 @@
       </ul>
     </div>
     @endif
-    <form action="{{ route('register') }}" method="POST">
+    <form class="register-user" action="{{ route('register') }}" method="POST">
       @csrf
       <input type="text" name="name" placeholder="Nombre de usuario" required></input>
       <input type="text" name="email" placeholder="Ingrese su email" required></input>
@@ -32,5 +36,7 @@
       <input type="text" name="password_confirmation" placeholder="Repirta su contrasenia" required></input>
       <input type="submit"></input>
     </form>
+
+
 </body>
 @endsection("http_body")

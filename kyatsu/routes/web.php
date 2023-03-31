@@ -20,19 +20,25 @@ Route::get('/', function () {
 */
 //Route::middleware["auth"]
 Route::group(["middleware" => ["guest"]], function () {
-    Route::get("authentication", function () {
-        return view("authentication");
-    })->name("authentication");
+  Route::get("authentication", function () {
+    return view("authentication");
+  })->name("authentication");
 });
 
 Route::get("/getCurrentUser", function () {
-    return (Auth::user());
+  return (Auth::user());
 });
 
+Route::get("/gameinfo", function () {
+  return view("gameinfo");
+})->name("gameinfo");
+Route::get("/heroes", function () {
+  return view("heroes");
+})->name("heroes");
 //GET O POST. Cuando nostros accedamos a la ruta / del sitio.
 // Al lado le colocas una coma y definis una funcion sin nombre  (Funciones anonima)-
 // El view es una funcion normal, la cual tiene un parametro.
 Route::get("/", function () {
-    return view("mainpage");
-});
-require __DIR__.'/auth.php';
+  return view("mainpage");
+})->name("mainpage");
+require __DIR__ . '/auth.php';
