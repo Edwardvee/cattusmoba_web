@@ -1,0 +1,83 @@
+/* .image-container{
+    
+}
+
+.main-image{
+    width: 20%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+} */
+/* section{
+    height:60vh;
+    width: 100%;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   background-attachment: absoulte;
+}
+.imgbg{
+    background-size: 100% 1200px;
+    background-image: url("https://giffiles.alphacoders.com/153/15370.gif");
+}
+ */
+ body{
+    padding:0px;
+    margin: 0;
+    
+ }
+ .img-title{
+    font-size: 50px;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #fff;
+    text-align: center;
+ }
+ 
+ header{
+    background: url(https://giffiles.alphacoders.com/153/15370.gif);
+    height: 100vh;
+    width: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    filter: brightness(0.80);
+}
+
+@media only screen and (max-width: 767px){
+    header h1{
+        font-size: 30px;
+    }
+    header p{
+        display: none;
+    }
+    header a{
+        padding: 5px 15px;
+    }
+} 
+header a {
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #fff;
+	background: #262626;
+	padding: 10px 30px;
+	margin-top: 10px;
+}
+        header p {
+	padding: 0 30%;
+	text-align: center;
+	color: #fff;
+        }

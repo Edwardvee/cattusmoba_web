@@ -5,13 +5,34 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link href="css/mainpage.css" rel="stylesheet">
+  <title> Kyatsu!</title>
 </head>
 
 <body>
-  <h1> Esta es la main page</h1>
+<!--   <div class="image-container">
+    <img class="main-image" src="img/adog.jpg"></img>
+  </div> -->
+<!--   <section class="imgbg"> 
+
+  </section> -->
+  <header>
+    <h1 class="img-title">Kyatsu! Moba</h1>
+    <p> ¿Eres digno de tanta accion?</p>
+    <a href="">Juega ahora</a>
+  </header>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>
+
 </body>
 
 @endsection("http_body")
