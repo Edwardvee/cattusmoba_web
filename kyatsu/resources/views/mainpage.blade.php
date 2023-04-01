@@ -16,11 +16,14 @@
 <!--   <section class="imgbg"> 
 
   </section> -->
-  <header>
+  <div> <!-- aunque no tenga sentido esto lo centra ._. -->
+ <header>
     <h1 class="img-title">Kyatsu! Moba</h1>
     <p> ¿Eres digno de tanta accion?</p>
     <a href="">Juega ahora</a>
   </header>
+</div>
+<div class="content">
     <h1> Esta es la main page</h1>
     <h1> Esta es la main page</h1>
     <h1> Esta es la main page</h1>
@@ -32,7 +35,7 @@
     <h1> Esta es la main page</h1>
     <h1> Esta es la main page</h1>
     <h1> Esta es la main page</h1>
-
+    </div>
 </body>
 
 @endsection("http_body")
