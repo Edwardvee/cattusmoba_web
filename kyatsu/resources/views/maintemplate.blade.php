@@ -20,9 +20,16 @@
       <a class="navbar-brand" href="https://overwatch.blizzard.com/es-es/"><img src="img/f.png" width="69" height="70"></img></a>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" style="font-size:23px" href="{{ route('gameinfo') }}">Informacion del juego </a>
-          </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  style="font-size:23px" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Informacion del juego
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Historia</a></li>
+            <li><a class="dropdown-item" href="#">Reglas</a></li>
+            <li><a class="dropdown-item" href="#">Cómo jugar</a></li>
+          </ul>
+        </li>
           <li class="nav-item">
             <a class="nav-link" style="font-size:23px" href="{{ route('heroes') }}">Héroes</a>
           </li>
