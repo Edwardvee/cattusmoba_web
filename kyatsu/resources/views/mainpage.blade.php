@@ -23,7 +23,7 @@
     <a href="">Juega ahora</a>
   </header>
 </div>
-<div class="content">
+<div class="content"> 
     <h1> Esta es la main page</h1>
     <h1> Esta es la main page</h1>
     <h1> Esta es la main page</h1>

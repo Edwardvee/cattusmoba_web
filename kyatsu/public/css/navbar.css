@@ -76,3 +76,13 @@
 .search-bar:valid a {
     display: block;
 }
+
+.dropdownDark{
+    background-color: var(--bs-body-color);
+    color:white;
+    width: 100%;
+}
+
+.dropdownText{
+    color:white;
+}
