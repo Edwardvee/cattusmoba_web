@@ -34,7 +34,7 @@
  <header>
     <h1 class="img-title">Kyatsu! Moba</h1>
     <p> ¿Eres digno de tanta accion?</p>
-    <a href="">Juega ahora</a>
+    <a href="https://tlauncher.org/installer">Juega ahora</a>
   </header>
 </div>
 
@@ -64,7 +64,7 @@
     <h1> Esta es la main page</h1>
     <h1> Esta es la main page</h1>
     <h1> Esta es la main page</h1>
-    <h1> Esta es la main page</h1>
+    <h1> Esta es la main page</h1>          
     <h1> Esta es la main page</h1>
     </div>
 </body>

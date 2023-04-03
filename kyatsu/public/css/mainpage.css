@@ -1,28 +1,4 @@
-/* .image-container{
-    
-}
 
-.main-image{
-    width: 20%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 10;
-    transform: translate(-50%, -50%);
-} */
-/* section{
-    height:60vh;
-    width: 100%;
-    background-position:center;
-    background-repeat: no-repeat;
-    background-size: cover;
-   background-attachment: absoulte;
-}
-.imgbg{
-    background-size: 100% 1200px;
-    background-image: url("https://giffiles.alphacoders.com/153/15370.gif");
-}
- */
  body{
     padding:0px;
     margin: 0;
