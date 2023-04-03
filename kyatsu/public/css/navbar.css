@@ -78,7 +78,7 @@
 }
 
 .dropdownDark{
-    background-color: var(--bs-body-color);
+    background-color: var(--bs-body-color); /* #212529 */
     color:white;
     width: 100%;
 }

@@ -92,3 +92,10 @@ header a {
     max-width: 1720px;
     margin:auto;
 }
+.cardTitle{
+    font-size: 50px;
+}
+.CrdRightSide{
+    background: rgb(33,37,41);
+    color: white;
+}
