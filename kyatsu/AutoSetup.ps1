@@ -206,13 +206,30 @@ composer install
 Copy-Item ($REPOSITORY_PATH.toString() + "\.env.example") -Destination ($REPOSITORY_PATH.toString() + "\.env")
 Write-Host "Las dependencias fueron configuradas exitosamente, configurando el framework" -ForegroundColor Green
 
-if ((Read-Host -Prompt "Deseas borrar la base de datos anterior de este sitio si es que tenias una? SI/NO") -eq "SI") {
-    php artisan migrate:rollback
+if ($null = (C:\xampp\mysql\bin\mysql.exe --batch --skip-column-names -e "SHOW DATABASES LIKE 'kyatsu';" -u root)) {
+    Write-Host "No se le solicitara borrar la base de datos ya que la misma no existe" -ForegroundColor Green
+} else {
+    if ((Read-Host -Prompt "Deseas borrar la base de datos anterior de este sitio si es que tenias una? SI/NO") -eq "SI") {
+        php artisan migrate:rollback
+    } else {
+        Write-Host "Usted marco que NO a borrar la base de datos anterior, eso puede ocasionar fallas, continuando..." -ForegroundColor Yellow
+    }
 }
+
+Write-Host "Generando KEY del repositorio..." -ForegroundColor Green
 php artisan key:generate --no-interaction
+
+Write-Host "Borrando cache del respositorio..." -ForegroundColor Green
 php artisan cache:clear --no-interaction
+
+Write-Host "Borrando cache de vistas del repositorio..." -ForegroundColor Green
 php artisan view:clear --no-interaction
-php artisan migrate --no-interaction
+
+Write-Host "Ejecutando las migraciones del repositorio..." -ForegroundColor Green
+php artisan migrate --no-interaction --force
+
+Write-Host "Ejecutando la siembra de la base de datos del proyecto..." -ForegroundColor Green
 php artisan db:seed
+
 Write-Host "Instalacion finalizada, avisa si hubo algun error o sigue sin funcionar" -ForegroundColor Green
 Write-Host "Acordate que el comando para iniciar es php artisan serve" -ForegroundColor Green
