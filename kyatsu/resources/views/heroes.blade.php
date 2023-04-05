@@ -13,7 +13,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col mt-3">
     <article class="card mt-1" >
   <img
     class="card__background"
@@ -34,7 +34,7 @@
 </article>
 
     </div>
-    <div class="col">
+    <div class="col mt-3">
     <article class="card">
   <img
     class="card__background"
@@ -55,7 +55,7 @@
 </article>
 
     </div>
-    <div class="col">
+    <div class="col mt-3">
     <article class="card">
   <img
     class="card__background"
@@ -83,7 +83,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col mt-3">
     <article class="card">
   <img
     class="card__background"
@@ -104,7 +104,7 @@
 </article>
 
     </div>
-    <div class="col" >
+    <div class="col mt-3">
     <article class="card">
   <img
     class="card__background" 
@@ -125,7 +125,7 @@
 </article>
 
     </div>
-    <div class="col">
+    <div class="col mt-3">
     <article class="card">
   <img
     class="card__background"
