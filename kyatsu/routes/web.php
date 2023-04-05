@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,15 @@ Route::group(["middleware" => ["guest"]], function () {
     return view("authentication");
   })->name("authentication");
 });
+
+//Route::group(['middleware' => ['can:access admin']], function () {
+//Route::resource('photos', ListUserResource::class)->name("users");
+Route::prefix("admin")->group(function () {
+  Route::resource('users', UserManagementController::class);
+
+});
+//})->name("admin");
+
 
 Route::get("/getCurrentUser", function () {
   return (Auth::user());
