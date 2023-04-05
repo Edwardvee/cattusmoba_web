@@ -49,6 +49,7 @@
 </svg></a>
         </form>
       </div>
+
     </div>
   </nav>
   @yield("http_body")
