@@ -39,7 +39,9 @@ Route::prefix("admin")->group(function () {
 Route::get("/getCurrentUser", function () {
   return (Auth::user());
 });
-
+Route::get("/dasomnya", function () {
+  return view("dasomnya");
+})->name("dasomnya");
 Route::get("/gameinfo", function () {
   return view("gameinfo");
 })->name("gameinfo");
@@ -53,3 +55,4 @@ Route::get("/", function () {
   return view("mainpage");
 })->name("mainpage");
 require __DIR__ . '/auth.php';
+

@@ -45,7 +45,7 @@
 
 .search-bar:hover,
 .search-bar:valid {
-    width: 200px;
+    width: 240px;
     cursor: pointer;
 }
 
@@ -63,16 +63,39 @@
 .a-search {
     display: none;
     position: absolute;
-    top: 70px;
+    top: 10%;
     bottom: 0;
-    left: 0;
+    left: 65%;
     right: 0;
     font-size: 20px;
-    color: white;
-    text-align: center;
-    width: 100%;
+    color: rgb(37, 36, 36);
+    text-align: right;
+    width: 10%;
+ 
 }
 
 .search-bar:valid a {
     display: block;
 }
+
+.dropdownDark{
+    background-color: var(--bs-body-color); /* #212529 */
+    color:white;
+    width: 100%;
+}
+
+.dropdownText{
+    color:white;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 1; /* remove the gap so it doesn't close */
+    opacity: 0.9;
+}
+
+/* .cross{
+    color: #07051a;
+    width: 100px;
+    height: 100px;
+    display:flex;
+} */
