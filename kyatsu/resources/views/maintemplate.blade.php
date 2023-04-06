@@ -27,9 +27,9 @@
           <a class="nav-link dropdown-toggle"  style="font-size:23px" href="#" id="navbarDarkDropdownMenuLink" role="buztton" data-bs-toggle="dropdown" aria-expanded="false">
             Informacion del juego </a>
           <ul class="dropdown-menu dropdownDark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="dropdown-item dropdownText" href="#">Historia</a></li>
-            <li><a class="dropdown-item dropdownText" href="#">Reglas</a></li>
-            <li><a class="dropdown-item dropdownText" href="#">Cómo jugar</a></li>
+            <li><a class="dropdown-item dropdownText" href="{{ route('historia') }}">Historia</a></li>
+            <li><a class="dropdown-item dropdownText" href="{{ route('reglas') }}">Reglas</a></li>
+            <li><a class="dropdown-item dropdownText" href="{{ route('como jugar') }}">Cómo jugar</a></li>
           </ul>
         </li>
 
