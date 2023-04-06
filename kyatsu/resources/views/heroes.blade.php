@@ -11,7 +11,7 @@
 <body>
   <p>Este es la pagina de Heroes</p>
 
-<div class="container">
+<div class="container" >
   <div class="row">
     <div class="col">
     <article class="card mt-1" >

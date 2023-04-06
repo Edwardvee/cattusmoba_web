@@ -92,7 +92,10 @@ p {
 
 .card__content--container {
   --flow-space: 1.25rem;
+  overflow: auto;
 }
+
+
 
 .card__title {
   position: relative;
