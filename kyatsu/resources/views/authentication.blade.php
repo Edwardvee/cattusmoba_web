@@ -11,7 +11,14 @@
 <body>
   <div class="leaves">
  <div class="set">
-  <div><img src=""></div>
+  <div><img src="img/leaf_1.png"></div>
+  <div><img src="img/leaf_2.png"></div>
+  <div><img src="img/leaf_3.png"></div>
+  <div><img src="img/leaf_4.png"></div>
+  <div><img src="img/leaf_1.png"></div>
+  <div><img src="img/leaf_2.png"></div>
+  <div><img src="img/leaf_3.png"></div>
+  <div><img src="img/leaf_4.png"></div>
  </div>
 
   </div>
@@ -44,6 +51,7 @@
       <input type="text" name="password_confirmation" placeholder="Repirta su contrasenia" required></input>
       <input type="submit"></input>
     </form> -->
+    <div class="contain">
     <div class="bodyregister">
     <div class="main">  	
       <input type="checkbox" id="chk" aria-hidden="true">
@@ -51,9 +59,10 @@
 			<div class="signup">
         <form>
           <label for="chk" aria-hidden="true">Registrate</label>
-					<input type="text" name="txt" placeholder="User name" required="">
+          <p class="text-register">Unete a mas de 1.000.000 de jugadores</p>
+					<input type="text" name="txt" placeholder="Usuario" required="">
 					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
+					<input type="password" name="pswd" placeholder="Contraseña" required="">
 					<button>Registrate</button>
 				</form>
 			</div>
@@ -61,12 +70,14 @@
 			<div class="login">
 				<form>
 					<label for="chk" aria-hidden="true">Logea</label>
+          <p class="text-login">Te extañabamos</p>
 					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
+					<input type="password" name="pswd" placeholder="Contraseña" required="">
 					<button>Login</button>
 				</form>
 			</div>
 	</div>
+  </div>
   </div>
 </body>
 @endsection("http_body")
