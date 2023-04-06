@@ -49,7 +49,7 @@ label{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
-input{
+.Auth_input{
 	width: 60%;
 	height: 20px;
 	background: #e0dede;

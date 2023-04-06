@@ -31,8 +31,8 @@
     <h3 class=""> ACCIÓN EN EQUIPO • GRATIS </h3>
     <img src="img/divider.png"> -->
     <form action="{{ route('login') }}">
-<!--       <input type="text" name="username" placeholder="Nombre de usuario" required></input>
-      <input type="text" name="password" placeholder="Nombre de usuario" required></input> -->
+<!--       <input class="Auth_input" type="text" name="username" placeholder="Nombre de usuario" required></input class="Auth_input">
+      <input class="Auth_input" type="text" name="password" placeholder="Nombre de usuario" required></input class="Auth_input"> -->
     </form>
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -45,24 +45,24 @@
     @endif
    <!--  <form class="register-user" action="{{ route('register') }}" method="POST">
       @csrf
-      <input type="text" name="name" placeholder="Nombre de usuario" required></input>
-      <input type="text" name="email" placeholder="Ingrese su email" required></input>
-      <input type="text" name="password" placeholder="Ingrese su contrasenia" required></input>
-      <input type="text" name="password_confirmation" placeholder="Repirta su contrasenia" required></input>
-      <input type="submit"></input>
+      <input class="Auth_input" type="text" name="name" placeholder="Nombre de usuario" required></input class="Auth_input">
+      <input class="Auth_input" type="text" name="email" placeholder="Ingrese su email" required></input class="Auth_input">
+      <input class="Auth_input" type="text" name="password" placeholder="Ingrese su contrasenia" required></input class="Auth_input">
+      <input class="Auth_input" type="text" name="password_confirmation" placeholder="Repirta su contrasenia" required></input class="Auth_input">
+      <input class="Auth_input" type="submit"></input class="Auth_input">
     </form> -->
     <div class="contain">
     <div class="bodyregister">
     <div class="main">  	
-      <input type="checkbox" id="chk" aria-hidden="true">
+      <input class="Auth_input" type="checkbox" id="chk" aria-hidden="true">
       
 			<div class="signup">
         <form>
           <label for="chk" aria-hidden="true">Registrate</label>
           <p class="text-register">Unete a mas de 1.000.000 de jugadores</p>
-					<input type="text" name="txt" placeholder="Usuario" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Contraseña" required="">
+					<input class="Auth_input" type="text" name="txt" placeholder="Usuario" required="">
+					<input class="Auth_input" type="email" name="email" placeholder="Email" required="">
+					<input class="Auth_input" type="password" name="pswd" placeholder="Contraseña" required="">
 					<button>Registrate</button>
 				</form>
 			</div>
@@ -71,8 +71,8 @@
 				<form>
 					<label for="chk" aria-hidden="true">Logea</label>
           <p class="text-login">Te extañabamos</p>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Contraseña" required="">
+					<input class="Auth_input" type="email" name="email" placeholder="Email" required="">
+					<input class="Auth_input" type="password" name="pswd" placeholder="Contraseña" required="">
 					<button>Login</button>
 				</form>
 			</div>
