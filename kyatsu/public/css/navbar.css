@@ -1,4 +1,28 @@
 /* 31/03/23 Hecho por lucas y manuel  */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #2c2c2c #2c2c2c;
+  }
+
+  /* Chrome, Edge, y Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    border: 3px solid #2c2c2c;
+  }
+  body {
+    overflow: overlay;
+}
+
 .search-bar {
     position: absolute;
     top: 50%;
