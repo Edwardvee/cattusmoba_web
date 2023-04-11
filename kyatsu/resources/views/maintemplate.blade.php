@@ -44,7 +44,7 @@
         </ul>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <form action="" class="search-bar">
-          <input maxlength="16" class="input-search" type="search" placeholder="Busca un jugador" required oninput="javascript:searchUsers()">
+          <input maxlength="16" class="input-search" type="search" placeholder="Busca un jugador" required oninput="javascript:searchUsers(this.value)">
           <div class="dropdown" id="paginator">
             <!--<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Menu de usuarios
@@ -87,22 +87,16 @@
         let paginatorResult;
         paginatorResult = document.createElement("div");
         response.data.forEach(element => {
-          $(paginatorResult).append($(document.createElement("li")).append($(document.createElement("a")).attr("href", "a").html(element["name"])));
+          $(paginatorResult).append($(document.createElement("li")).append($(document.createElement("a")).attr("href", route("users", element["uuid"])).html(element["name"])));
         });
-        paginatorResult.append($(document.createElement("p").html("Mostrando " + response["from"] + " a " + response["to"] + " de " + response["total"] + "resultados")));
+        paginatorResult.append($(document.createElement("p")).html("Mostrando " + response["from"] + " a " + response["to"] + " de " + response["total"] + "resultados"));
         $("#paginator").append(paginatorResult);
         let paginatorLinks;
         paginatorLinks = document.createElement("div");
         response.links.forEach(element => {
-          $(paginatorLinks).append($(document.createElement("buton").addClass("btn btn-primary").append($(document.createElement("A").attr("href", element["url"]).html(element["label"])))))
+          $(paginatorLinks).append($(document.createElement("buton")).addClass("btn btn-primary").append($(document.createElement("A")).attr("href", element["url"]).html(element["label"])));
         });
-        /* for (let i = 0; i <= response.per_page; i++) {
-           $(paginatorResult).append($(document.createElement("li")).append($(document.createElement("a")).attr("href", route(),).html()));
-
-         }*/
-        console.log(paginatorResult);
-        console.log(response)
-
+        $(paginatorResult).append(paginatorLinks);
       }
     });
   }

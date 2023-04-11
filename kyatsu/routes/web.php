@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Validators\ValidatorXHR;
 use App\Http\Resources\UserCollection;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +52,17 @@ Route::prefix("frontend")->group(function () {
   })->name("user");
 })->name("frontend");
 
+Route::get("/user/{uuid}", function ($uuid) {
+  $validator = Validator::make(["uuid" => $uuid], [
+    "uuid" => ["required", "uuid", "exists:App\Models\User,uuid"]
+  ]);
+  $validated = $validator->validated();
+  return view("user", ["user" => User::findOrFail($validated["uuid"])]);
+})->name("users");
 
+Route::get("/user_paginator/{name}/{page}", function ($name, $page) {
+  return view("user_paginator", ["name" => $name, "page" => $page]);
+})->name("user_paginator");
 Route::get("/", function () {
   return view("mainpage");
 })->name("mainpage");

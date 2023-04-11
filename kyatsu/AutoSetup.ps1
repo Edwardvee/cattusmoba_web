@@ -20,7 +20,7 @@ Set-Variable COMPOSER_VERSION -Option Constant -Value 2.2
 Set-Variable REPOSITORY_PATH -Option Constant $pwd
 Set-Variable ADMIN_RIGHTS -Option Constant ([Security.Principal.WindowsPrincipal] ` [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 Set-Variable INSTALL_COMPOSER_DIRECTORY -Value "$env:ProgramData\composer\"
-
+Set-Variable CURRENT_GIT_BRANCH -Option Constant -Value (git branch --show-current)
 
 #function setPath() {
 #    Set-Variable -Name 'path_enviroment' -Scope global -Value ([Environment]::GetEnvironmentVariable('PATH', 'Machine'))
@@ -34,9 +34,18 @@ Write-Host "en el lugar exacto en donde esta ubicado en el repositorio web"-Fore
 Write-Host "No habra el archivo fuera del repositorio web"-ForegroundColor Green
 Write-Host "Version minima de PHP Requerida: " $PHP_VERSION -ForegroundColor Yellow
 Write-Host "Version minima de Composer Requerida: " $COMPOSER_VERSION -ForegroundColor Yellow
+Write-Host ""
+Write-Host "WARNING: Usted esta trabajando en el branch " $CURRENT_GIT_BRANCH -ForegroundColor Yellow
+Write-Host "Por cada vez que cambies de branch, deberas reejecutar el autoinstalador" -ForegroundColor Yellow
+Write-Host "Ya que los cambios entre branchs pueden romper y el autoinstalador te reconfigurara todo" -ForegroundColor Yellow
+Write-Host "para que tu laravel vuelva a encender reparando el problema" -ForegroundColor Yellow
+Write-Host "sin que tengas que reescribir codigo ni ejecutar comandos, solo este autoinstalador" -ForegroundColor Yellow
+
 if ((Read-Host -Prompt 'Desea proceder? Escriba SI/NO') -ne "SI") {
     throw "FATAL: Instalacion inicial abortada por el usuario"
 }
+
+
 
 function enviromentTest() {
     Write-Host "Verificando instalacion de PHP en el entorno" -ForegroundColor Green  
@@ -220,7 +229,7 @@ Write-Host "Generando KEY del repositorio..." -ForegroundColor Green
 php artisan key:generate --no-interaction
 
 Write-Host "Eliminado cache de configuracion y de rutas" -ForegroundColor Green
-php artisan optimize
+php artisan optimize --no-interaction
 
 Write-Host "Borrando cache del respositorio..." -ForegroundColor Green
 php artisan cache:clear --no-interaction
