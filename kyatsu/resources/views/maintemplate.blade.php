@@ -6,7 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @routes(url("ziggy/frontend.js"))
+  <script id="http_data_paginator" type="application/json">
+    <?php echo (json_encode(["name" => "A", "page" => 1])); ?>
+  </script>
+  <script id="route_generator_paginator">
+    getRoute = (function($name, $page) {
+      return route("user", {
+        name: $name,
+        page: $page
+      });
+    });
+  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="{{url('js/user_paginator.js')}}" autorun="false"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
   <link href="css/navbar.css" rel="stylesheet">
@@ -68,13 +80,7 @@
 
 </html>
 <script>
-  $.ajaxSetup({
-    headers: {
-      Accept: "application/json; charset=utf-8",
-      Follow: false
-    }
-  });
-
+  /*
   function searchUsers($name, $page = 1) {
     $.ajax({
       method: "GET",
@@ -84,6 +90,7 @@
         page: $page
       }),
       success: (response) => {
+
         let paginatorResult;
         paginatorResult = document.createElement("div");
         response.data.forEach(element => {
@@ -100,7 +107,7 @@
       }
     });
   }
-
+*/
 
   const clearInput = () => {
     const input = document.getElementsByTagName("input")[0];

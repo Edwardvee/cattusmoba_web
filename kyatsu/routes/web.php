@@ -46,7 +46,9 @@ Route::prefix("frontend")->group(function () {
       "page" => ["required", "integer"]
     ]);
     $validated = $validator->validator->validated();
-    return User::where("name", "LIKE", "%" . $validated["name"] . "%")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"]);
+    //return ("%" . $validated["name"] . "%");
+    return User::where("name", "LIKE", "%{$validated["name"]}")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"]);
+    //return User::where("name", "LIKE", ("%" . $validated["name"] . "%"))->toSql();
     //Consultar a teruel
     //return UserCollection::collection(User::where("name", "LIKE", "%" . $validated["name"] . "%")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"])->getCollection());
   })->name("user");
