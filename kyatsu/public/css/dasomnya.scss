@@ -1,0 +1,71 @@
+.ms-header {
+    display: flex;
+    align-items: center;
+    jsutify-content: center;
+    
+    font-family: sans-serif;
+    
+    width: 100vw;
+    height: 100vh;
+    
+    background: linear-gradient(to right bottom, rgb(157, 215, 213), lighten(rgb(253, 115, 100), 10%));
+    
+    &__title {
+      flex: 1 1 100%;
+      width: 100%;
+    
+      text-align: center;
+      font-size: 4rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0px 0px 2px rgba(black, .4);
+    }
+  }
+  
+  .ms-slider {
+    display: inline-block;
+    height: 1.5em;
+    overflow: hidden;
+    vertical-align: middle;
+    mask-image: linear-gradient(transparent, white, white, white, transparent);
+    mask-type: luminance;
+    mask-mode: alpha;
+    
+    &__words {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+    
+      list-style: none;
+      
+      animation-name: wordSlider;
+      animation-timing-function: ease-out;
+      animation-iteration-count: infinite;
+      animation-duration: 7s;
+    }
+    
+    &__word {
+      display: block;
+      line-height: 1.3em;
+      text-align: left;
+    }
+  }
+  
+  @keyframes wordSlider {
+    $steps: -0%, -25%, -50%, -75%;
+    
+    @for $index from 0 to length($steps)-1 {
+      $next: $index+1;
+      $step: floor(100/(length($steps)-1));
+      $animation_step: floor($step*.2);
+    
+      #{$step*$index}%,
+      #{($step*$next) - $animation_step}% {
+        transform: translateY(nth($steps, $index+1));
+      }
+    }
+    100% {
+      transform: translateY(nth($steps, length($steps)));
+    }
+  }
+    

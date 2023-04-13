@@ -15,24 +15,33 @@
  }
  
  header{
-    background: url(https://giffiles.alphacoders.com/153/15370.gif);
+    position: relative; 
     height: 600px;
     max-width: 1920px;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin:auto;
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
     display: -o-flex;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-flow: column;
-    margin:auto;
-    
+
 }
+ header::before{
+    content: "";
+    background: url(https://giffiles.alphacoders.com/153/15370.gif);
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 1;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+ }
 
 @media only screen and (max-width: 767px){
     header h1{
@@ -60,6 +69,12 @@ header a {
 	color: #fff;
     filter: brightness(1);
         }
+        header h1 {
+            padding: 0 30%;
+            text-align: center;
+            color: #fff;
+            filter: brightness(1);
+                }
 /* .centroMessi{
  width: 1600px;
  margin:auto;

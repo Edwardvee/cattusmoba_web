@@ -11,13 +11,13 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="img/empresa.png" width="85" height="85"></img></a>
+      <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="img/empresa.png" width="75" height="75"></img></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="img/f.png" width="69" height="70"></img></a>
+      <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="img/f.png" width="65" height="70"></img></a>
 
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
