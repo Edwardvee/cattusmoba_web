@@ -9,6 +9,10 @@
 </head>
 
 <body>
+<br>
+<br>
+<br><br>
+
   <p>Este es la pagina de Heroes</p>
 
 <div class="container" >
@@ -27,7 +31,9 @@
       <p class="card__description">
       Jinx, una maniática e impulsiva criminal de Zaun, vive para sembrar el caos sin pararse a pensar en las consecuencias, 
       Con un arsenal de juguetes letales a su disposición, desata las explosiones más brillantes y los estallidos más ruidosos
-       para dejar un rastro de caos y pánico a su paso.
+       para dejar un rastro de caos y pánico a su paso. aaaaaaaaaaaaaaaaaaaaaaaaa
+       aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+       aaaaaaaaaa
       </p>
     </div>
   </div>

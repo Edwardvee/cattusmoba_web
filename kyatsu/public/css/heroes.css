@@ -53,6 +53,7 @@ p {
 /* CARD COMPONENT */
 
 .card {
+  
   display: grid;
   place-items: center;
   width: 80vw;
@@ -67,11 +68,18 @@ p {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
 }
-
+.card__description{
+  overflow: auto;
+  --flow-space: 0.9375rem;
+  justify-content: space-between;
+  height: 55%;
+  --flow-space: 1.25rem;
+  padding: 1%;
+}
 .card__background {
   object-fit: cover;
   max-width: 100%;
-  height: 100%;
+  height: 100%; 
 }
 
 .card__content {
@@ -92,9 +100,13 @@ p {
 
 .card__content--container {
   --flow-space: 1.25rem;
-  overflow: auto;
+    
 }
-
+/* .card__content--container:hover{
+  overflow:auto;
+  opacity: 1;
+}
+ */
 
 
 .card__title {
