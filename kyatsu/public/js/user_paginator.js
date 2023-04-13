@@ -21,16 +21,23 @@ $.ajaxSetup({
 
 var information = new Proxy(JSON.parse(document.getElementById("http_data_paginator").innerHTML), {
   set: (obj, prop, value) => {
-    if ((typeof (prop) === "string") && (!["string", "number"].includes(typeof(value)))) {
+    if ((typeof (prop) === "string") && (!["string", "number"].includes(typeof (value)))) {
       throw "FATAL: La propiedad no es un string o el value provisto no es un string/numbero";
     }
     if (((prop === "page") && (isNaN(parseInt(value)))) || ((prop === "name") && (!value.length > 16))) {
       throw "FATAL: Lo provisto en el paginador no son datos validos";
     }
+    //let disabledLinks = document.getElementById("paginator_links");
+    /*if (disabledLinks) {
+      $(disabledLinks).click(function (event) { event.preventDefault(); });
+      $(disabledLinks).attr("style", "pointer-events:none");
+    }*/
     Object.assign(obj, { [prop]: value });
     searchUsers(obj["name"], obj["page"])
     console.log(obj);
-    window.history.replaceState(obj, "", route("user_paginator", obj));
+    if (thisScript.getAttribute("autorun") == "true") {
+      window.history.replaceState(obj, "", route("user_paginator", obj));
+    }
     return true;
   }
 });
@@ -56,16 +63,20 @@ function searchUsers($name, $page = 1) {
       $("#paginator").append(paginatorResult);
       let paginatorLinks;
       paginatorLinks = document.createElement("div");
+      paginatorLinks.setAttribute("id", "paginator_links");
       response.links.forEach(element => {
-        $(paginatorLinks).append($(document.createElement("buton")).addClass("btn btn-primary").append($(document.createElement("A")).attr("onclick", "information['page'] = element['label'];"
-        ).html(element["label"])));
+        $(paginatorLinks).append($(document.createElement("buton")).addClass("btn btn-primary").append($(document.createElement("A")).click(() => {
+          information["page"] = element["label"];
+        }).html(element["label"])));
         $(paginatorResult).append(paginatorLinks);
       });
     }
   });
 }
 
-if (document.currentScript.getAttribute("autorun") == "true") {
+let thisScript = document.currentScript;
+
+if (thisScript.getAttribute("autorun") == "true") {
   $(document).ready(function () {
     let preload = information["name"];
     information["name"] = preload;
