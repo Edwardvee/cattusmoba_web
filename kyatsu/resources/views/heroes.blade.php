@@ -103,22 +103,22 @@
     </div>
   </div>
 </article>
-
-    </div>
-    <div class="col mt-3">
+</div>
+<div class="col mt-3">
     <article class="card">
   <img
-    class="card__background" 
-    src="img/pngwing.png"
+    class="card__background"
+    src="img/cait.png"
     width="1920"
     height="2193"
   />
   <div class="card__content | flow">
-    <div class="card__content--container | flow">
-      <h2 class="card__title">Caitlin</h2>
+    <div class="card__content--container | flow" >
+      <h2 class="card__title">Caitlyn</h2>
       <p class="card__description">
-      Caitlin es una Entrenadora Pokémon en Pokémon Masters EX, basada en el personaje del mismo nombre en los juegos de la serie 
-      principal. Ella forma un par de sincronización con Reuniclus. El par de sincronización se puede obtener a través del buscador de pares de sincronización.
+      Nacido y criado en un barrio adinerado de Piltóver, Ezreal siempre fue un niño curioso. Sus padres 
+      eran arqueólogos reconocidos, por lo que se acostumbró a sus largas ausencias lejos del hogar familiar, fantaseando con frecuencia con unirse a ellos durante sus viajes.
+      </p>
     </div>
   </div>
 </article>
@@ -128,7 +128,7 @@
     <article class="card">
   <img
     class="card__background"
-    src="img/juanxdx.png"
+    src="img/as.jpg"
     width="1920"
     height="2193"
   />
