@@ -2,8 +2,7 @@
 
 :root {
   /* Colors */
-  --brand-color: hsl(46, 100%, 50%);
-  --black: hsl(0, 0%, 0%);
+  --brand-color: hsl(202, 80%, 42%);
   --white: hsl(0, 0%, 100%);
   /* Fonts */
   --font-title: "Montserrat", sans-serif;
