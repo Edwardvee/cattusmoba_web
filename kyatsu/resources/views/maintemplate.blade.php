@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +22,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
   <link href="css/navbar.css" rel="stylesheet">
 </head>
-
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
@@ -32,21 +30,17 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="img/f.png" width="69" height="70"></img></a>
-
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
-
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="font-size:23px" href="#" id="navbarDarkDropdownMenuLink" role="buztton" data-bs-toggle="dropdown" aria-expanded="false">
-              Informacion del juego </a>
-            <ul class="dropdown-menu dropdownDark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item dropdownText" href="#">Historia</a></li>
-              <li><a class="dropdown-item dropdownText" href="#">Reglas</a></li>
-              <li><a class="dropdown-item dropdownText" href="#">Cómo jugar</a></li>
-            </ul>
-          </li>
-
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  style="font-size:23px" href="#" id="navbarDarkDropdownMenuLink" role="buztton" data-bs-toggle="dropdown" aria-expanded="false">
+            Informacion del juego </a>
+          <ul class="dropdown-menu dropdownDark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item dropdownText" href="{{ route('historia') }}">Historia</a></li>
+            <li><a class="dropdown-item dropdownText" href="{{ route('reglas') }}">Reglas</a></li>
+            <li><a class="dropdown-item dropdownText" href="{{ route('como jugar') }}">Cómo jugar</a></li>
+          </ul>
+        </li>
           <li class="nav-item">
             <a class="nav-link" style="font-size:23px" href="{{ route('heroes') }}">Héroes</a>
           </li>
@@ -73,11 +67,11 @@
             </svg></a>
         </form>
       </div>
+
     </div>
   </nav>
   @yield("http_body")
 </body>
-
 </html>
 <script>
   /*

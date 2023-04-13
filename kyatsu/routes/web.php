@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 #Resources
 use App\Models\User;
 use App\Validators\ValidatorXHR;
-use App\Http\Resources\UserCollection;
+//use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Validator;
 
 /*
@@ -85,6 +85,16 @@ Route::get("/dasomnya", function () {
 Route::get("/getCurrentUser", function () {
   return (Auth::user());
 });
+
+Route::get("/historia", function () {
+  return view("historia");
+})->name("historia");
+Route::get("/reglas", function () {
+  return view("reglas");
+})->name("reglas");
+Route::get("/como jugar", function () {
+  return view("como jugar");
+})->name("como jugar");
 
 //GET O POST. Cuando nostros accedamos a la ruta / del sitio.
 // Al lado le colocas una coma y definis una funcion sin nombre  (Funciones anonima)-
