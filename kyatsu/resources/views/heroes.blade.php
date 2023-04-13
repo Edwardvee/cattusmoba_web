@@ -13,7 +13,6 @@
 <br>
 <br><br>
 
-  <p>Este es la pagina de Heroes</p>
 
 <div class="container" >
   <div class="row">
@@ -116,8 +115,8 @@
     <div class="card__content--container | flow" >
       <h2 class="card__title">Caitlyn</h2>
       <p class="card__description">
-      Nacido y criado en un barrio adinerado de Piltóver, Ezreal siempre fue un niño curioso. Sus padres 
-      eran arqueólogos reconocidos, por lo que se acostumbró a sus largas ausencias lejos del hogar familiar, fantaseando con frecuencia con unirse a ellos durante sus viajes.
+      Caitlin es una Entrenadora Pokémon en Pokémon Masters EX, basada en el personaje del mismo nombre en los juegos de la serie principal. Ella 
+      forma un par de sincronización con Reuniclus. El par de sincronización se puede obtener a través del buscador de pares de sincronización.    
       </p>
     </div>
   </div>
@@ -136,7 +135,7 @@
     <div class="card__content--container | flow">
       <h2 class="card__title">Juan</h2>
       <p class="card__description">
-      Juan
+       Que grande Juan
       </p>
     </div>
   </div>

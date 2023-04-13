@@ -27,9 +27,12 @@ p {
 
 /* GLOBAL STYLES */
 body {
-  place-items: center;
-  
-}
+  background: linear-gradient(135deg, #ffffff 25%, transparent 25%), linear-gradient(45deg, #ffffff 25%, transparent 25%),linear-gradient(135deg, transparent 24%,#000000 25%, #000000 45%, transparent 45%), linear-gradient(45deg, transparent 24%,#000000 25%, #000000 45%, transparent 45%);
+        background-size: 6em 6em;
+        background-color: #ffffff;
+        opacity: 1
+  }
+
 
 h2 {
   font-size: 2.25rem;
