@@ -38,6 +38,17 @@
     border: 4px solid white;
 }
 
+.results_pag{  
+    overflow: hidden;
+}
+#paginator{
+    background: white;
+    position: relative; 
+    transform: translate(0%, 6%);
+    border-radius: 25px;
+    border: 4px solid white;
+}
+
 .input-search {
     position: absolute;
     top: 0;

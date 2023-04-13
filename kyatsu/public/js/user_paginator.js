@@ -32,6 +32,7 @@ var information = new Proxy(JSON.parse(document.getElementById("http_data_pagina
       $(disabledLinks).click(function (event) { event.preventDefault(); });
       $(disabledLinks).attr("style", "pointer-events:none");
     }*/
+    document.getElementById("paginator").innerHTML = "";
     Object.assign(obj, { [prop]: value });
     searchUsers(obj["name"], obj["page"])
     console.log(obj);
@@ -43,33 +44,43 @@ var information = new Proxy(JSON.parse(document.getElementById("http_data_pagina
 });
 
 function searchUsers($name, $page = 1) {
+  console.log($name);
+  console.log($page);
+  if ($name == "") {
+    erase();
+    return "";
+  }
   $.ajax({
     method: "GET",
     accepts: "application/json",
     url: getRoute($name, $page),
     success: (response) => {
       console.log(response);
-      document.getElementById("paginator").innerHTML = "";
+      $("#paginator").html("");
+      document.getElementById("paginator").removeAttribute("class");
+      $("#paginator").attr("class",'visible');
       let paginatorResult;
-      paginatorResult = document.createElement("div");
+      paginatorResult = $(document.createElement("div")).addClass("results_pag").attr("id", "resultsid_pag");
       if (response["data"].length < 1) {
         $("#paginator").append($(document.createTextNode("No se encontraron datos para la busqueda solicitada")));
         return;
       }
       response.data.forEach(element => {
-        $(paginatorResult).append($(document.createElement("li")).append($(document.createElement("a")).attr("href", route("users", element["uuid"])).html(element["name"])));
+        $(paginatorResult).append($(document.createElement("ul")).append($(document.createElement("a")).attr("href", route("users", element["uuid"])).html(element["name"])));
       });
       paginatorResult.append($(document.createElement("p")).html("Mostrando " + response["from"] + " a " + response["to"] + " de " + response["total"] + "resultados"));
       $("#paginator").append(paginatorResult);
-      let paginatorLinks;
-      paginatorLinks = document.createElement("div");
-      paginatorLinks.setAttribute("id", "paginator_links");
-      response.links.forEach(element => {
-        $(paginatorLinks).append($(document.createElement("buton")).addClass("btn btn-primary").append($(document.createElement("A")).click(() => {
-          information["page"] = element["label"];
-        }).html(element["label"])));
-        $(paginatorResult).append(paginatorLinks);
-      });
+      if (thisScript.getAttribute("autorun") == "true") {
+        let paginatorLinks;
+        paginatorLinks = document.createElement("div");
+        paginatorLinks.setAttribute("id", "paginator_links");
+        response.links.forEach(element => {
+          $(paginatorLinks).append($(document.createElement("buton")).addClass("btn btn-primary").append($(document.createElement("A")).click(() => {
+            information["page"] = element["label"];
+          }).html(element["label"])));
+          $(paginatorResult).append(paginatorLinks);
+        });
+      }
     }
   });
 }
@@ -82,3 +93,32 @@ if (thisScript.getAttribute("autorun") == "true") {
     information["name"] = preload;
   });
 }
+
+/*
+var searchcontent = document.getElementById("search-content");
+searchcontent.addEventListener("input", function (event) {
+    if (this.value == 0) {
+      erase();
+    }
+});
+*/
+function erase(){
+  let searchcross = document.getElementById("searcherase");
+  let resultsbox = document.getElementById("paginator");
+  let searchcontent = document.getElementById("search-content");
+  console.log(searchcontent.value);
+  searchcontent.value = "";
+  resultsbox.innerHTML = "";
+  resultsbox.removeAttribute("class");
+ resultsbox.classList.add("invisible");
+}
+/*
+function checkEmpty(){
+  let searchcontent = document.getElementById("search-content");
+  if (searchcontent.value == "") {
+    erase();
+  } else {
+    searchUsers(searchcontent.value);
+  }
+}
+*/
