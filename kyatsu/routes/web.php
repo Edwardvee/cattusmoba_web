@@ -32,9 +32,16 @@ Route::group(["middleware" => ["guest"]], function () {
   })->name("authentication");
 });
 
+
+Route::group(["middleware" => ["can: access admin"]], function () {
+  Route::prefix("admin")->group(function () {
+    Route::resource('admin_users', UserManagementController::class);
+  })->name("admin");
+});
+/*
 Route::prefix("admin")->group(function () {
   Route::resource('admin_users', UserManagementController::class);
-})->name("admin");
+})->name("admin");*/
 //})->name("admin");
 
 
