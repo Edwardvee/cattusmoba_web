@@ -41,13 +41,7 @@
 .results_pag{  
     overflow: hidden;
 }
-#paginator{
-    background: white;
-    position: relative; 
-    transform: translate(0%, 6%);
-    border-radius: 25px;
-    border: 4px solid white;
-}
+
 
 .input-search {
     position: absolute;
@@ -63,7 +57,30 @@
     border-radius: 20px;
     padding: 0 20px;
 }
-
+#resultsUl{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#resultsUl li a {
+    border-bottom: 1px solid #ddd; 
+    margin-top: -1px; 
+    padding: 12px; 
+    text-decoration: none;
+    font-size: 18px; 
+    color: black;
+    display: block; /* Make it into a block element to fill the whole list */
+  
+}
+#resultsUl li a:hover:not(.header) {
+    background-color: #949494; 
+  }
+#searchText{
+    margin-top: 1px; 
+    color: black;
+    display: block;
+    font-size: smaller;
+}
 .fa {
     box-sizing: border-box;
     padding: 10px;
@@ -83,6 +100,21 @@
 .search-bar:valid {
     width: 240px;
     cursor: pointer;
+}
+
+#paginator{
+   opacity: 100%;
+    display:block;
+    background: white;
+    position:absolute; 
+    top: 35px;
+    right: auto;
+    padding: 0.2em;
+    padding-left: 0.6em;
+    overflow: hidden;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border: 4px solid white;
 }
 
 .search-bar:hover .input-search,

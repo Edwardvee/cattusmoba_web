@@ -46,7 +46,7 @@ var information = new Proxy(JSON.parse(document.getElementById("http_data_pagina
 function searchUsers($name, $page = 1) {
   console.log($name);
   console.log($page);
-  if ($name == "") {
+  if ($name == "" || $name == null || $name == 0) {
     erase();
     return "";
   }
@@ -60,15 +60,18 @@ function searchUsers($name, $page = 1) {
       document.getElementById("paginator").removeAttribute("class");
       $("#paginator").attr("class",'visible');
       let paginatorResult;
-      paginatorResult = $(document.createElement("div")).addClass("results_pag").attr("id", "resultsid_pag");
+      paginatorResult = $(document.createElement("nav")).addClass("results_pag").attr("id", "resultsid_pag");
+      let resultsList = $(document.createElement("ul")).attr("tabindex", "0");
+      $(resultsList).attr("id", "resultsUl");
+      $(paginatorResult).append(resultsList);
       if (response["data"].length < 1) {
         $("#paginator").append($(document.createTextNode("No se encontraron datos para la busqueda solicitada")));
         return;
       }
       response.data.forEach(element => {
-        $(paginatorResult).append($(document.createElement("ul")).append($(document.createElement("a")).attr("href", route("users", element["uuid"])).html(element["name"])));
+        $(resultsList).append($(document.createElement("li")).attr("tabindex", "-1").append($(document.createElement("a")).attr("href", route("users", element["uuid"])).html(element["name"])));
       });
-      paginatorResult.append($(document.createElement("p")).html("Mostrando " + response["from"] + " a " + response["to"] + " de " + response["total"] + "resultados"));
+      paginatorResult.append($(document.createElement("p")).html("Mostrando " + response["from"] + " a " + response["to"] + " de " + response["total"] + " resultados").addClass("fw-lighter")).attr("id", "searchText");
       $("#paginator").append(paginatorResult);
       if (thisScript.getAttribute("autorun") == "true") {
         let paginatorLinks;
@@ -111,14 +114,15 @@ function erase(){
   resultsbox.innerHTML = "";
   resultsbox.removeAttribute("class");
  resultsbox.classList.add("invisible");
+ 
 }
-/*
+
 function checkEmpty(){
-  let searchcontent = document.getElementById("search-content");
-  if (searchcontent.value == "") {
-    erase();
-  } else {
-    searchUsers(searchcontent.value);
-  }
+    let searchcontent = document.getElementById("search-content");
+   
+    if ( searchcontent.addEventListener('change',searchcontent,true) == true) {
+      erase();
+    } else {
+      searchUsers(searchcontent.value);
+    }
 }
-*/
