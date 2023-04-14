@@ -98,8 +98,15 @@ header a {
   margin:auto;
   margin-top: 1%;
   margin-bottom: 1%;
- height: 8%;
-  color: white;
-  align-items: center;
-  display: flex;
+  height: 8%;
+ border-top-left-radius: 1200px;
+
+}
+.OurRed{
+    margin-top: 10px;
+    line-height: normal;
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+
 }

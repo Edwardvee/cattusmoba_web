@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  
   <div><!--  aunque no tenga sentido esto lo centra ._. --> 
  <header>
     <h1 class="img-title">Kyatsu! Moba</h1>
@@ -19,7 +20,7 @@
 </div>
 
 <div class="redes rounded-pill">
-  <p> Nuestras redes: </p>
+  <p class="OurRed"> Nuestras redes: </p>
   
 </div>
 
