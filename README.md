@@ -11,7 +11,7 @@
 - Nicolas Krulewietki
 - Daniel Fernandez
 - Lucas Boghossian
-- Wendy Churky 
+- Wendy Churqui
 
 ## Objetivos
 - Realizar un juego de tipo "MOBA" (Multiplayer Online Battle Arena), y una pagina web la cual servira para descargar y promocionar el mismo.
@@ -19,5 +19,5 @@
 
 ## Autores
 
-| [<img src="https://avatars.githubusercontent.com/u/106595700?v=4" width=115><br><sub>Manuel Casimiro</sub>](https://github.com/OGBiggieCheese)| [<img src="https://avatars.githubusercontent.com/u/106192270?v=4" width=115><br><sub>Ivan Quiroga</sub>](https://github.com/Edwardvee)|  [<img src="https://avatars.githubusercontent.com/u/62914367?v=4" width=115><br><sub>Nicolas Krulewietki</sub>](https://github.com/nicolas-k-cmd) |[<img src="https://avatars.githubusercontent.com/u/106191316?v=4" width=115><br><sub>Daniel Fernandez</sub>](https://github.com/PakitoFlow)|[<img src="https://avatars.githubusercontent.com/u/106191563?v=4" width=115><br><sub>Lucas Boghossian</sub>](https://github.com/lucasboghossian)|[<img src="https://avatars.githubusercontent.com/u/130793897?v=4" width=115><br><sub>Wendy Churky</sub>](https://github.com/wennn55)|
+| [<img src="https://avatars.githubusercontent.com/u/106595700?v=4" width=115><br><sub>Manuel Casimiro</sub>](https://github.com/OGBiggieCheese)| [<img src="https://avatars.githubusercontent.com/u/106192270?v=4" width=115><br><sub>Ivan Quiroga</sub>](https://github.com/Edwardvee)|  [<img src="https://avatars.githubusercontent.com/u/62914367?v=4" width=115><br><sub>Nicolas Krulewietki</sub>](https://github.com/nicolas-k-cmd) |[<img src="https://avatars.githubusercontent.com/u/106191316?v=4" width=115><br><sub>Daniel Fernandez</sub>](https://github.com/PakitoFlow)|[<img src="https://avatars.githubusercontent.com/u/106191563?v=4" width=115><br><sub>Lucas Boghossian</sub>](https://github.com/lucasboghossian)|[<img src="https://avatars.githubusercontent.com/u/130793897?v=4" width=115><br><sub>Wendy Churqui</sub>](https://github.com/wennn55)|
 | :---: | :---: | :---: | :---: | :---: | :---: |
