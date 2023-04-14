@@ -6,11 +6,12 @@
    </p>
 
 ## Integrantes
-- Ivan Quiroga
 - Manuel Casimiro
+- Ivan Quiroga 
 - Nicolas Krulewietki
 - Daniel Fernandez
 - Lucas Boghossian
+- Wendy Churky 
 
 ## Objetivos
 - Realizar un juego de tipo "MOBA" (Multiplayer Online Battle Arena), y una pagina web la cual servira para descargar y promocionar el mismo.
