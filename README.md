@@ -1,9 +1,20 @@
-# Kyatsu Moba by Dasomnya<sup>tm</sup>
+# Kyatsu! Moba by Dasomnya<sup>tm</sup>
    <p align="left">
    <img src="https://img.shields.io/badge/Estado-En%20desarollo-yellow">
    <img src="https://img.shields.io/badge/Entrega-30%2F11%2F23-blue">
    <img src="https://img.shields.io/badge/Proyecto-👾Videojuego👾-ff69b4">
    </p>
+   
+## ¿Que es Kyatsu! Moba?
+<p> 
+Kyatsu! Moba es un juego indie de tipo MOBA que combina accion acelerada, gameplay estrategico, y personajes unicos. Este repositorio contiene el codigo de la pagina web para poder descargar el juego.
+</p>
+
+## Caracteristicas de la pagina web
+- Rapido y claro acceso a la descarga del videojuego
+- Tanto registro como inicio de sesion comodo
+- Explicacion tanto de la historia como de los personajes videojuego
+- Un diseño amigable con el consumidor, y que incite a descargar el juego 
 
 ## Integrantes
 - Manuel Casimiro
