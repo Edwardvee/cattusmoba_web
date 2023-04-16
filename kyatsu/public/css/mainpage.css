@@ -64,21 +64,55 @@ header a {
     filter: brightness(1);
 }
         header p {
-	padding: 0 30%;
+	margin: 0 30%;
 	text-align: center;
 	color: #fff;
     filter: brightness(1);
         }
         header h1 {
-            padding: 0 30%;
+            margin: 0 30%;
             text-align: center;
             color: #fff;
             filter: brightness(1);
                 }
-/* .centroMessi{
- width: 1600px;
- margin:auto;
-} */
+
+.Bdownload{
+    border-radius: 10px;
+    transition-duration: 0.2s;
+}
+.Bdownload:hover{
+    transition-duration: 0.2s;
+    background-color: #ffffff;
+    color: black;
+    border-radius: 10px;
+}
+.Bdownload:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 4em;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+    box-shadow: 0 0 10px 40px black;
+  }
+  
+  .Bdownload:active:after {
+    box-shadow: 0 0 0 0 black;
+    position: absolute;
+    border-radius: 4em;
+    left: 0;
+    top:0;
+    opacity: 1;
+    transition: 0s;
+  }
+  
+  .Bdownload:active {
+    top: 1px;
+  }
 .content{
     max-width: 1720px;
     margin:auto;

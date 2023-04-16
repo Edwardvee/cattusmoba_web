@@ -15,7 +15,7 @@
  <header>
     <h1 class="img-title">Kyatsu! Moba</h1>
     <p id="rrandommsg"> ¿Eres digno de tanta accion?</p>
-    <a href="https://tlauncher.org/installer">Juega ahora</a>
+    <a class="Bdownload" href="https://tlauncher.org/installer">Juega ahora</a>
   </header>
 </div>
 
