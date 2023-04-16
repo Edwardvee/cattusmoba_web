@@ -44,12 +44,14 @@ var information = new Proxy(JSON.parse(document.getElementById("http_data_pagina
 });
 
 function searchUsers($name, $page = 1) {
+  let searchcontent = document.getElementById("search-content");
   console.log($name);
   console.log($page);
   if ($name == "" || $name == null || $name == 0) {
     erase();
     return "";
   }
+ 
   $.ajax({
     method: "GET",
     accepts: "application/json",
@@ -58,7 +60,13 @@ function searchUsers($name, $page = 1) {
       console.log(response);
       $("#paginator").html("");
       document.getElementById("paginator").removeAttribute("class");
-      $("#paginator").attr("class",'visible');
+      $("#paginator").attr("class");
+      $('#paginator').blur(function()
+      {
+            if( !this.value ) {
+                  $(this).parents('p').addClass('invisible');
+            }
+      });
       let paginatorResult;
       paginatorResult = $(document.createElement("nav")).addClass("results_pag").attr("id", "resultsid_pag");
       let resultsList = $(document.createElement("ul")).attr("tabindex", "0");
@@ -109,7 +117,6 @@ function erase(){
   let searchcross = document.getElementById("searcherase");
   let resultsbox = document.getElementById("paginator");
   let searchcontent = document.getElementById("search-content");
-  console.log(searchcontent.value);
   searchcontent.value = "";
   resultsbox.innerHTML = "";
   resultsbox.removeAttribute("class");
@@ -119,10 +126,15 @@ function erase(){
 
 function checkEmpty(){
     let searchcontent = document.getElementById("search-content");
+    searchcontent.addEventListener("input", (e) => {  
    
-    if ( searchcontent.addEventListener('change',searchcontent,true) == true) {
-      erase();
-    } else {
-      searchUsers(searchcontent.value);
-    }
+      if ( searchcontent.value == "" || searchcontent.value == null || searchcontent.value == 0) {
+        erase();
+      } else {
+        searchUsers(searchcontent.value);
+      
+      };
+    });
+    
+  
 }

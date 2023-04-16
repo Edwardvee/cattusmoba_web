@@ -50,7 +50,7 @@
         </ul>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <form action="" class="search-bar" >
-          <input maxlength="16" id="search-content" class="input-search" type="search" placeholder="Busca un jugador" required oninput="javascript:checkEmpty();javascript:searchUsers(this.value);">
+          <input maxlength="16" id="search-content" class="input-search" type="search" placeholder="Busca un jugador" required onkeyup="javascript:checkEmpty();javascript:searchUsers(this.value);">
           <div id="paginator" class="invisible">
          
           </div>
