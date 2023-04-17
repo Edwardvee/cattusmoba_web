@@ -53,7 +53,6 @@ var MPtext = ["¿Eres digno de tanta accion?", "Se parte de la historia", "¿Ser
 var rand = Math.floor(Math.random()*MPtext.length);
 var randtext = MPtext[rand];
 document.getElementById("rrandommsg").innerHTML = randtext;
-
 function tanquejs(){
   document.getElementById('myImage')
     .src="img/cait.png";
