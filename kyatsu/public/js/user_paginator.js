@@ -140,6 +140,4 @@ function checkEmpty(){
       
       };
     });
-   
-  
 }
