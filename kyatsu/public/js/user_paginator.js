@@ -123,7 +123,6 @@ searchcontent.addEventListener("input", function (event) {
     resultsbox.innerHTML = "";
     resultsbox.removeAttribute("class");
   resultsbox.classList.add("invisible");
-  
 }
 
 function checkEmpty(){
