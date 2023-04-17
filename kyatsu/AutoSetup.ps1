@@ -215,7 +215,7 @@ composer install
 Copy-Item ($REPOSITORY_PATH.toString() + "\.env.example") -Destination ($REPOSITORY_PATH.toString() + "\.env")
 Write-Host "Las dependencias fueron configuradas exitosamente, configurando el framework" -ForegroundColor Green
 
-if ($null -eq (E:\xampp\mysql\bin\mysql.exe --batch --skip-column-names -e "SHOW DATABASES LIKE 'kyatsu';" -u root)) {
+if ($null -eq (C:\xampp\mysql\bin\mysql.exe --batch --skip-column-names -e "SHOW DATABASES LIKE 'kyatsu';" -u root)) {
     Write-Host "No se le solicitara borrar la base de datos ya que la misma no existe" -ForegroundColor Green
 } else {
     if ((Read-Host -Prompt "Deseas borrar la base de datos anterior de este sitio si es que tenias una? SI/NO") -eq "SI") {

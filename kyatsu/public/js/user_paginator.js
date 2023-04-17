@@ -47,53 +47,55 @@ function searchUsers($name, $page = 1) {
   let searchcontent = document.getElementById("search-content");
   console.log($name);
   console.log($page);
-  if ($name == "" || $name == null || $name == 0) {
-    erase();
-    return "";
-  }
- 
-  $.ajax({
-    method: "GET",
-    accepts: "application/json",
-    url: getRoute($name, $page),
-    success: (response) => {
-      console.log(response);
-      $("#paginator").html("");
-      document.getElementById("paginator").removeAttribute("class");
-      $("#paginator").attr("class");
-      $('#paginator').blur(function()
-      {
-            if( !this.value ) {
-                  $(this).parents('p').addClass('invisible');
-            }
-      });
-      let paginatorResult;
-      paginatorResult = $(document.createElement("nav")).addClass("results_pag").attr("id", "resultsid_pag");
-      let resultsList = $(document.createElement("ul")).attr("tabindex", "0");
-      $(resultsList).attr("id", "resultsUl");
-      $(paginatorResult).append(resultsList);
-      if (response["data"].length < 1) {
-        $("#paginator").append($(document.createTextNode("No se encontraron datos para la busqueda solicitada")));
-        return;
-      }
-      response.data.forEach(element => {
-        $(resultsList).append($(document.createElement("li")).attr("tabindex", "-1").append($(document.createElement("a")).attr("href", route("users", element["uuid"])).html(element["name"])));
-      });
-      paginatorResult.append($(document.createElement("p")).html("Mostrando " + response["from"] + " a " + response["to"] + " de " + response["total"] + " resultados").addClass("fw-lighter")).attr("id", "searchText");
-      $("#paginator").append(paginatorResult);
-      if (thisScript.getAttribute("autorun") == "true") {
-        let paginatorLinks;
-        paginatorLinks = document.createElement("div");
-        paginatorLinks.setAttribute("id", "paginator_links");
-        response.links.forEach(element => {
-          $(paginatorLinks).append($(document.createElement("buton")).addClass("btn btn-primary").append($(document.createElement("A")).click(() => {
-            information["page"] = element["label"];
-          }).html(element["label"])));
-          $(paginatorResult).append(paginatorLinks);
-        });
-      }
+  window.timerSearch = setTimeout(function(){
+    if ($name == "" || $name == null || $name == 0) {
+      erase();
+      return "";
     }
-  });
+    $.ajax({
+      method: "GET",
+      accepts: "application/json",
+      url: getRoute($name, $page),
+      success: (response) => {
+        console.log(response);
+        $("#paginator").html("");
+        document.getElementById("paginator").removeAttribute("class");
+        $("#paginator").attr("class");
+        $('#paginator').blur(function()
+        {
+              if( !this.value ) {
+                    $(this).parents('p').addClass('invisible');
+              }
+        });
+        let paginatorResult;
+        paginatorResult = $(document.createElement("nav")).addClass("results_pag").attr("id", "resultsid_pag");
+        let resultsList = $(document.createElement("ul")).attr("tabindex", "0");
+        $(resultsList).attr("id", "resultsUl");
+        $(paginatorResult).append(resultsList);
+        if (response["data"].length < 1) {
+          $("#paginator").append($(document.createTextNode("No se encontraron datos para la busqueda solicitada")));
+          return;
+        }
+        response.data.forEach(element => {
+          $(resultsList).append($(document.createElement("li")).attr("tabindex", "-1").append($(document.createElement("a")).attr("href", route("users", element["uuid"])).html(element["name"])));
+        });
+        paginatorResult.append($(document.createElement("p")).html("Mostrando " + response["from"] + " a " + response["to"] + " de " + response["total"] + " resultados").addClass("fw-lighter")).attr("id", "searchText");
+        $("#paginator").append(paginatorResult);
+        if (thisScript.getAttribute("autorun") == "true") {
+          let paginatorLinks;
+          paginatorLinks = document.createElement("div");
+          paginatorLinks.setAttribute("id", "paginator_links");
+          response.links.forEach(element => {
+            $(paginatorLinks).append($(document.createElement("buton")).addClass("btn btn-primary").append($(document.createElement("A")).click(() => {
+              information["page"] = element["label"];
+            }).html(element["label"])));
+            $(paginatorResult).append(paginatorLinks);
+          });
+        }
+      }
+    });
+}, 600);
+
 }
 
 let thisScript = document.currentScript;
@@ -113,21 +115,25 @@ searchcontent.addEventListener("input", function (event) {
     }
 });
 */
-function erase(){
-  let searchcross = document.getElementById("searcherase");
-  let resultsbox = document.getElementById("paginator");
-  let searchcontent = document.getElementById("search-content");
-  searchcontent.value = "";
-  resultsbox.innerHTML = "";
-  resultsbox.removeAttribute("class");
- resultsbox.classList.add("invisible");
- 
+  function erase(){
+    let searchcross = document.getElementById("searcherase");
+    let resultsbox = document.getElementById("paginator");
+    let searchcontent = document.getElementById("search-content");
+    searchcontent.value = "";
+    resultsbox.innerHTML = "";
+    resultsbox.removeAttribute("class");
+  resultsbox.classList.add("invisible");
+  
 }
 
 function checkEmpty(){
     let searchcontent = document.getElementById("search-content");
-    searchcontent.addEventListener("input", (e) => {  
-   
+
+    searchcontent.addEventListener("keydown", (e) => {  
+      console.log(e);
+      if (e.code == "Backspace"){
+          console.log("aassadasa")
+      }
       if ( searchcontent.value == "" || searchcontent.value == null || searchcontent.value == 0) {
         erase();
       } else {
@@ -135,6 +141,6 @@ function checkEmpty(){
       
       };
     });
-    
+   
   
 }
