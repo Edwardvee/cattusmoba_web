@@ -11,7 +11,8 @@
 <body> 
   <div><!--  aunque no tenga sentido esto lo centra ._. --> 
  <header>
-    <h1 class="img-title">Kyatsu! Moba</h1>
+
+ <div class="area"> Kyatsu! Moba </div>
     <p id="rrandommsg"> ¿Eres digno de tanta accion?</p>
     <a class="Bdownload" href="https://tlauncher.org/installer">Juega ahora</a>
   </header>
