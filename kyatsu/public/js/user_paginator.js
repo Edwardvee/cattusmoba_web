@@ -172,7 +172,7 @@ function debounce(func, wait) {
     };
 }
 /* var searchUser = cacher(searchUsers); */
-var searchUsers = debounce(searchUsers, 300);
+var searchUsers = debounce(searchUsers, 600);
 let thisScript = document.currentScript;
 
 if (thisScript.getAttribute("autorun") == "true") {
@@ -202,6 +202,8 @@ function erase() {
     resultsbox.classList.add("invisible");
 }
 function checkEmpty(){
+    let resultsbox = document.getElementById("paginator");
+
   let searchcontent = document.getElementById("search-content");
 searchcontent.addEventListener("input", (e) => {
     if (
@@ -211,7 +213,7 @@ searchcontent.addEventListener("input", (e) => {
     ) {
         erase();
     } else {
-        resultsbox.classList.remove("invisible");
+        resultsbox.removeAttribute("class ");
     }
 });
 }

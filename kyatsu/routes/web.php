@@ -80,7 +80,7 @@ Route::get("/gameinfo", function () {
   return view("gameinfo");
 })->name("gameinfo");
 
-Route::get('/redis', [RedisController::class, 'index']);
+Route::get('/redis', [RedisController::class, 'index'])->name("redis");
 
 Route::get("/heroes", function () {
   return view("heroes");
