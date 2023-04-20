@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Validators\ValidatorXHR;
 //use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Controllers\RedisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,6 +79,8 @@ Route::get("/", function () {
 Route::get("/gameinfo", function () {
   return view("gameinfo");
 })->name("gameinfo");
+
+Route::get('/redis', [RedisController::class, 'index']);
 
 Route::get("/heroes", function () {
   return view("heroes");

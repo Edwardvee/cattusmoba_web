@@ -214,7 +214,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Ziggy' => Tightenco\Ziggy\ZiggyFacade::class,
+        'Redis' => Illuminate\Support\Facades\Redis::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+
 
 ];
