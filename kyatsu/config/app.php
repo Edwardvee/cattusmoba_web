@@ -188,6 +188,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        Tightenco\Ziggy\ZiggyServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -212,7 +213,10 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Ziggy' => Tightenco\Ziggy\ZiggyFacade::class,
+        'Redis' => Illuminate\Support\Facades\Redis::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+
 
 ];
