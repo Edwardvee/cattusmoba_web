@@ -29,6 +29,14 @@
 <!--     <h1 class=""> Aca comienza la buena vida</h1>
     <h2 class=""> Una aventura epica auspiciada por Dasomnya </h2>
     <h3 class=""> ACCIÓN EN EQUIPO • GRATIS </h3>
+    <img src="img/divider.png">
+    <h3 class="">Login</h3>
+    <form action="{{ route('login') }}" id="login_form" method="POST">
+      @csrf
+      <input id="validator" type="text" name="name" placeholder="Nombre de usuario/Email"></input>
+      <input type="text" name="password" placeholder="Contrasenia" required></input>
+      <input type="submit"></input>
+=======
     <img src="img/divider.png"> -->
     <form action="{{ route('login') }}">
 <!--       <input class="Auth_input" type="text" name="username" placeholder="Nombre de usuario" required></input class="Auth_input">
@@ -55,9 +63,9 @@
     <div class="bodyregister">
     <div class="main">  	
       <input class="Auth_input" type="checkbox" id="chk" aria-hidden="true">
-      
 			<div class="signup">
         <form>
+          @csrf
           <label for="chk" aria-hidden="true">Registrate</label>
           <p class="text-register">Unete a mas de 1.000.000 de jugadores</p>
 					<input class="Auth_input" type="text" name="txt" placeholder="Usuario" required="">
@@ -69,15 +77,26 @@
 
 			<div class="login">
 				<form>
+          @csrf
 					<label for="chk" aria-hidden="true">Logea</label>
           <p class="text-login">Te extañabamos</p>
-					<input class="Auth_input" type="email" name="email" placeholder="Email" required="">
+					<input class="Auth_input" id="validator" type="email" name="email" placeholder="Email" required="">
 					<input class="Auth_input" type="password" name="pswd" placeholder="Contraseña" required="">
 					<button>Login</button>
 				</form>
 			</div>
+      <script>
+      let login_form = document.getElementById("login_form");
+      login_form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let validator = document.getElementById("validator");
+        validator.setAttribute("name", ((validator.value.indexOf("@") == "-1") ? "name" : "email"));
+        login_form.submit();
+      });
+  </script>
 	</div>
   </div>
   </div>
+>>>>>>> origin/main
 </body>
 @endsection("http_body")
