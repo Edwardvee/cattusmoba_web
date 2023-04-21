@@ -194,8 +194,36 @@ header a {
 .heroImg{   
  max-height: 500px;
 }
-#myImage {
-    transition: opacity 1s ease-in-out;
-    opacity: 1;
+/* #myImage {
+    animation: wipe-in-top-right 1s ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+  } */
+ /*  .animate-image {
+    animation: wipe-in-top-right 1s;
+  }
+   */
+ /*  @keyframes wipe-in-top-right {
+    from {
+      clip-path: polygon(-50% 50%, 50% 150%, 50% 150%, -50% 50%);
+    }
+    to {
+      clip-path: polygon(50% -50%, 150% 50%, 50% 150%, -50% 50%);
+    }
+  } */
+
+.animate-image{
+    animation: polygon-out-opposing-corners 1s;
+}
+@keyframes polygon-out-opposing-corners {
+    from {
+      clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+    }
+    to {
+      clip-path: polygon(0 0, 50% 50%, 100% 100%, 50% 50%);
+    }
   }
   
+  [transition-style="out:polygon:opposing-corners"] {
+    animation: 1.5s cubic-bezier(.25, 1, .30, 1) polygon-out-opposing-corners both;
+  }

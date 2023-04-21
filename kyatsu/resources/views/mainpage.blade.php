@@ -74,15 +74,13 @@ function cambiarImagen(src, mensaje) {
   var imagen = document.getElementById("myImage");
   var message = document.getElementById("message");
   
-  imagen.style.opacity = 0;
-  
   setTimeout(function() {
     imagen.src = src;
     message.textContent = mensaje;
-    imagen.style.opacity = 1;
-  }, 1000);
+    imagen.classList.add("animate-image"); // Agrega la clase "animate-image"
+  }, 100);
+  imagen.classList.remove("animate-image");
 }
-
 </script>
 @endsection("http_body")
 
