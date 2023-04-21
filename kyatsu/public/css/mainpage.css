@@ -1,11 +1,11 @@
-
- body{
-    padding:0px;
+body {
+    padding: 0px;
     margin: 0;
-    margin-top:100px;
-    
- }
- .img-title{
+    margin-top: 100px;
+
+}
+
+.img-title {
     font-size: 50px;
     font-weight: 700;
     margin: 0;
@@ -13,23 +13,24 @@
     letter-spacing: 3px;
     color: #fff;
     text-align: center;
- }
- 
- header{
-    position: relative; 
+}
+
+header {
+    position: relative;
     height: 600px;
     max-width: 1920px;
     align-items: center;
     justify-content: center;
     flex-flow: column;
-    margin:auto;
+    margin: auto;
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
     display: -o-flex;
 
 }
- header::before{
+
+header::before {
     content: "";
     background: url(https://giffiles.alphacoders.com/153/15370.gif);
     background-size: cover;
@@ -42,108 +43,125 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
- }
+}
 
-@media only screen and (max-width: 767px){
-    header h1{
+@media only screen and (max-width: 767px) {
+    header h1 {
         font-size: 30px;
     }
-    header p{
+
+    header p {
         display: none;
     }
-    header a{
+
+    header a {
         padding: 5px 15px;
     }
-} 
+}
+
 header a {
-	text-transform: uppercase;
-	text-decoration: none;
-	color: #fff;
-	background: #262626;
-	padding: 10px 30px;
-	margin-top: 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background: #262626;
+    padding: 10px 30px;
+    margin-top: 10px;
     filter: brightness(1);
 }
-        header p {
-	margin: 0 30%;
-	text-align: center;
-	color: #fff;
-    filter: brightness(1);
-        }
-        header h1 {
-            margin: 0 30%;
-            text-align: center;
-            color: #fff;
-            filter: brightness(1);
-                }
 
-.Bdownload{
+header p {
+    margin: 0 30%;
+    text-align: center;
+    color: #fff;
+    filter: brightness(1);
+}
+
+header h1 {
+    margin: 0 30%;
+    text-align: center;
+    color: #fff;
+    filter: brightness(1);
+}
+
+.Bdownload {
     border-radius: 10px;
     transition-duration: 0.2s;
 }
-.Bdownload:hover{
+
+.Bdownload:hover {
     transition-duration: 0.2s;
     background-color: #ffffff;
     color: black;
     border-radius: 10px;
 }
+
 .Bdownload:after {
     content: "";
     display: block;
     position: absolute;
     border-radius: 4em;
     left: 0;
-    top:0;
+    top: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
     transition: all 0.5s;
     box-shadow: 0 0 10px 40px black;
-  }
-  
-  .Bdownload:active:after {
+}
+
+.Bdownload:active:after {
     box-shadow: 0 0 0 0 black;
     position: absolute;
     border-radius: 4em;
     left: 0;
-    top:0;
+    top: 0;
     opacity: 1;
     transition: 0s;
-  }
-  
-  .Bdownload:active {
-    top: 1px;
-  }
-.content{
-    max-width: 1720px;
-    margin:auto;
 }
-.cardTitle{
+
+.Bdownload:active {
+    top: 1px;
+}
+
+.content {
+    max-width: 1720px;
+    margin: auto;
+}
+
+.cardTitle {
     font-size: 50px;
 }
-.CrdRightSide{
-    background: rgb(33,37,41);
-    color: white;
-}
-.Descripcion{
-    color: white;
-}
-.redes{
-  border-radius: 15px;
-  background-color: #262626;
-  width: 70%;
-  padding: 1px;
-  margin:auto;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  height: 8%;
-  text-align: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
 
+.CrdRightSide {
+    background: rgb(33, 37, 41);
+    color: white;
 }
-.OurRed{
+
+.Descripcion {
+    color: white;
+}
+
+.redes {
+    border-radius: 15px;
+    background-color: #262626;
+    width: 70%;
+    padding: 1px;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    height: 8%;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.redes_icon {
+    display: contents;
+    width: 20px;
+}
+
+.OurRed {
     margin: 10px;
     text-align: center;
     justify-self: center;
@@ -153,20 +171,22 @@ header a {
     vertical-align: middle;
     color: white;
     font-size: 30px;
-    
+
 }
-.Red{
+
+.Red {
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    margin:10px;
+    margin: 10px;
     margin-top: 0px;
 }
 
-.Red:hover{
+.Red:hover {
     transition-duration: 0.2s;
     background-color: black;
 }
+
 .heroesDesc{
     display: inline-block;
     border-radius: 4px;
@@ -227,3 +247,46 @@ header a {
   [transition-style="out:polygon:opposing-corners"] {
     animation: 1.5s cubic-bezier(.25, 1, .30, 1) polygon-out-opposing-corners both;
   }
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+ background:url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/noisy_net.png') repeat;
+}
+.area{
+    margin: 0;
+    letter-spacing: 3px;
+  text-align:center;
+  font-size:6.5em;
+  color:#ffffff;
+  letter-spacing: -7px;
+  font-weight:700;
+  text-transform:uppercase;
+  animation:blur 2s ease-out infinite;
+  text-shadow:0px 0px 5px #4a4848,
+      0px 0px 7px #4a4848;
+      z-index: 999;
+      
+}
+
+@keyframes blur{
+  from{
+      text-shadow:0px 0px 10px #b5b1b1,
+      0px 0px 10px #b5b1b1,
+      0px 0px 25px #b5b1b1,
+      0px 0px 25px #b5b1b1,
+      0px 0px 25px #b5b1b1,
+      0px 0px 50px #b5b1b1,
+      0px 0px 50px #b5b1b1,
+      0px 0px 50px #7B96B8,
+      0px 0px 1000px #7B96B8,
+      0px 10px 50px #7B96B8,
+      0px 10px 50px #7B96B8,
+      0px 10px 50px #7B96B8,
+      0px 10px 50px #7B96B8,
+      0px -10px 50px #7B96B8,
+      0px -10px 50px #7B96B8;}
+}
+

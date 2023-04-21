@@ -12,7 +12,7 @@ Kyatsu! Moba es un juego indie de tipo MOBA que combina accion acelerada, gamepl
 
 ## Caracteristicas de la pagina web
 - Rapido y claro acceso a la descarga del videojuego
-- Tanto registro como inicio de sesion comodo
+- Ambos registro e inicio de sesion comodos
 - Explicacion tanto de la historia como de los personajes videojuego
 - Un diseño amigable con el consumidor, y que incite a descargar el juego 
 

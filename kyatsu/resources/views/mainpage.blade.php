@@ -8,33 +8,24 @@
   <link href="css/mainpage.css" rel="stylesheet">
   <title> Kyatsu!</title>
 </head>
-
-<body>
-  
-  
+<body> 
   <div><!--  aunque no tenga sentido esto lo centra ._. --> 
  <header>
-    <h1 class="img-title">Kyatsu! Moba</h1>
+
+ <div class="area"> Kyatsu! Moba </div>
     <p id="rrandommsg"> ¿Eres digno de tanta accion?</p>
     <a class="Bdownload" href="https://tlauncher.org/installer">Juega ahora</a>
   </header>
 </div>
-
 <div class="redes">
   <p class="OurRed"> Siguenos en nuestras redes sociales</p>
   <br> 
-    <img class="Red" src="img/Discord.png" width="40px"> 
-    <img class="Red" src="img/YouTube.png" width="40px">
-    <img class="Red" src="img/Facebook.png" width="40px">
-    <img class="Red" src="img/Instagram.png" width="40px">
-
-  
+   <a href="youtube.com" class="redes_icon"><img class="Red" src="img/Discord.png" width="40px"></a> 
+   <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="redes_icon"><img class="Red" src="img/YouTube.png" width="40px"></a> 
+   <a href="youtube.com" class="redes_icon"><img class="Red" src="img/Facebook.png" width="40px"></a> 
+   <a href="https://www.instagram.com/dasomnya_industries/" class="redes_icon"> <img class="Red" src="img/Instagram.png" width="40px"></a>
 </div>
-
-
-
 <div class="content"> 
-
  <div class="card mb-3" style="max-width: 100%;">
   <div class="row g-0">
     <div class="col-md-4">
@@ -52,18 +43,12 @@
         <p class="Descripcion" id="message">Los daños se enfocan claramente en hacer daño.</p>
       </div>
     </div>
-
-
   </div>
-
   <div>
   </div>
 </div>
-  
-
 </div>
 </body>
-
 <script>
 var MPtext = ["¿Eres digno de tanta accion?", "Se parte de la historia", "¿Seras nuestro nakama?", "Te odiamos Nico", "¿Es la primera vez que te vemos?", "Welcome to the jungle", "¿Como llegaste a aqui?"];
 var rand = Math.floor(Math.random()*MPtext.length);
@@ -80,6 +65,7 @@ function cambiarImagen(src, mensaje) {
     imagen.classList.add("animate-image"); // Agrega la clase "animate-image"
   }, 100);
   imagen.classList.remove("animate-image");
+
 }
 </script>
 @endsection("http_body")
