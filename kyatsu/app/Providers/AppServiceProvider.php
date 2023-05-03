@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         Password::defaults(function () {
-            return Password::min(8)->mixedCase()->rules(["max:32"]);
+            //return Password::min(8)->mixedCase()->rules(["max:32"]);
+            return Password::min(8)->rules(["max:32"]);
         });
     }
 
