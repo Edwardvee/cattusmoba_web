@@ -239,18 +239,7 @@ header h1 {
 
   } 
 
-.animate-image {
-    animation: polygon-out-opposing-corners 1s;
-}
 
-@keyframes polygon-out-opposing-corners {
-    from {
-        clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
-    }
-    to {
-        clip-path: polygon(0 0, 50% 50%, 100% 100%, 50% 50%);
-    }
-}
 
  
 
