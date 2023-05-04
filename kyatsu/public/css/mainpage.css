@@ -257,7 +257,7 @@ header h1 {
     }
 }
 
-  }
+ 
 
 
   
@@ -295,7 +295,7 @@ body {
  .area:hover{
     animation: blur 2s ease-in-out infinite;
 
-
+ }
 
 @keyframes blur {
     from {
