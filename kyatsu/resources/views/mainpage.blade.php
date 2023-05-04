@@ -22,10 +22,10 @@
         <div class="item-scroll">
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <img id="myImage" src="img/cait.png" class="img-fluid rounded-start heroImg" alt="...">
                     </div>
-                    <div class="col-md-8 CrdRightSide">
+                    <div class="col-md-9 CrdRightSide">
                         <div class="card-body">
                             <h5 class="card-title cardTitle">Heroes increibles</h5>
                             <p class="card-text cardText">Ya sea que prefieras lanzarte directo a la batalla, apoyar a
@@ -46,10 +46,10 @@
         <div class="item-scroll">
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <img id="myImage" src="img/cait.png" class="img-fluid rounded-start heroImg" alt="...">
                     </div>
-                    <div class="col-md-8 CrdRightSide">
+                    <div class="col-md-9 CrdRightSide">
                         <div class="card-body">
                             <h5 class="card-title cardTitle">Heroes increibles</h5>
                             <p class="card-text cardText">Ya sea que prefieras lanzarte directo a la batalla, apoyar a
@@ -68,10 +68,10 @@
         <div class="item-scroll">
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <img id="myImage" src="img/cait.png" class="img-fluid rounded-start heroImg" alt="...">
                     </div>
-                    <div class="col-md-8 CrdRightSide">
+                    <div class="col-md-9 CrdRightSide">
                         <div class="card-body">
                             <h5 class="card-title cardTitle">Heroes increibles</h5>
                             <p class="card-text cardText">Ya sea que prefieras lanzarte directo a la batalla, apoyar a
