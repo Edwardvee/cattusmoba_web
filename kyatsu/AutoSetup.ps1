@@ -44,8 +44,9 @@ if ((Read-Host -Prompt 'Desea proceder? Escriba SI/NO') -ne "SI") {
 # Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName | Select-Object XAMPP
 function xamppInstallValidation {
     try {
-        Set-Variable -Name XAMPP_DIRECTORY -Option AllScope -Value ((Get-ItemProperty HKLM:\Software\xampp\ | Select-Object Install_Dir).Install_Dir);
-        Set-Variable -Name MYSQL_PATH -Option AllScope -Value ($XAMPP_DIRECTORY + "\mysql\bin\mysql.exe");
+        Set-Variable -Name XAMPP_DIRECTORY -Scope Script -Option Constant -Value ((Get-ItemProperty HKLM:\Software\xampp\ | Select-Object Install_Dir).Install_Dir);
+        Set-Variable -Name MYSQL_PATH -Scope Script -Option Constant -Value ($XAMPP_DIRECTORY + "\mysql\bin\mysql.exe");
+
         Write-Host "La validacion de la instalacion de XAMPP ha sido un exito, continuando..." -ForegroundColor Green
     }
     catch [System.Security.SecurityException] {
@@ -56,7 +57,7 @@ function xamppInstallValidation {
         Write-Host "Desea proporcionar la URL absoluta alternativa a MySQL/MariaDB o desea abortar el autoinstalador?" -ForegroundColor Yellow
         if ("SI" -eq (Read-Host -Prompt "Escriba SI/NO")) {
             Write-Host "Proporcione ruta absoluta del proceso mysql.exe";
-            Set-Variable MYSQL_PATH -Option AllScope -Value (Read-Host "Escriba...");
+            Set-Variable MYSQL_PATH -Scope Script -Option Constant -Value (Read-Host "Escriba...");
             if (!Test-Path $MYSQL_PATH) {
                 throw "FATAL: La URL Absoluta alternativa de mysql.exe proporcionada no lleva a ningun archivo existente, abortando...";
             }
@@ -188,7 +189,7 @@ composer install
 Copy-Item ($REPOSITORY_PATH.toString() + "\.env.example") -Destination ($REPOSITORY_PATH.toString() + "\.env")
 Write-Host "Las dependencias fueron configuradas exitosamente, configurando el framework" -ForegroundColor Green
  
-if ($null -eq (Invoke-Expression ('{0} --batch --skip-column-names -u root -e "SHOW DATABASES LIKE {1}";' -f $MYSQL_PATH, $PROJECT_NAME))) {
+if ($null -eq (Invoke-Expression ('{0} --batch --skip-column-names -u root -e "SHOW DATABASES LIKE {1};";' -f $MYSQL_PATH, $PROJECT_NAME))) {
     Write-Host "No se le solicitara borrar la base de datos ya que la misma no existe" -ForegroundColor Green
 }
 else {
