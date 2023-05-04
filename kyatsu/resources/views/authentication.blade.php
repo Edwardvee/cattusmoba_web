@@ -1,14 +1,12 @@
   @extends("maintemplate")
 
+  @section("http_headers")
+  <title>Kyatsu</title>
+  <script src="{{ url('js/auth.js') }}"></script>
+  <link href="css/register.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+  @endsection
   @section("http_body")
-
-  <head>
-    <title>Kyatsu</title>
-    <script src="{{ url('js/auth.js') }}"></script>
-    <link href="css/register.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-  </head>
-
   <body>
     <div class="leaves">
       <div class="set">
@@ -49,7 +47,6 @@
               <button type="submit">Registrate</button>
             </form>
           </div>
-
           <div class="login">
             <form method="POST" id="login_form" action="{{ route('login') }}">
               @csrf
