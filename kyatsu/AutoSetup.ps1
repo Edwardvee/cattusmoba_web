@@ -15,18 +15,14 @@
 
 Write-Output @off
 $host.ui.RawUI.WindowTitle = "Auto-Instalador de Laravel"
-Set-Variable PHP_VERSION -Option Constant -Value 8.1
-Set-Variable COMPOSER_VERSION -Option Constant -Value 2.2
-Set-Variable REPOSITORY_PATH -Option Constant $pwd
-Set-Variable ADMIN_RIGHTS -Option Constant ([Security.Principal.WindowsPrincipal] ` [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-Set-Variable INSTALL_COMPOSER_DIRECTORY -Value "$env:ProgramData\composer\"
-Set-Variable CURRENT_GIT_BRANCH -Option Constant -Value (git branch --show-current)
 
-#function setPath() {
-#    Set-Variable -Name 'path_enviroment' -Scope global -Value ([Environment]::GetEnvironmentVariable('PATH', 'Machine'))
-#}
-#setPath
-#$path_enviroment += ";C:\pRUEBA\TEST2\Composer\;Programa2"
+Set-Variable -Name PHP_VERSION -Option Constant -Value 8.1
+Set-Variable -Name COMPOSER_VERSION -Option Constant -Value 2.2
+Set-Variable -Name REPOSITORY_PATH -Option Constant $pwd
+Set-Variable -Name ADMIN_RIGHTS -Option Constant ([Security.Principal.WindowsPrincipal] ` [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+Set-Variable -Name INSTALL_COMPOSER_DIRECTORY -Value "$env:ProgramData\composer\"
+Set-Variable -Name CURRENT_GIT_BRANCH -Option Constant -Value (git branch --show-current)
+Set-Variable -Name PROJECT_NAME -Option Constant -Value ("'" + (Split-Path $PSScriptRoot -Leaf) + "'");
 
 Write-Host "Auto-Instalador de Laravel" -ForegroundColor Green
 Write-Host "Antes de proceder, asegurese que abrio este archivo"-ForegroundColor Green
@@ -45,7 +41,43 @@ if ((Read-Host -Prompt 'Desea proceder? Escriba SI/NO') -ne "SI") {
     throw "FATAL: Instalacion inicial abortada por el usuario"
 }
 
+# Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName | Select-Object XAMPP
+function xamppInstallValidation {
+    try {
+        Set-Variable -Name XAMPP_DIRECTORY -Option AllScope -Value ((Get-ItemProperty HKLM:\Software\xampp\ | Select-Object Install_Dir).Install_Dir);
+        Set-Variable -Name MYSQL_PATH -Option AllScope -Value ($XAMPP_DIRECTORY + "\mysql\bin\mysql.exe");
+        Write-Host "La validacion de la instalacion de XAMPP ha sido un exito, continuando..." -ForegroundColor Green
+    }
+    catch [System.Security.SecurityException] {
+        throw "FATAL: No se tiene acceso al regedit, ejecute el autoinstalador como administrador, abortando...";
+    }
+    catch [System.Management.Automation.ItemNotFoundException] {
+        Write-Host "No se ha encontrado el programa XAMPP, podra continuar solo si proporciona la URL absoluta del mysql.exe" -ForegroundColor Yellow
+        Write-Host "Desea proporcionar la URL absoluta alternativa a MySQL/MariaDB o desea abortar el autoinstalador?" -ForegroundColor Yellow
+        if ("SI" -eq (Read-Host -Prompt "Escriba SI/NO")) {
+            Write-Host "Proporcione ruta absoluta del proceso mysql.exe";
+            Set-Variable MYSQL_PATH -Option AllScope -Value (Read-Host "Escriba...");
+            if (!Test-Path $MYSQL_PATH) {
+                throw "FATAL: La URL Absoluta alternativa de mysql.exe proporcionada no lleva a ningun archivo existente, abortando...";
+            }
+            else {
+                Write-Host "URL Absoluta de mysql.exe modificada manualmente, continuando..." -ForegroundColor Green
+            }
+        }
+        else {
+            throw "FATAL: XAMPP No esta instalado y no se ha proporcionado una URL absoluta alternativa del proceso mysql.exe";
+        }
+    }
+    #catch {
+    #    throw "FATAL: Ha ocurrido un error desconocido al acceder al regedit para validar XAMPP, abortando...";
+    #}
+}
 
+xamppInstallValidation
+
+#Write-Host $XAMPP_DIRECTORY -ForegroundColor Yellow;
+#Write-Host $MYSQL_PATH -ForegroundColor Yellow;
+#Invoke-Expression ('{0} --batch --skip-column-names -u root -e "SHOW DATABASES LIKE {1};"' -f $MYSQL_PATH, $PROJECT_NAME);
 
 function enviromentTest() {
     Write-Host "Verificando instalacion de PHP en el entorno" -ForegroundColor Green  
@@ -108,66 +140,6 @@ function setupComposer() {
                 Write-Host "Las variables de entorno fueron configuradas correctamente, este script se reinciara"
                 Read-Host -Prompt "Presione cualquier tecla para continuar"
                 RefreshEnv
-                <#
-                function removeComposerEnviromentVariable() {
-                    if ($path_enviroment -match "composer") {
-                        $path_position_start
-                        $path_position_end
-                        $position_start = $path_enviroment.indexOf("composer", 0, [StringComparison]::OrdinalIgnoreCase)
-                        Write-Host $position_start -ForegroundColor Cyan
-                        for ($i = $position_start; $i -ge 0; $i--) {
-                            if (($path_enviroment[$i]) -eq ";") {
-                                $path_position_start = $i++;
-                                break
-                            }
-                        }
-                        for ($i = $position_start; $i -le ((Get-Variable path_enviroment -ValueOnly).Length); $i++) {
-                            Write-Host $i;
-                            if ($null -eq ($path_enviroment[$i])) {
-                                $path_position_end = $i--;
-                                break;
-                            } 
-                            if (($path_enviroment[$i]) -eq ";") {
-                                $path_position_end = $i--;
-                                break
-                            }
-                        }
-                        $extracted_string = $path_enviroment.Substring($path_position_start, ($path_position_end - $path_position_start))
-                        Write-Host "Se ha detectado una variable de entorno existente para composer. Para evitar problemas de compatibilidad." -ForegroundColor Yellow
-                        Write-Host "Se aconseja eliminarla para evitar fallos. Usted desea eliminarla?"
-                        if (!((Read-Host -Prompt "SI/NO") -eq "SI")) {
-                            Write-Host "Usted marco NO a eliminar la variable de entorno de composer antigua. Esto puede ocasionar fallos, pero puede proseguir..." -ForegroundColor Yellow
-                            return;
-                        }
-                        Write-Host "El valor a extirpar es: "`n $extracted_string -ForegroundColor Cyan
-                        Write-host `n
-                        $future_path = (Get-Variable path_enviroment -ValueOnly).Replace($extracted_string, "")
-                        Write-Host "El nuevo valor de la variable de entorno PATH es: "`n$future_path -ForegroundColor Cyan
-                        if ((Read-Host "Desea extirparlo de la variable de entorno PATH? SI/NO") -eq "SI") {
-                            $security_filename = "installer_security.txt"
-                            [Environment]::SetEnvironmentVariable("PATH", $future_path)
-                            if (!(Test-Path "$(Get-Variable REPOSITORY_PATH -ValueOnly)\$security_filename" )) {
-                                New-Item -Path (Get-Variable REPOSITORY_PATH -ValueOnly) -ItemType 'file' -Name $security_filename
-                                Add-Content -Path "$(Get-Variable REPOSITORY_PATH -ValueOnly)\$security_filename" -Value "Copias de seguridad de la variable de entorno PATH en la instalacion de composer"
-                            }
-                            Add-Content -Path "$(Get-Variable REPOSITORY_PATH -ValueOnly)\$security_filename" -Value "($((Get-Date).toString("dd-MM-yyyy hh:mm:ss"))`n$(Get-Variable path_enviroment -ValueOnly))"
-                            Write-Host "Por seguridad, se ha guardado el valor de la variable de entorno PATH anterior en el archivo installer_security.txt del repositorio" -ForegroundColor Yellow
-                            Write-Host "Tenga en cuenta que ese archivo esta en el .gitignore y es especifico de su computadora" -ForegroundColor Yellow
-                            Write-Host "Se ha establecido la variable de entorno para composer correctamente" -ForegroundColor Green
-                            setPath
-                        } else {
-                            Write-host "Se ha rechazado la extirpacion de la variable de entorno de composer anterior por el operator" -ForegroundColor Green
-                        }
-                    }
-                }
-                removeComposerEnviromentVariable
-                function setComposerEnviromentVariable() {
-                    $definitive_path = "$(Get-Variable path_enviroment -ValueOnly)$(Get-Variable INSTALL_COMPOSER_DIRECTORY)composer.phar"
-                    Write-Host ""
-                
-
-                }
-                # // >
                 #Set-Location $REPOSITORY_PATH
             }
         }
@@ -187,7 +159,8 @@ Write-Host "Verificando instalacion de composer en el entorno" -ForegroundColor 
 
 if (!([bool](Get-Command composer -ErrorAction SilentlyContinue))) {
     throw "FATAL: Composre no se encuentra instalado en esta computadora, por favor instalelo"
-} else {
+}
+else {
     if ((composer --version) -lt $COMPOSER_VERSION) {
         throw "FATAL: La version de composer instalada es inferior a la requerida. Version instalada:" + (composer --version) 
     }
@@ -214,14 +187,17 @@ Write-Host "Configurando sistema" -ForegroundColor Green
 composer install
 Copy-Item ($REPOSITORY_PATH.toString() + "\.env.example") -Destination ($REPOSITORY_PATH.toString() + "\.env")
 Write-Host "Las dependencias fueron configuradas exitosamente, configurando el framework" -ForegroundColor Green
-
-if ($null -eq (C:\xampp\mysql\bin\mysql.exe --batch --skip-column-names -e "SHOW DATABASES LIKE 'kyatsu';" -u root)) {
+ 
+if ($null -eq (Invoke-Expression ('{0} --batch --skip-column-names -u root -e "SHOW DATABASES LIKE {1}";' -f $MYSQL_PATH, $PROJECT_NAME))) {
     Write-Host "No se le solicitara borrar la base de datos ya que la misma no existe" -ForegroundColor Green
-} else {
+}
+else {
     if ((Read-Host -Prompt "Deseas borrar la base de datos anterior de este sitio si es que tenias una? SI/NO") -eq "SI") {
-        php artisan migrate:rollback
-    } else {
-        Write-Host "Usted marco que NO a borrar la base de datos anterior, eso puede ocasionar fallas, continuando..." -ForegroundColor Yellow
+        <# php artisan migrate:rollback#> 
+        Invoke-Expression ('{0} --batch -e "DROP DATABASE {1};" -u root' -f $MYSQL_PATH, $PROJECT_NAME -replace "'", "");
+    }
+    else {
+        Write-Host "Usted marco que NO a borrar la base de datos anterior, esto puede ocasionar fallas, continuando..." -ForegroundColor Yellow
     }
 }
 
