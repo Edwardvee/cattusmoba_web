@@ -43,7 +43,7 @@
               <input class="Auth_input" type="email" name="email" placeholder="Email" required="">
               <input class="Auth_input" type="text" name="password" placeholder="Contraseña" required="">
               <input class="Auth_input" type="text" name="password_confirmation" placeholder="Confirmar contraseña" required="">
-              <input class="Auth_input" type="checkbox" name="remember" value="1">
+              <input class="Auth_input" type="checkbox" name="remember" value="1"> 
               <button type="submit">Registrate</button>
             </form>
           </div>
