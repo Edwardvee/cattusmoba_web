@@ -26,6 +26,7 @@ header {
     display: -moz-flex;
     display: -ms-flex;
     display: -o-flex;
+    top: -50px;
 }
 
 header::before {
@@ -128,7 +129,6 @@ header h1 {
 .content {
     max-width: 1720px;
     margin: auto;
-    
 }
 
 .cardTitle {
@@ -224,11 +224,6 @@ header h1 {
 .heroImg {
     max-height: 500px;
 }
-/* #myImage {
-    animation: wipe-in-top-right 1s ease-in-out;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-  } */
 
   .animate-image {
     animation: wipe-in-top-right 1s;
@@ -278,7 +273,9 @@ body {
     background: url("http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/noisy_net.png")
         repeat;
 }
-
+.item-scroll{
+    opacity: 0;
+}
 .area { 
     max-height: 50px;
     margin: 1em;
@@ -316,4 +313,16 @@ body {
             0px -10px 50px #7b96b802;
     }
     }
-}
+
+
+    .appear {
+        transition: all 0.8s;
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      
+      .appear.inview {
+        opacity: 1;
+        transform: none;
+        transition-delay: 0.3s;
+      }

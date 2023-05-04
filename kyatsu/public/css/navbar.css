@@ -1,4 +1,4 @@
-/* 31/03/23 Hecho por lucas y manuel  */
+/* 31/03/23 Hecho por Manuel  */
 /* Firefox */
 * {
     scrollbar-width: auto;
@@ -179,12 +179,6 @@ body {
     opacity: 0.9;
 }
 
-/* .cross{
-    color: #07051a;
-    width: 100px;
-    height: 100px;
-    display:flex;
-} */
 .user_i {
     width: 35px;
     height: 35px;
