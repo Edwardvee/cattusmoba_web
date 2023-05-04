@@ -31,9 +31,9 @@
                             <p class="card-text cardText">Ya sea que prefieras lanzarte directo a la batalla, apoyar a
                                 tus compañeros de equipo, o algo intermedio, hay un lugar para ti en la arena</p>
                             <div class="col-md-12">
-                                <button class="heroesDesc" onclick="cambiarImagen('img/cait.png', 'Texto de la imagen 1')">Daño<img class="butIcoHero" src="img/damage.png"></button>
-                                <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2')">Soporte</button>
-                                <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3')">Tanque</button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/cait.png', 'Texto de la imagen 1','myImage')">Daño<img class="butIcoHero" src="img/damage.png"></button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2','myImage')">Soporte</button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3','myImage')">Tanque</button>
                             </div>
                             <p class="Descripcion" id="message">Los daños se enfocan claramente en hacer daño.</p>
                         </div>
@@ -47,7 +47,7 @@
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-3">
-                        <img id="myImage" src="img/cait.png" class="img-fluid rounded-start heroImg" alt="...">
+                        <img id="myImage2" src="img/cait.png" class="img-fluid rounded-start heroImg" alt="...">
                     </div>
                     <div class="col-md-9 CrdRightSide">
                         <div class="card-body">
@@ -55,9 +55,9 @@
                             <p class="card-text cardText">Ya sea que prefieras lanzarte directo a la batalla, apoyar a
                                 tus compañeros de equipo, o algo intermedio, hay un lugar para ti en la arena</p>
                             <div class="col-md-12">
-                                <button class="heroesDesc" onclick="cambiarImagen('img/cait.png', 'Texto de la imagen 1')">Daño<img class="butIcoHero" src="img/damage.png"></button>
-                                <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2')">Soporte</button>
-                                <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3')">Tanque</button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/cait.png', 'Texto de la imagen 1','myImage2')">Daño<img class="butIcoHero" src="img/damage.png"></button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2','myImage2')">Soporte</button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3','myImage2')">Tanque</button>
                             </div>
                             <p class="Descripcion" id="message">Los daños se enfocan claramente en hacer daño.</p>
                         </div>
@@ -69,7 +69,7 @@
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-3">
-                        <img id="myImage" src="img/cait.png" class="img-fluid rounded-start heroImg" alt="...">
+                        <img id="myImage3" src="img/cait.png" class="img-fluid rounded-start heroImg" alt="...">
                     </div>
                     <div class="col-md-9 CrdRightSide">
                         <div class="card-body">
@@ -77,9 +77,9 @@
                             <p class="card-text cardText">Ya sea que prefieras lanzarte directo a la batalla, apoyar a
                                 tus compañeros de equipo, o algo intermedio, hay un lugar para ti en la arena</p>
                             <div class="col-md-12">
-                                <button class="heroesDesc" onclick="cambiarImagen('img/cait.png', 'Texto de la imagen 1')">Daño<img class="butIcoHero" src="img/damage.png"></button>
-                                <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2')">Soporte</button>
-                                <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3')">Tanque</button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/cait.png', 'Texto de la imagen 1','myImage3')">Daño<img class="butIcoHero" src="img/damage.png"></button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2','myImage3')">Soporte</button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3','myImage3')">Tanque</button>
                             </div>
                             <p class="Descripcion" id="message">Los daños se enfocan claramente en hacer daño.</p>
                         </div>
@@ -95,8 +95,8 @@
             var randtext = MPtext[rand];
             document.getElementById("rrandommsg").innerHTML = randtext;
 
-            function cambiarImagen(src, mensaje) {
-                var imagen = document.getElementById("myImage");
+            function cambiarImagen(src, mensaje,img) {
+                var imagen = document.getElementById(img);
                 var message = document.getElementById("message");
 
                 setTimeout(function() {
