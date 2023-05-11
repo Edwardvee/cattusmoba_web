@@ -4,7 +4,7 @@
 <title> Kyatsu!</title>
 @endsection
 @section('http_body')
-<body>
+
     <header>
         <div class="area"> Kyatsu! Arena </div>
         <p id="rrandommsg"> ¿Eres digno de tanta accion?</p>
@@ -124,5 +124,5 @@
                 });
             });
         </script>
-</body>
+
 @endsection("http_body")

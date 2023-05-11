@@ -65,6 +65,7 @@
       </div>
     </div>
   </nav>
+
   @yield("http_body")
   <script>
     const clearInput = () => {

@@ -1,0 +1,30 @@
+section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+}
+
+main{
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.preventScroll{
+    overflow: hidden;
+    height: 100%;
+}
+
+.guide{
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style-type: none;
+
+}
