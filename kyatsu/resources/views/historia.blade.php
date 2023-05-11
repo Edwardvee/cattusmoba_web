@@ -27,30 +27,32 @@
 
     <ul class="guide">
         <li>
-        <a href="#one"><p>oña</p> </a>
+        <button id="one">oña</button> 
         </li>
         <li>
-        <a href="#two"><p>oña</p></a> 
+        <p>oña</p>
             </li>
         <li>
-        <a href="#three"><p>oña</p></a>       
+        <p>oña</p>      
       </li>
         <li>
-        <a href="#four"><p>oña</p></a>
-            </li>
+        <p>oña</p>
+    </li>
     </ul>
     
 </div>
 </main>
 <script>
 
-
 $(document).ready(function (){
-    $("body").addClass("preventScroll");
-    function scrollGo(section){
+   
+    var one = $("#one").position() ;
+    $("#one").(function(){
+       alert('g');
+    });
 
-    }
-})
+    $("body").addClass("preventScroll");
+});
 
 </script>
 @endsection("http_body")
