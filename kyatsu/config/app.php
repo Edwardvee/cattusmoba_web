@@ -189,7 +189,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Tightenco\Ziggy\ZiggyServiceProvider::class,
-
+        Cog\Laravel\Ban\Providers\BanServiceProvider::class,
         /*
          * Application Service Providers...
          */

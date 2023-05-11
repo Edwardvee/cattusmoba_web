@@ -25,7 +25,7 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 */
-//Route::middleware["auth"]
+
 Route::group(["middleware" => ["guest"]], function () {
   Route::get("authentication", function () {
     return view("authentication");
@@ -38,28 +38,6 @@ Route::group(["middleware" => ["can: access admin"]], function () {
     Route::resource('admin_users', UserManagementController::class);
   })->name("admin");
 });
-/*
-Route::prefix("admin")->group(function () {
-  Route::resource('admin_users', UserManagementController::class);
-})->name("admin");*/
-//})->name("admin");
-
-
-//Aprender como funcionan las colecciones
-Route::prefix("frontend")->group(function () {
-  Route::get('/user/{name}/{page}', function ($name, $page) {
-    $validator = new ValidatorXHR(["name" => $name, "page" => $page], [
-      'name' => ["required", "string", "max:16"],
-      "page" => ["required", "integer"]
-    ]);
-    $validated = $validator->validator->validated();
-    //return ("%" . $validated["name"] . "%");
-    return User::where("name", "LIKE", "%{$validated["name"]}%")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"]);
-    //return User::where("name", "LIKE", ("%" . $validated["name"] . "%"))->toSql();
-    //Consultar a teruel
-    //return UserCollection::collection(User::where("name", "LIKE", "%" . $validated["name"] . "%")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"])->getCollection());
-  })->name("user");
-})->name("frontend");
 
 Route::get("/user/{uuid}", function ($uuid) {
   $validator = Validator::make(["uuid" => $uuid], [
