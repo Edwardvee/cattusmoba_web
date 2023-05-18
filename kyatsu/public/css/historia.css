@@ -6,15 +6,10 @@ section {
     scroll-snap-align: start;
 }
 
-main{
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-}
-
-.preventScroll{
-    overflow: hidden;
-    height: 100%;
+body{
+    scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(300px);
+  scroll-snap-type: y mandatory;
 }
 
 .guide{
@@ -26,5 +21,8 @@ main{
     flex-direction: column;
     justify-content: center;
     list-style-type: none;
+}
 
+.guide p{
+    user-select: none;
 }
