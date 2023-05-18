@@ -3,13 +3,16 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    scroll-snap-align: start;
 }
-
-body{
-    scroll-snap-type: mandatory;
-  scroll-snap-points-y: repeat(300px);
-  scroll-snap-type: y mandatory;
+#pointer{
+    z-index: 99999;
+    color: azure;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 400px;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
 }
 
 .guide{
@@ -21,8 +24,89 @@ body{
     flex-direction: column;
     justify-content: center;
     list-style-type: none;
+    z-index: 1;
 }
 
 .guide p{
     user-select: none;
+    cursor: pointer;
+    color: azure;
+}
+
+#one, #two, #three, #four{
+    height: 1000px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: auto;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+}
+
+#one h1, #two h1, #three h1, #four h1{
+    z-index: 100;
+    color: azure;
+}
+
+#one::before{
+    content: "";
+    background: url(../img/ubicacion1.jpg);
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7);
+} 
+
+#two::before{
+    content: "";
+    background: url(../img/ubicacion2.jpg);
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7);
+}
+
+#three::before{
+    content: "";
+    background: url(../img/ubicacion3.jpg);
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7);
+}
+
+#four::before{
+    content: "";
+    background: url(../img/ubicacion4.jpg);
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7);
 }

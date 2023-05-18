@@ -4,12 +4,9 @@
 <title>Kyatsu! - Historia</title>
 @endsection
 @section("http_body")
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <main>
+<div id="pointer">.</div>
 <div class="pepe">
    <section id="one">
     <h1>Ubicacion 1</h1>
@@ -47,7 +44,20 @@
 </div>
 </main>
 <script>
+$(document).ready(function(){
+  
+    var two = $("#two").position();
+    var three = $("#three").position();
+    var four = $("#four").position();
 
+    $(window).on("scroll", function(){
+        var pointer = $(window).scrollTop()
+        console.log(pointer);
+            if(pointer > 24 && pointer < -576){
+                alert("p");
+            }
+    });
+});
 function scrollGo(id, button){
     id.scrollIntoView(false);
     let iconos = document.getElementsByClassName("iconoubi");
