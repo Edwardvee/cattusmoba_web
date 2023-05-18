@@ -19,11 +19,12 @@
         <a href="https://www.instagram.com/dasomnya_industries/" class="redes_icon"> <img class="Red" src="img/Instagram.png" width="40px"></a>
     </div>
     <div class="content">
-        <div class="item-scroll">
-            <div class="card mb-3" style="max-width: 100%;">
+
+     <div class="nwn"> 
+     <div class="card mb-3 ewe" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-3">
-                        <img id="myImage" src="img/cait.png" class="img-fluid rounded-start heroImg" alt="...">
+                        <img id="myImage2" src="https://media.tenor.com/Px7kBr6Kq5kAAAAi/mordekaiser-morde.gif" class="img-fluid rounded-start heroImg" alt="...">
                     </div>
                     <div class="col-md-9 CrdRightSide">
                         <div class="card-body">
@@ -31,18 +32,17 @@
                             <p class="card-text cardText">Ya sea que prefieras lanzarte directo a la batalla, apoyar a
                                 tus compañeros de equipo, o algo intermedio, hay un lugar para ti en la arena</p>
                             <div class="col-md-12">
-                                <button class="heroesDesc" onclick="cambiarImagen('img/cait.png', 'Texto de la imagen 1','myImage')">Daño<img class="butIcoHero" src="img/damage.png"></button>
-                                <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2','myImage')">Soporte</button>
-                                <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3','myImage')">Tanque</button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/cait.png', 'Texto de la imagen 1','myImage2')">Daño<img class="butIcoHero" src="img/damage.png"></button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2','myImage2')">Soporte</button>
+                                <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3','myImage2')">Tanque</button>
                             </div>
                             <p class="Descripcion" id="message">Los daños se enfocan claramente en hacer daño.</p>
                         </div>
                     </div>
                 </div>
-                <div>
-                </div>
             </div>
-        </div>
+      </div>
+
         <div class="item-scroll">
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">

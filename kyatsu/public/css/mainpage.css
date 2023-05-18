@@ -136,12 +136,12 @@ header h1 {
 }
 
 .CrdRightSide {
-    background: rgb(33, 37, 41);
-    color: white;
+    background-color : transparent;
+    color: rgb(31, 31, 31);
 }
 
 .Descripcion {
-    color: white;
+    color:rgb(31, 31, 31);
 }
 
 .redes {
@@ -315,3 +315,86 @@ body {
         transform: none;
         transition-delay: 0.3s;
       }
+/* .nwn{
+    position: relative;
+    background-image: url(../img/hola.jpg);
+    height: 720px;
+    width:100%;
+    background-image: no-repeat;
+    background-image: fixed;
+    background-image: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin-bottom: 120px;
+} */
+.ewe{
+    background-color: transparent;
+}
+.nwn {
+    position: relative;
+    height: 670px;
+    max-width: 1200px;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: auto;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex; 
+    margin-bottom: 10px;
+}
+
+.nwn::before {
+    content: "";
+    background: url(../img/hola.jpg);
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 1;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 767px) {
+    .nwn h1 {
+        font-size: 30px;
+    }
+
+    .nwn p {
+        display: none;
+    }
+
+    .nwn a {
+        padding: 5px 15px;
+    }
+}
+
+.nwn a {
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #262626;
+    padding: 10px 30px;
+    margin-top: 10px;
+    filter: brightness(1);
+}
+
+.nwn p {
+    margin: 0 30%;
+    text-align: center;
+
+    filter: brightness(1);
+}
+
+.nwn h1 {
+    margin: 0 30%;
+    text-align: center;
+    
+ 
+}
