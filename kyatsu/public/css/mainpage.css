@@ -222,7 +222,10 @@ header h1 {
     min-width: 9px;
 }
 .heroImg {
-    max-height: 500px;
+    max-height: 600px;
+    height: 450px;
+    min-width: 2px;
+    width: 500px;
 }
 
   .animate-image {
@@ -331,6 +334,8 @@ body {
 } */
 .ewe{
     background-color: transparent;
+    width: 90%;
+    height: 70%;
 }
 .nwn {
     position: relative;
@@ -386,9 +391,8 @@ body {
 }
 
 .nwn p {
-    margin: 0 30%;
+    margin: 0 10%;
     text-align: center;
-
     filter: brightness(1);
 }
 
@@ -397,4 +401,14 @@ body {
     text-align: center;
     
  
+}
+.nwn h5 {
+    margin: 0 10%;
+    text-align: center;
+    
+ 
+}
+.potente{
+    display: flex;
+    justify-content: center;
 }
