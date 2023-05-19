@@ -16,6 +16,8 @@ section {
 }
 
 .guide{
+    border-radius: 12px;
+    background-color: hsla(0, 0%, 0%, 0.4) ;
     position: fixed;
     z-index: 2;
     top: 50%;
@@ -25,9 +27,13 @@ section {
     justify-content: center;
     list-style-type: none;
     z-index: 1;
+    align-items: center;
 }
 
+
 .guide p{
+    
+    z-index: 999999;
     user-select: none;
     cursor: pointer;
     color: azure;
@@ -110,3 +116,26 @@ section {
     background-repeat: no-repeat;
     filter: brightness(0.7);
 }
+
+.parent {
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+  --scroll-gap: 2em;
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 3 * var(--scroll-gap));
+ 
+} 
+
+section:not(:last-child) {
+  margin-bottom: var(--scroll-gap);
+  
+}
+
