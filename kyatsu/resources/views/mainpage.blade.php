@@ -4,9 +4,9 @@
 <title> Kyatsu!</title>
 @endsection
 @section('http_body')
-
+ 
     <header>
-        <div class="area"> Kyatsu! Arena </div>
+        <h1 class="area"> Kyatsu! Arena </h1>
         <p id="rrandommsg"> ¿Eres digno de tanta accion?</p>
         <a class="Bdownload" href="https://tlauncher.org/installer">Juega ahora</a>
     </header>
@@ -21,6 +21,7 @@
     <div class="content">
 
      <div class="nwn"> 
+        
      <div class="card mb-3 ewe" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-3">
@@ -36,13 +37,13 @@
                                 <button class="heroesDesc" onclick="cambiarImagen('https://media.tenor.com/WocrE_nW-pQAAAAi/lisichka.gif', 'Texto de la imagen 2','myImage2')">Soporte</button>
                                 <button class="heroesDesc" onclick="cambiarImagen('https://media.tenor.com/Px7kBr6Kq5kAAAAi/mordekaiser-morde.gif', 'Texto de la imagen 3','myImage2')">Tanque</button>
                             </div>
-                            <p class="Descripcion" id="message">Los daños se enfocan claramente en hacer daño.</p>
+                            <p class="" id="message">Los daños se enfocan claramente en hacer daño.</p>
                         </div>
                     </div>
                 </div>
             </div>
       </div>
-a
+
         <div class="item-scroll">
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
@@ -59,7 +60,7 @@ a
                                 <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2','myImage2')">Soporte</button>
                                 <button class="heroesDesc" onclick="cambiarImagen('img/placeholder2.png', 'Texto de la imagen 3','myImage2')">Tanque</button>
                             </div>
-                            <p class="Descripcion" id="message">Los daños se enfocan claramente en hacer daño.</p>
+                            <p class="" id="message">Los daños se enfocan claramente en hacer daño.</p>
                         </div>
                     </div>
                 </div>
@@ -81,7 +82,7 @@ a
                                 <button class="heroesDesc" onclick="cambiarImagen('img/india.jpg', 'Texto de la imagen 2','myImage3')">Soporte</button>
                                 <button class="heroesDesc" onclick="cambiarImagen('https://media.tenor.com/Px7kBr6Kq5kAAAAi/mordekaiser-morde.gif', 'Texto de la imagen 3','myImage3')">Tanque</button>
                             </div>
-                            <p class="Descripcion" id="message">Los daños se enfocan claramente en hacer daño.</p>
+                            <p class="" id="message">Los daños se enfocan claramente en hacer daño.</p>
                         </div>
                     </div>
                 </div>
