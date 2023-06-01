@@ -46,7 +46,10 @@ body {
     overflow: hidden;
 }
 
-
+.dropdown-menu {
+    left: auto !important;
+    right: 0;
+  }
 .input-search {
     position: absolute;
     top: 0;

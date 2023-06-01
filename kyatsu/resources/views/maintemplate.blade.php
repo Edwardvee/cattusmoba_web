@@ -62,7 +62,7 @@
         <a class="nav-item"><a href="{{route('authentication')}}" class="button btn btn-secondary">Ingresa</a>
         @endguest
         @auth
-        <div class="dropdown" style="padding-right: 20px">
+        <div class="dropdown dropdown-auto" style="padding-right: 20px">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
   @php echo(auth()->user()->name); @endphp
   </button>

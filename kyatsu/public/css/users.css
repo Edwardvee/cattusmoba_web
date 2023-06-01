@@ -1,4 +1,5 @@
 .header{
+    margin-top: 2vh;
     padding: 10px 10px 16px 0;
     display: -webkit-box;
     display: -webkit-flex;
@@ -6,10 +7,11 @@
     display: flex;
     -webkit-flex: 1;
     -ms-flex: 1;
-    flex: 1;
+    flex: 1;    border-radius: 6px;
     box-sizing: border-box;
-  
+  background-color: #dfdfdf;
 }
+
 .content{
     display: flex;
     flex-direction: column;
@@ -20,25 +22,86 @@
     flex-grow: 1;
 }
 .profile-icon{
-    margin-top: 32px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     position: relative;
     width: 100px;
     height: 100px;
     -webkit-flex-basis: 100px;
     -ms-flex-preferred-size: 100px;
     flex-basis: 100px;
-    border:1cm;
+ 
     border-color: #202D37;
   /*   background-image: url(../img/f.png);
     background-size: cover;
     background-position: center; */
 }
+div.winrates{
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 6px;
+    vertical-align: top;
+    min-height: 870px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: #dfdfdf;
+}
 .profile-icon img
 {
+    margin-left: 10px;
     max-width: 100%;
+    height: 100px;
     border-radius: 20px;
     border:1cm;
     border-color: #202D37;
+}
+div.match{
+    
+    margin: 2vh;
+    display: flex;
+    height: 115px;
+    border-radius: 6px;
+    border-left-width: 6px;
+    border-left-style: solid;
+    background-color:  #dfdfdf;
+    justify-items: center;
+}
+
+.winrate-champ{
+    margin: 2vh;
+    background-color: #bebdbd;
+    border-radius: 1%;
+}
+div.champ{
+    margin: 2vh;
+    display: flex;
+    border-radius: 4px;
+    background-color:  #dfdfdf;
+    justify-items: center;
+}
+.icon-side{
+    align-items: center;
+    display: flex;
+    padding: 1vh;
+
+}
+img.champ-icon{
+    border: 0px;
+    width: 80px;
+    height: 80px;
+    display: block;
+    border-radius: 55%;
+    background-color: #747474;
+
+}
+
+div.matches {
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 8px;
+    font-size: 20px;
+    vertical-align: top;
+    
 }
 .info{
     -webkit-flex: 1;
