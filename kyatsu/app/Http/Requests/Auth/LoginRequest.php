@@ -48,6 +48,10 @@ class LoginRequest extends FormRequest
                 'email' => __('auth.failed'),
             ]);
         }
+        else{
+        redirect()->route('mainpage');
+
+        }
 
         RateLimiter::clear($this->throttleKey());
     }

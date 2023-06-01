@@ -1,9 +1,8 @@
-@extends("usertemplate")
+@extends("maintemplate")
 
 @section("http_body")
-
 <head>
-    <title>Kyatsu! - Usuario</title>
+  <title>Kyatsu - Info</title>
 </head>
 <br>
 <br><br><br><br>
