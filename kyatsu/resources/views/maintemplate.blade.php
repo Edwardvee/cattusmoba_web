@@ -78,6 +78,7 @@
   </nav>
 
   @yield("http_body")
+  
   <script>
     const clearInput = () => {
       const input = document.getElementsByTagName("input")[0];
@@ -86,5 +87,22 @@
     const clearBtn = document.getElementById("clear-btn");
     clearBtn.addEventListener("click", clearInput);
   </script>
+      <div class="footer">
+      <h4>Siguenos en:</h4>
+        <hr class="horizontalrule">
+        <div class="social-links">
+        <a href="youtube.com" ><img class="Red" src="img/Discord.png" width="40px"></a>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" <img class="Red" src="img/YouTube.png" width="40px"></a>
+        <a href="youtube.com"<img class="Red" src="img/Facebook.png" width="40px"></a>
+        <a href="https://www.instagram.com/dasomnya_industries/" <img class="Red" src="img/Instagram.png" width="40px"></a>
+    </div>
 </body>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

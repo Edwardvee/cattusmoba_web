@@ -141,20 +141,49 @@ header h1:hover{
     background-color : transparent;
 }
 
-.redes {
+
+.footer {
+    position:relative;
+    bottom:0;
+    left:0;
+    width:100%;
+    z-index: 1;
+    height: 100px;
     border-radius: 15px;
     background-color: #262626;
-    width: 90%;
     padding: 1px;
     margin: auto;
     margin-top: 1%;
     margin-bottom: 1%;
-    height: 8%;
     text-align: center;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
 }
+
+ .footer h4{
+   font-size: 18px;
+   color: #ffffff;
+   text-transform: capitalize;
+   margin-bottom: 35px;
+   font-weight: 500;
+   position: relative;
+ }
+ 
+ .footer .social-links a{
+   display: inline-block;
+   height: 40px;
+   width: 40px;
+   background-color: rgba(255,255,255,0.2);
+   margin:0 10px 10px 0;
+   text-align: center;
+   line-height: 40px;
+   border-radius: 50%;
+   color: #ffffff;
+   transition: all 0.5s ease;
+ }
+
+
 .horizontalrule{
     margin: auto;
     margin-top: 0.5em;
@@ -164,7 +193,7 @@ header h1:hover{
     height: 0.1em;
     max-width: 90%;
 }
-.redes_icon {
+.footer_icon {
     display: contents;
     width: 20px;
 }

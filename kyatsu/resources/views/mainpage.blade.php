@@ -10,14 +10,7 @@
         <p id="rrandommsg"> ¿Eres digno de tanta accion?</p>
         <a class="Bdownload" href="https://tlauncher.org/installer">Juega ahora</a>
     </header>
-    <div class="redes">
-        <p class="OurRed"> Siguenos en nuestras redes sociales</p>
-        <hr class="horizontalrule">
-        <a href="youtube.com" class="redes_icon"><img class="Red" src="img/Discord.png" width="40px"></a>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="redes_icon"><img class="Red" src="img/YouTube.png" width="40px"></a>
-        <a href="youtube.com" class="redes_icon"><img class="Red" src="img/Facebook.png" width="40px"></a>
-        <a href="https://www.instagram.com/dasomnya_industries/" class="redes_icon"> <img class="Red" src="img/Instagram.png" width="40px"></a>
-    </div>
+
     <div class="content">
 
      <div class="nwn"> 
@@ -88,6 +81,7 @@
                 </div>
             </div>
         </div>
+        
         <script>
             var MPtext = ["¿Eres digno de tanta accion?", "Se parte de la historia", "¿Seras nuestro nakama?",
                 "Te odiamos Nico", "¿Es la primera vez que te vemos?", "Welcome to the jungle", "¿Como llegaste a aqui?"
