@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Validators\ValidatorXHR;
 use App\Models\User;
+use App\Rules\ColumnExists;
 use Illuminate\Support\Facades\RateLimiter;
 
 /*
@@ -33,18 +34,22 @@ Route::middleware(["throttle:api"])->prefix("frontend")->group(function () {
     ]);
     $validated = $validator->validator->validated();
     return User::where("name", "LIKE", "%{$validated["name"]}%")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"]);
-  })->name("user")->middleware('throttle:1,1');
-})->name("frontend");
+  })->name("user");
 
-/*
-Route::prefix("frontend")->group(function () {
+  /*
+  Route::middleware(["forbid-banned-user"])->prefix("admin")->group(function () {
     Route::get('/user/{name}/{page}', function ($name, $page) {
       $validator = new ValidatorXHR(["name" => $name, "page" => $page], [
         'name' => ["required", "string", "max:16"],
-        "page" => ["required", "integer"]
+        "page" => ["required", "integer"],
+        "method" => ["required", "string", new ColumnExists]
       ]);
       $validated = $validator->validator->validated();
       return User::where("name", "LIKE", "%{$validated["name"]}%")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"]);
     })->name("user");
-})->name("frontend");
+  })->name("admin");
 */
+
+})->name("frontend");
+
+//Route::middleware(["throttle:api", "can: access admin", "auth", "forbid-banned-user"])->prefix("frontend")->group(function () {

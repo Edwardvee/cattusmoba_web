@@ -5,6 +5,7 @@
  */
 $.ajaxSetup({
     headers: {
+        "X-Requested-With": "XMLHttpRequest",
         Accept: "application/json; charset=utf-8",
         Follow: false,
     },
@@ -31,15 +32,11 @@ var information = new Proxy(
             }
             if (
                 (prop === "page" && isNaN(parseInt(value))) ||
-                (prop === "name" && !value.length > 16)
+                (prop === "name" && !value.length > 16) ||
+                (prop === "order" && !["ASC", "DESC"].includes(value))
             ) {
                 throw "FATAL: Lo provisto en el paginador no son datos validos";
             }
-            //let disabledLinks = document.getElementById("paginator_links");
-            /*if (disabledLinks) {
-      $(disabledLinks).click(function (event) { event.preventDefault(); });
-      $(disabledLinks).attr("style", "pointer-events:none");
-    }*/
             document.getElementById("paginator").innerHTML = "";
             Object.assign(obj, { [prop]: value });
             searchUsers(obj["name"], obj["page"]);
@@ -48,13 +45,99 @@ var information = new Proxy(
                 window.history.replaceState(
                     obj,
                     "",
-                    route("user_paginator", obj)
+                    route(existsOrManualZiggy(), obj)
                 );
             }
             return true;
         },
     }
 );
+
+function existsOrManualZiggy () {
+    try {
+        //throw "E";
+        return route().current();
+    } catch {
+        return ziggyStringToController()[0][0];
+    }
+}
+
+var currentURLroute = ((new URL(window.location.href).pathname).slice(1));
+var currentURLquery = new URL(window.location.href).searchParams.toString();
+
+//Cuando se migre a typescript la idea es escribir todo esto en proxy en vez de multiples returns.
+
+function ziggyStringToController() {
+    //Obtenemos todas las rutas del controlador
+    var parameters = Object.entries(Ziggy.routes).filter(element => {
+        if (new RegExp(currentURLroute, "i").test(element[1]["uri"])) {
+            return true;
+        }
+    });
+    //Obtenemos todas las rutas del controlador las cuales el
+    //regex coincida con la URL actual
+    var selectiveParameters = parameters.filter(element => {
+        let splitted = element[1]["uri"].split("/");
+        var regExp = '^';
+        splitted.forEach((element2, index) => {
+            //En Ziggy, las rutas de laravel las cuales contienen un parametro en la url
+            // contienen {}, por lo que debemos detectarlo con regex para ver si es ese caos
+            if (/({)|(})/.test(element2)) {
+                regExp += "([a-zA-Z0-9-_{}]+)";
+            //Si no lo es agregamos la parte de la ruta textual al regex
+            } else {
+                regExp += "(";
+                regExp += element2;
+                regExp += ")";
+            }
+            //Por cada grupo dentro del regex debemos agregar al separador slash, pero debemos hacerlo
+            //siempre excepto cuando es la parte final de la URL.
+            if (index != (splitted.length - 1)) {
+                regExp += "\\/";
+            }
+        });
+        //Probamos el regex para ver si coincide con la URL
+        if (new RegExp(regExp, "i").test(currentURLroute)) {
+            return true;
+        }
+    });
+
+    if (!selectiveParameters.length > 1) {
+        return selectiveParameters;
+    };
+
+    //Aca mediante un OPTIONS obtenemos todos los metodos autorizados y comparamos si los
+    //que tenemos en Ziggy Routes coinciden con los autorizados
+    var methodSelectiveParameters = selectiveParameters.filter(element => {
+        var req = new XMLHttpRequest();
+        req.open('OPTIONS', document.location, false);
+        req.send(null);
+        //El header Allow dice los metodos autorizados
+        var headers = req.getResponseHeader("Allow");
+        var splitted_headers = headers.split(",");
+        if (splitted_headers.forEach(element_headers => {
+            //Si el metodo autorizado se encuentra en la ruta ziggy, retornar true
+            if (element[1]["methods"].includes(element_headers)) {
+                return true;
+            }
+
+        }));
+    });
+    if (!methodSelectiveParameters.length != 1) {
+        return methodSelectiveParameters
+    };
+    //Este es el ultimo filtro, si el metodo autorizado es GET y la query de la pagina actual no esta vacia, es get y autorizados
+    //Si no es get y el currentURLquery esta vacio retornamos true ya que no es get
+    //La idea es no llegar a este filtro ya que no es preciso pero a veces no queda otra
+    var forcedSelectiveParameters = selectiveParameters.filter((element, index) => {
+        if ((element[1]["methods"].includes("GET")) && (currentURLquery != "")) {
+            return true;
+        } else if (currentURLquery == "" && !element[1]["methods"].includes("GET")) {
+            return true;
+        }
+    });
+    return forcedSelectiveParameters;
+}
 
 function cacher(func) {
     var cache = [];
@@ -127,12 +210,12 @@ function searchUsers($name, $page = 1) {
                     $(document.createElement("p"))
                         .html(
                             "Mostrando " +
-                                response["from"] +
-                                " a " +
-                                response["to"] +
-                                " de " +
-                                response["total"] +
-                                " resultados"
+                            response["from"] +
+                            " a " +
+                            response["to"] +
+                            " de " +
+                            response["total"] +
+                            " resultados"
                         )
                         .addClass("fw-lighter")
                 )
@@ -158,6 +241,17 @@ function searchUsers($name, $page = 1) {
                 });
             }
         },
+        statusCode: {
+            429: function () {
+                $("#paginator").append(
+                    $(
+                        document.createTextNode(
+                            "Se han realizado demasiadas solicitudes, espera un poco"
+                        )
+                    )
+                );
+            }
+        }
     });
 }
 function debounce(func, wait) {
@@ -194,26 +288,25 @@ let resultsbox = document.getElementById("paginator");
 let searchcontent = document.getElementById("search-content");
 
 function erase() {
-  let resultsbox = document.getElementById("paginator");
+    let resultsbox = document.getElementById("paginator");
     let searchcross = document.getElementById("searcherase");
     let searchcontent = document.getElementById("search-content");
     searchcontent.value = "";
     resultsbox.innerHTML = "";
     resultsbox.classList.add("invisible");
 }
-function checkEmpty(){
+function checkEmpty() {
     let resultsbox = document.getElementById("paginator");
-
-  let searchcontent = document.getElementById("search-content");
-searchcontent.addEventListener("input", (e) => {
-    if (
-        searchcontent.value == "" ||
-        searchcontent.value == null ||
-        searchcontent.value == 0
-    ) {
-        erase();
-    } else {
-        resultsbox.removeAttribute("class ");
-    }
-});
+    let searchcontent = document.getElementById("search-content");
+    searchcontent.addEventListener("input", (e) => {
+        if (
+            searchcontent.value == "" ||
+            searchcontent.value == null ||
+            searchcontent.value == 0
+        ) {
+            erase();
+        } else {
+            resultsbox.removeAttribute("class ");
+        }
+    });
 }
