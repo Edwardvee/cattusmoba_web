@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +26,7 @@
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   @yield("http_headers")
 </head>
+
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
@@ -60,25 +62,27 @@
         </form>
         @guest
         <a class="nav-item"><a href="{{route('authentication')}}" class="button btn btn-secondary">Ingresa</a>
-        @endguest
-        @auth
-        <div class="dropdown" style="padding-right: 20px">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-  @php echo(auth()->user()->name); @endphp
-  </button>
-  <ul class="dropdown-menu" style="max-width: auto">
-    <li><a class="dropdown-item" href="{{route('users', ['uuid' => auth()->user()->uuid])}}">Perfil</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesion</a></li>
-  </ul>
-</div>      
-        @endauth
+          @endguest
+          @auth
+          <div class="dropdown" style="padding-right: 20px">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              @php echo(auth()->user()->name); @endphp
+            </button>
+            <ul class="dropdown-menu" style="max-width: auto">
+              <li><a class="dropdown-item" href="{{route('users', ['uuid' => auth()->user()->uuid])}}">Perfil</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesion</a></li>
+            </ul>
+          </div>
+          @endauth
       </div>
     </div>
   </nav>
 
   @yield("http_body")
-  
+
   <script>
     const clearInput = () => {
       const input = document.getElementsByTagName("input")[0];
@@ -87,22 +91,21 @@
     const clearBtn = document.getElementById("clear-btn");
     clearBtn.addEventListener("click", clearInput);
   </script>
-      <div class="footer">
-      <h4>Siguenos en:</h4>
-        <hr class="horizontalrule">
-        <div class="social-links">
-        <a href="youtube.com" ><img class="Red" src="img/Discord.png" width="40px"></a>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" <img class="Red" src="img/YouTube.png" width="40px"></a>
-        <a href="youtube.com"<img class="Red" src="img/Facebook.png" width="40px"></a>
-        <a href="https://www.instagram.com/dasomnya_industries/" <img class="Red" src="img/Instagram.png" width="40px"></a>
+
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col"><h4>Siguenos en:</h4></div>
+        <div class="col"></div>
+      </div>
     </div>
-</body>
+  
+      
 
+  </footer>
 
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

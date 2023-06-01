@@ -119,5 +119,6 @@
                 });
             });
         </script>
+    </div>
 
 @endsection("http_body")
