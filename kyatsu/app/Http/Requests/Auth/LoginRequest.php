@@ -38,7 +38,7 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate()
     {
         $this->ensureIsNotRateLimited();
         $credentials = $this->only(((!$this->only("email")) ? "name" : "email"), "password");
@@ -48,12 +48,10 @@ class LoginRequest extends FormRequest
                 'email' => __('auth.failed'),
             ]);
         }
-        else{
-        redirect()->route('mainpage');
-
-        }
 
         RateLimiter::clear($this->throttleKey());
+       return redirect('mainpage');
+
     }
 
     /**
