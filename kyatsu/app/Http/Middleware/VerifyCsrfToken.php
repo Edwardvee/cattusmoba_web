@@ -14,4 +14,10 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
+    protected $middlewareGroups = [
+        'web' => [
+            // ...
+        ],
+        // ...
+    ];
 }

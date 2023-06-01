@@ -1,5 +1,8 @@
-/* 31/03/23 Hecho por Manuel  */
 /* Firefox */
+html {
+    scroll-behavior: smooth !important; 
+  }
+  
 * {
     scrollbar-width: auto;
     scrollbar-color: #2c2c2c #2c2c2c;

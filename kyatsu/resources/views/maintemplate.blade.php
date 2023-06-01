@@ -28,11 +28,11 @@
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="img/empresa.png" width="50" height="50"></img></a>
+      <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="{{url('img/empresa.png')}}" width="50" height="50"></img></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="img/f.png" width="40" height="45"></img></a>
+      <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="{{url('img/f.png')}}" width="40" height="45"></img></a>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item dropdown">
@@ -45,10 +45,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="font-size:23px" href="{{ route('heroes') }}">Héroes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="font-size:23px" href="javascript:void(0)">Link</a>
+            <a class="nav-link" style="font-size:23px" href="{{route('heroes')}}">Héroes</a>
           </li>
         </ul>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -61,10 +58,25 @@
               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
             </svg></a>
         </form>
+        @guest
         <a class="nav-item"><a href="{{route('authentication')}}" class="button btn btn-secondary">Ingresa</a>
+        @endguest
+        @auth
+        <div class="dropdown" style="padding-right: 20px">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  @php echo(auth()->user()->name); @endphp
+  </button>
+  <ul class="dropdown-menu" style="max-width: auto">
+    <li><a class="dropdown-item" href="{{route('users', ['uuid' => auth()->user()->uuid])}}">Perfil</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesion</a></li>
+  </ul>
+</div>      
+        @endauth
       </div>
     </div>
   </nav>
+
   @yield("http_body")
   <script>
     const clearInput = () => {
