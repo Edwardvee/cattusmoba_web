@@ -32,7 +32,7 @@ class UserManagementController extends Controller
             "method" => ["required", "string", new ColumnExists],
             "order" => ["required", new Enum(OrderBy::class)]
         ]); 
-        return User::where("{$validated['method']}", "LIKE", "%{$validated["name"]}%")->orderBy($validated["method"], $validated["order"])->paginate(15, "page", $validated["page"]);
+        return User::whereRaw($validated['method'] . " LIKE '%" . $validated["name"] . "%'")->orderBy($validated["method"], $validated["order"])->paginate(15, ["*"], "page", $validated["page"]);
     }
 
     /**

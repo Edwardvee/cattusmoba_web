@@ -120,7 +120,6 @@ function ziggyStringToController() {
             if (element[1]["methods"].includes(element_headers)) {
                 return true;
             }
-
         }));
     });
     if (!methodSelectiveParameters.length != 1) {
@@ -165,81 +164,118 @@ function searchUsers($name, $page = 1) {
         accepts: "application/json",
         url: getRoute($name, $page),
         success: (response) => {
-            console.warn(response);
-            $("#paginator").html("");
-            document.getElementById("paginator").removeAttribute("class");
-            $("#paginator").attr("class");
-            $("#paginator").blur(function () {
-                if (!this.value) {
-                    $(this).parents("p").addClass("invisible");
+            if (thisScript.getAttribute("autorun") == "false ") {
+                console.warn(response);
+                $("#paginator").html("");
+                document.getElementById("paginator").removeAttribute("class");
+                $("#paginator").attr("class");
+                $("#paginator").blur(function () {
+                    if (!this.value) {
+                        $(this).parents("p").addClass("invisible");
+                    }
+                });
+                let paginatorResult;
+                paginatorResult = $(document.createElement("nav"))
+                    .addClass("results_pag")
+                    .attr("id", "resultsid_pag");
+                let resultsList = $(document.createElement("ul")).attr(
+                    "tabindex",
+                    "0"
+                );
+                $(resultsList).attr("id", "resultsUl");
+                $(paginatorResult).append(resultsList);
+                if (response["data"].length < 1) {
+                    $("#paginator").append(
+                        $(
+                            document.createTextNode(
+                                "No se encontraron datos para la busqueda solicitada"
+                            )
+                        )
+                    );
+                    return;
                 }
-            });
-            let paginatorResult;
-            paginatorResult = $(document.createElement("nav"))
-                .addClass("results_pag")
-                .attr("id", "resultsid_pag");
-            let resultsList = $(document.createElement("ul")).attr(
-                "tabindex",
-                "0"
-            );
-            $(resultsList).attr("id", "resultsUl");
-            $(paginatorResult).append(resultsList);
-            if (response["data"].length < 1) {
-                $("#paginator").append(
-                    $(
-                        document.createTextNode(
-                            "No se encontraron datos para la busqueda solicitada"
-                        )
-                    )
-                );
-                return;
-            }
-            response.data.forEach((element) => {
-                $(resultsList).append(
-                    $(document.createElement("li"))
-                        .attr("tabindex", "-1")
-                        .append(
-                            $(document.createElement("a"))
-                                .attr("href", route("users", element["uuid"]))
-                                .html(element["name"])
-                        )
-                );
-            });
-            paginatorResult
-                .append(
-                    $(document.createElement("p"))
-                        .html(
-                            "Mostrando " +
-                            response["from"] +
-                            " a " +
-                            response["to"] +
-                            " de " +
-                            response["total"] +
-                            " resultados"
-                        )
-                        .addClass("fw-lighter")
-                )
-                .attr("id", "searchText");
-            $("#paginator").append(paginatorResult);
-            if (thisScript.getAttribute("autorun") == "true") {
-                let paginatorLinks;
-                paginatorLinks = document.createElement("div");
-                paginatorLinks.setAttribute("id", "paginator_links");
-                response.links.forEach((element) => {
-                    $(paginatorLinks).append(
-                        $(document.createElement("buton"))
-                            .addClass("btn btn-primary")
+                response.data.forEach((element) => {
+                    $(resultsList).append(
+                        $(document.createElement("li"))
+                            .attr("tabindex", "-1")
                             .append(
-                                $(document.createElement("A"))
-                                    .click(() => {
-                                        information["page"] = element["label"];
-                                    })
-                                    .html(element["label"])
+                                $(document.createElement("a"))
+                                    .attr("href", route("users", element["uuid"]))
+                                    .html(element["name"])
                             )
                     );
-                    $(paginatorResult).append(paginatorLinks);
                 });
+                paginatorResult
+                    .append(
+                        $(document.createElement("p"))
+                            .html(
+                                "Mostrando " +
+                                response["from"] +
+                                " a " +
+                                response["to"] +
+                                " de " +
+                                response["total"] +
+                                " resultados"
+                            )
+                            .addClass("fw-lighter")
+                    )
+                    .attr("id", "searchText");
+                $("#paginator").append(paginatorResult);
+                if (thisScript.getAttribute("autorun") == "true") {
+                    let paginatorLinks;
+                    paginatorLinks = document.createElement("div");
+                    paginatorLinks.setAttribute("id", "paginator_links");
+                    response.links.forEach((element) => {
+                        $(paginatorLinks).append(
+                            $(document.createElement("buton"))
+                                .addClass("btn btn-primary")
+                                .append(
+                                    $(document.createElement("A"))
+                                        .click(() => {
+                                            information["page"] = element["label"];
+                                        })
+                                        .html(element["label"])
+                                )
+                        );
+                        $(paginatorResult).append(paginatorLinks);
+                    });
+                }
+                //Crear la tabla
+            } else {
+                console.log(response);
+                $("#paginator").append($(document.createElement("table")).addClass("table table-hover")
+                .append($(document.createElement("thead")).addClass("table-dark").append($(document.createElement("tr")).append(
+                            () => {
+                            //Aca creamos los th
+                            var answer = [];
+                              Object.keys(response["data"][0]).forEach(element => {
+                                    answer.push($(document.createElement("th")).html(element).get(0));
+                               })
+                            return answer;
+                            }  
+                        )
+                    )
+                  ).append($(document.createElement("tbody")).append(() => {
+                        var answer = [];
+                        Object.keys(response["data"]).forEach(element => {
+                            console.log("Entro al object keys");
+                            //Por cada key(registro) creamos un tr y le haremos un foreach de cada td
+                            answer.push($(document.createElement("tr")).append(() => {
+                                    var perLine = [];
+                                    Object.entries(response["data"][element]).forEach(element2 => {
+                                        // agregar ?? null a element2[1] si se quiere que los campos vacios digan nulo
+                                        perLine.push($(document.createElement("td")).html(element2[1]).get(0));
+                                    });                                
+                                    return perLine;
+                                }).get(0)
+                            );
+                        });
+                        return answer;
+                  }
+                  ))
+                );
             }
+   
         },
         statusCode: {
             429: function () {

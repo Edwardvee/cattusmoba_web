@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <form action="" class="search-bar">
           <input maxlength="16" id="search-content" class="input-search" type="search" placeholder="Busca un jugador" required onkeyup="javascript:checkEmpty();javascript:searchUsers(this.value);">
-          <div id="paginator" class="invisible">
+          <!-- <div id="paginator" class="invisible"> -->
           </div>
           <i class="fa fa-search"></i>
           <a class="a-search" id="searcherase" href="javascript:void(0)" onClick="erase()" id="clear-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
