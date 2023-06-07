@@ -32,11 +32,11 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="{{url('img/empresa.png')}}" width="50" height="50"></img></a>
+      <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="{{url('img/empresa.png')}}" width="50" height="50"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="{{url('img/f.png')}}" width="40" height="45"></img></a>
+      <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="{{url('img/f.png')}}" width="40" height="45"></a>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
@@ -54,7 +54,7 @@
         </ul>
 
  
-        @guest
+  
          <div class="d-flex align-items-center">
         <form action="" class="search-bar">
           <input maxlength="16" id="search-content" class="input-search" type="search" placeholder="Busca un jugador" required onkeyup="javascript:checkEmpty();javascript:searchUsers(this.value);">
@@ -64,6 +64,7 @@
               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
             </svg></a>
         </form>
+        @guest
         <a class="nav-item"><a href="{{route('authentication')}}" class="button btn btn-secondary">Ingresa</a> </div>
         @endguest
         @auth
@@ -77,7 +78,6 @@
     <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesion</a></li>
   </ul>
 </div>      
-
         @endauth
         
       </div> 
@@ -95,17 +95,7 @@
     clearBtn.addEventListener("click", clearInput);
   </script>
 
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col"><h4>Siguenos en:</h4></div>
-        <div class="col"></div>
-      </div>
-    </div>
-  
-      
 
-  </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
