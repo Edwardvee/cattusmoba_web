@@ -29,10 +29,6 @@
   @yield("http_headers")
 </head>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a9bf78fb99ae16ec06e41a54b81b2c7733ee47ca
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
@@ -68,26 +64,6 @@
               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
             </svg></a>
         </form>
-<<<<<<< HEAD
-        @guest
-        <a class="nav-item"><a href="{{route('authentication')}}" class="button btn btn-secondary">Ingresa</a>
-          @endguest
-          @auth
-          <div class="dropdown" style="padding-right: 20px">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              @php echo(auth()->user()->name); @endphp
-            </button>
-            <ul class="dropdown-menu" style="max-width: auto">
-              <li><a class="dropdown-item" href="{{route('users', ['uuid' => auth()->user()->uuid])}}">Perfil</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesion</a></li>
-            </ul>
-          </div>
-          @endauth
-      </div>
-=======
         <a class="nav-item"><a href="{{route('authentication')}}" class="button btn btn-secondary">Ingresa</a> </div>
         @endguest
         @auth
@@ -105,7 +81,6 @@
         @endauth
         
       </div> 
->>>>>>> a9bf78fb99ae16ec06e41a54b81b2c7733ee47ca
     </div>
   </nav>
 
