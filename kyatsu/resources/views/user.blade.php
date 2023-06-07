@@ -21,7 +21,7 @@
 
       <div class="info">
         <div class="name">
-          <h1 class="player-name"> {{ $user["name"]}}</h1>
+          <h1 class="player-name"> {{ $info}}</h1>
         </div>
         <div class="creation-date">
           <h5>Creado en: {{ $user["created_at"]}}</h5>

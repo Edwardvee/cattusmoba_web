@@ -3,12 +3,16 @@
 use App\Http\Controllers\admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 #Resources
 use App\Models\User;
 use App\Validators\ValidatorXHR;
 //use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\RedisController;
+use App\Http\Controllers\user_info;
+use App\Models\users_info;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,7 +72,7 @@ Route::get("/user/{uuid}", function ($uuid) {
   $validated = $validator->validated();
   return view("user", ["user" => User::findOrFail($validated["uuid"])]);
 })->name("users");
-
+Route::get('user/{uuid}',[users_info::class, 'show']);
 Route::get("/user_paginator/{name}/{page}", function ($name, $page) {
   return view("user_paginator", ["name" => $name, "page" => $page]);
 })->name("user_paginator");
