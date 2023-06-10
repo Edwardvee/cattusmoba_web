@@ -22,7 +22,6 @@ header {
 header::before {
     content: "";
     background: url(https://giffiles.alphacoders.com/153/15370.gif);
-    background-size: cover;
     position: absolute;
     top: 0px;
     right: 0px;
