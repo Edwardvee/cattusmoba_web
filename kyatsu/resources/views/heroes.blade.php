@@ -5,7 +5,7 @@
 <link href="css/heroes.css" rel="stylesheet">
 @endsection
 @section("http_body")
-
+<!-- HONOR A LOS LEALES, LARGA VIDA AL EMPREADOR DE LA HUMANIDAD -->
 <body class="ola"> <!-- class ola para bajar el body 120px por el navbar-->
   
 <div class="container">
@@ -15,6 +15,7 @@
           <div class="row">
             <div class="col-8 niggabackground">
                   <h3>Actriz de voz: Ivan Quiroga</h3>
+                  <h6>Cumpleaños / 04-06</h6>
                   <p>Lisa Minci es la bibliotecaria de los caballeros de Favonio de Mondstadt en Kyatsu! y, a pesar de su apariencia sosa, es un ser muy inteligente y una maga con increíble talento que en realidad se cohíbe por su temor al costo del conocimiento</p>
               </div> 
          </div>
@@ -34,7 +35,7 @@
            <button class="heroes"></button>
            <button class="heroes"></button>
            <button class="heroes"></button>
-           
+
      </div> 
 
    </div>

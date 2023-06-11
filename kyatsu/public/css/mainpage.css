@@ -3,10 +3,11 @@ body {
     margin: 0;
     margin-top: 100px;
 }
-
 header {
     position: relative;
-    height: 600px;
+    height: 100vh;
+    width: 100vw;
+    max-height: 1080px;
     max-width: 1920px;
     align-items: center;
     justify-content: center;
@@ -18,7 +19,6 @@ header {
     display: -o-flex;
     top: -50px;
 }
-
 header::before {
     content: "";
     background: url(https://giffiles.alphacoders.com/153/15370.gif);
@@ -28,11 +28,10 @@ header::before {
     bottom: 0px;
     left: 0px;
     opacity: 1;
-    background-size: cover;
+    background-size:  cover;
     background-position: center center;
     background-repeat: no-repeat;
 }
-
 @media only screen and (max-width: 767px) {
     header h1 {
         font-size: 100px;
@@ -41,17 +40,14 @@ header::before {
        text-shadow: 0px 0px 5px #4a4848, 0px 0px 7px #4a4848;
         z-index: 999;
     }
-
     header
     header p {
         display: none;
     }
-
     header a {
         padding: 5px 15px;
     }
 }
-
 header a {
     text-transform: uppercase;
     text-decoration: none;
@@ -61,14 +57,12 @@ header a {
     margin-top: 10px;
     filter: brightness(1);
 }
-
 header p {
     margin: 0 30%;
     text-align: center;
     color: #fff;
     filter: brightness(1);
 }
-
 header h1 {
     user-select: none;
     z-index: 999;
@@ -139,9 +133,6 @@ header h1:hover{
 .CrdRightSide {
     background-color : transparent;
 }
-
-
-
 .heroesDesc {
     display: inline-block;
     border-radius: 4px;
@@ -157,7 +148,6 @@ header h1:hover{
     margin: 5px;
     text-decoration: none;
 }
-
 .heroesDesc:hover {
     background-color: #e0e0e0;
 }
@@ -171,7 +161,6 @@ header h1:hover{
     min-width: 2px;
     width: 500px;
 }
-
   .animate-image {
     animation: wipe-in-top-right 1s;
   }
@@ -214,19 +203,16 @@ header h1:hover{
     }
     }
 
-
-    .appear {
+.appear {
         transition: all 0.8s;
         opacity: 0;
         transform: translateY(40px);
-      }
-      
-      .appear.inview {
+     }
+.appear.inview {
         opacity: 1;
         transform: none;
         transition-delay: 0.3s;
       }
-
 .ewe{
     background-color: transparent;
     width: 90%;
@@ -246,7 +232,6 @@ header h1:hover{
     display: -o-flex; 
     margin-bottom: 10px;
 }
-
 .nwn::before {
     content: "";
     background: url(../img/hola.jpg);
@@ -303,3 +288,83 @@ header h1:hover{
     display: flex;
     justify-content: center;
 }
+
+.arrows {
+    width: 60px;
+    height: 72px;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+    bottom: 20px;
+  }
+  
+  .arrows path {
+    stroke: #000000;
+    fill: transparent;
+    stroke-width: 2px;  
+    animation: arrow 2s infinite;
+    -webkit-animation: arrow 2s infinite; 
+  }
+  
+  @keyframes arrow
+  {
+  0% {opacity:0}
+  40% {opacity:1}
+  80% {opacity:0}
+  100% {opacity:0}
+  }
+  
+  @-webkit-keyframes arrow /*Safari and Chrome*/
+  {
+  0% {opacity:0}
+  40% {opacity:1}
+  80% {opacity:0}
+  100% {opacity:0}
+  }
+  
+  .arrows path.a1 {
+    animation-delay:-1s;
+    -webkit-animation-delay:-1s; /* Safari 和 Chrome */
+  }
+  
+  .arrows path.a2 {
+    animation-delay:-0.5s;
+    -webkit-animation-delay:-0.5s; /* Safari 和 Chrome */
+  }
+  
+  .arrows path.a3 { 
+    animation-delay:0s;
+    -webkit-animation-delay:0s; /* Safari 和 Chrome */
+  }
+
+
+.notibg{
+ background-image: url(https://rare-gallery.com/thumbs/917112-adventurers-cats-fantasy-art-animals-artwork.jpg);
+ background-size: cover;
+ background-position: center center;
+ background-repeat: no-repeat;
+}
+.niggabackground{
+    background-color: rgba(0,0,0,.8);
+}
+.noti{
+    color: white;
+    margin-left: -20px;
+}
+.linknot{
+    color: white;
+    background-color: transparent;
+    border:none;
+    border-top: 0.7px solid rgba(255, 255, 255, 0.85);
+    padding: 10px 0px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+/*   I recall the virtues I stood for
+I recall the struggles and the things that we have done!
+I will not be deterred from my vengeance
+I remember the lessons passed on to the Sons!
+I am one of the Emperor's Children
+I am Rylanor and I am the Ancient of Rites!
+So I reject you for now and for always!
+To strike you down I have waited for a million nights!" */
