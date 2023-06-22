@@ -102,9 +102,11 @@ Route::get("/getCurrentUser", function () {
 Route::get("/historia", function () {
   return view("historia");
 })->name("historia");
-Route::get("/reglas", function () {
-  return view("reglas");
-})->name("reglas");
+
+Route::get("/patchnotes", function () {
+  return view("patchnotes");
+})->name("patchnotes");
+
 Route::get("/como jugar", function () {
   return view("como jugar");
 })->name("como jugar");

@@ -2,11 +2,10 @@
 body{
   background-image:url(https://i0.wp.com/gamingonphone.com/wp-content/uploads/2022/02/windrise_cover-1024x508.jpg);
   background-size: cover;
-  background-position: center center;
   background-repeat: no-repeat;
 }
 .ola{
-  margin-top: 100px;
+  margin-top: 120px;
 }
 .heroes{
   background-image: url(https://img1.picmix.com/output/stamp/normal/2/1/7/6/1866712_2dde6.png); 
@@ -27,4 +26,7 @@ body{
 .niggabackground{
   border-radius: 10px;
   background-color: rgba(0,0,0,.5);
+}
+.pj{
+  height: 70vh;
 }
