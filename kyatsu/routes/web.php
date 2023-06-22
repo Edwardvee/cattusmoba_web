@@ -69,13 +69,15 @@ Route::get("/user/{uuid}", function ($uuid) {
   $validator = Validator::make(["uuid" => $uuid], [
     "uuid" => ["required", "uuid", "exists:App\Models\User,uuid"]
   ]);
+
   $validated = $validator->validated();
   return view("user", ["user" => User::findOrFail($validated["uuid"])]);
 })->name("users");
-Route::get('user/{uuid}',[users_info::class, 'show']);
+
 Route::get("/user_paginator/{name}/{page}", function ($name, $page) {
   return view("user_paginator", ["name" => $name, "page" => $page]);
 })->name("user_paginator");
+
 Route::get("/", function () {
   return view("mainpage");
 })->name("mainpage");
