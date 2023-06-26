@@ -113,6 +113,9 @@ body {
 }
 
 #paginator {
+    display: block;
+}
+form #paginator {
     opacity: 100%;
     display: none;
     background: white;
