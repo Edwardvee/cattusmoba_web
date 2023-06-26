@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +20,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): Response
+    public function store(Request $request)//: Response
     {
         Auth::logout();
         $request->validate([
@@ -48,6 +49,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
         Auth::login($user, ($request->input("remember") ? true : false));
-        return response()->noContent();
+        //return response()->noContent();
+        return response()->redirectTo(RouteServiceProvider::HOME);
     }
 }
