@@ -1,5 +1,7 @@
 "use strict";
 class AdministrablePaginator extends TablePaginator {
+    public routeUniqueIdentifier: string = "A";
+    public routeGenerator: string = "admin.admin_users.index";
     public constructor(capsulator? :string) {
         super(capsulator ?? "paginator_admin");
     }

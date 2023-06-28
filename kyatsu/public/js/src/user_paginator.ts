@@ -38,7 +38,7 @@ interface KyatsuProxyInterface {
 }
 
 //type getRoute = () => string;
-declare function route(name?: string, params?: object): string & { current: () => string };
+declare function route(name?: string, params?: object | string): string & { current: () => string };
 
 
 $.ajaxSetup({
@@ -154,6 +154,10 @@ abstract class Paginator {
     public capsulator: HTMLDivElement | HTMLElement;
     public information: KyatsuProxyInterface | ProxyConstructor;
     public abstract ProxyMayChangeURL: boolean;
+    //Multiple results Route
+    public abstract routeGenerator: string;
+    //Unique result Route By UUID
+    public abstract routeUniqueIdentifier: string;
     public MayBePaginable: boolean = true;
     public applyTimeout: boolean = true;
     //@ts-ignore
@@ -169,12 +173,29 @@ abstract class Paginator {
         }
         this.information = this.inputHandlerSetup(this.defaultProxy());
     }
+    /**
+     * Returns the route to the unique resource
+     * @param uuid UUID to search
+     * @returns string URL To perform the XHR Request
+     */
+    public getUniqueIdentifier(uuid: string) {
+        return route(this.routeUniqueIdentifier, uuid);
+    }
+    /**
+     * Returns the route for the search
+     * @param object  KyatsuProxyInterface
+     * @returns string URL to perform the XHR Request
+     */
+    public getRoute(object: KyatsuProxyInterface): string {
+        return route(this.routeGenerator, object);
+    }
+
     public defaultProxy(defaultParameters: boolean = false): KyatsuProxyInterface {
         let CurrentURL: URLSearchParams = new URLSearchParams;
         let JSON: KyatsuProxyInterface = {
             page: 1,
-            name: "a",
-            method: "uuid",
+            name: "%%",
+            method: "name",
             order: OrderBy.DESC,            
         };
         if (defaultParameters == false) {
@@ -232,25 +253,42 @@ abstract class Paginator {
             accepts: {
                 json: "application/json"
             },
-            //@ts-ignore
-            url: getRoute($name, $page, $order, $method),
+            url: this.getRoute({
+                name: $name,
+                page: $page,
+                order: $order as OrderBy,
+                method: $method
+            }),
+            //getRoute($name, $page, $order, $method),
             success: (response: PaginatorResponseInterface) => {
                 this.xhrSuccess(response);
             },
             statusCode: {
-                429: function () {
-                    $("#paginator").append(
+                429: () => {
+                    $(this.capsulator).empty();
+                    $(this.capsulator).append(
                         $(
                             document.createTextNode(
                                 "Se han realizado demasiadas solicitudes, espera un poco"
                             )
                         )
                     );
-                }
+                },
+                422: (response) => {
+                    $(this.capsulator).empty();
+                    $(this.capsulator).append(
+                        $(
+                            document.createTextNode(
+                                response.responseJSON["message"]
+                            )
+                        )
+                    );
+                },
+                
             }
         });
     }
-    public abstract buildHTML(response: PaginatorResponseInterface): HTMLTableElement | HTMLDivElement | undefined | void;
+    public abstract buildHTML(response: PaginatorResponseInterface): HTMLTableElement | HTMLDivElement | HTMLElement | undefined | void;
     public abstract buildHTMLPaginable(response: PaginatorResponseInterface): HTMLDivElement | undefined | void;
 
     /**
@@ -338,7 +376,7 @@ abstract class Paginator {
     }*/
 }
 
-class searchPaginator extends Paginator {
+abstract class searchPaginator extends Paginator {
     public MayBePaginable: boolean = false;
     public ProxyMayChangeURL: boolean = false;
     /**
@@ -367,63 +405,18 @@ class searchPaginator extends Paginator {
         return paginatorLinks;
     }
 
-    public buildHTML(response: PaginatorResponseInterface): void {
-        console.warn(response);
-        $(this.capsulator).html("");
-        document.getElementById(String(this.capsulator))!.removeAttribute("class");
-        $(this.capsulator).attr("class");
-        $(this.capsulator).blur(function () {
-            if (!this.getAttribute("value")) {
-                $(this).parents("p").addClass("invisible");
-            }
-        });
-        let paginatorResult;
-        paginatorResult = $(document.createElement("nav"))
-            .addClass("results_pag")
-            .attr("id", "resultsid_pag");
-        let resultsList = $(document.createElement("ul")).attr(
-            "tabindex",
-            "0"
-        );
-        $(resultsList).attr("id", "resultsUl");
-        $(paginatorResult).append(resultsList);
-        if (response["data"]!.length < 1) {
-            $(this.capsulator).append(
-                $(
-                    document.createTextNode(
-                        "No se encontraron datos para la busqueda solicitada"
-                    )
+    public buildHTML(response: PaginatorResponseInterface): HTMLElement {
+        return $(document.createElement("nav")).addClass("results_pag").append(
+            $(document.createElement("ul")).attr("tabindex", "9").append(
+                $(document.createElement("li")).append((): HTMLAnchorElement[] => {
+                    var answer: HTMLAnchorElement[] = [];
+                    Object.entries(response["data"]).forEach((element: any) => {
+                        answer.push($(document.createElement("a")).html(element["name"]).attr("href", this.getUniqueIdentifier(element["uuid"])).get(0)! );
+                    });
+                    return answer; 
+                })
                 )
-            );
-            return;
-        }
-        response["data"]!.forEach((element: any) => {
-            $(resultsList).append(
-                $(document.createElement("li"))
-                    .attr("tabindex", "-1")
-                    .append(
-                        $(document.createElement("a"))
-                            .attr("href", route("users", element["uuid"]))
-                            .html(element["name"])
-                    )
-            );
-        });
-        paginatorResult
-            .append(
-                $(document.createElement("p"))
-                    .html(
-                        "Mostrando " +
-                        response["from"] +
-                        " a " +
-                        response["to"] +
-                        " de " +
-                        response["total"] +
-                        " resultados"
-                    )
-                    .addClass("fw-lighter")
-            )
-            .attr("id", "searchText");
-        $(this.capsulator).append(paginatorResult);
+        ).get(0)!
     }
 }
 /**
@@ -434,6 +427,7 @@ class searchPaginator extends Paginator {
 
 abstract class TablePaginator extends Paginator {
     public ProxyMayChangeURL: boolean = true;
+    public InputCapsulator?: HTMLDivElement;
     /**
      * Additionals cells to be added to an entry based on paginator table needs
      * @param uuid
@@ -522,6 +516,15 @@ abstract class TablePaginator extends Paginator {
             throw new Error("Tbody not found");
         }
     }
+    public HTMLInputConstructor(): HTMLDivElement {
+        return $(document.createElement("div")).append(
+            $(document.createElement("input")).attr("type", "search").
+            attr("placeholder", "Buscar...").attr("required", "true").on("search", (event) => {
+                Object.assign(this.information, { name: $(event.currentTarget).val() });
+            })
+        ).get(0)!;
+        
+    }
     public hiddenCell(element: HTMLElement, index: number): void {
         console.log("has been injected");
         console.log(element);
@@ -529,16 +532,29 @@ abstract class TablePaginator extends Paginator {
     }
     public buildHTMLPaginable(response: PaginatorResponseInterface): HTMLDivElement {
         return $(document.createElement("div")).append($(document.createElement("p")).html(
-        "Mostrando " +
-        response["from"] +
-        " a " +
-        response["to"] +
-        " de " +
-        response["total"] +
-        " resultados")).append().get(0)!;
+        "Mostrando pagina " + String(response["current_page"]) + " (" +
+        response["from"] + " a " + response["to"] + " de " +
+        response["total"] + " resultados) filtrados por " + ((Object.getOwnPropertyDescriptor(this.information, "method"))!.value)
+        + " de la busqueda de " + ((Object.getOwnPropertyDescriptor(this.information, "name"))!.value)
+        + " en modo " + ((Object.getOwnPropertyDescriptor(this.information, "order"))!.value)
+        
+        )).get(0)!;
+    }
+    public override xhrSuccess(response: PaginatorResponseInterface): void {
+        $(this.capsulator).empty();
+        this.InputCapsulator = this.HTMLInputConstructor();
+        $(this.capsulator).append(this.InputCapsulator);
+        if (this.MayBePaginable) {
+            //@ts-ignore
+            $(this.capsulator).append(this.buildHTMLPaginable(response));
+        }
+        //@ts-ignore
+        $(this.capsulator).append(this.buildHTML(response));
     }
 }
+
 /*
+
 /* var searchUser = cacher(searchUsers); 
 var searchUsers = debounce(searchUsers, 600);
 let thisScript = document.currentScript;
