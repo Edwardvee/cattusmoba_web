@@ -28,7 +28,6 @@
               Informacion del juego </a>
             <ul class="dropdown-menu dropdownDark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item dropdownText" href="{{ route('historia') }}">Historia</a></li>
-              <li><a class="dropdown-item dropdownText" href="{{ route('reglas') }}">Reglas</a></li>
               <li><a class="dropdown-item dropdownText" href="{{ route('como jugar') }}">Cómo jugar</a></li>
             </ul>
           </li>
