@@ -4,5 +4,9 @@
 <title>Kyatsu! - Reglas</title>
 @endsection
 @section("http_body")
-<p>Este es la pagina de Reglas</p>
+<body>
+    
+    <p>Este es la pagina de Reglas</p>
+
+</body>
 @endsection("http_body")

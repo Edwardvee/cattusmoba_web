@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 #Resources
 use App\Models\User;
 use App\Validators\ValidatorXHR;
@@ -10,6 +11,9 @@ use App\Validators\ValidatorXHR;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\RedisController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\user_info;
+use App\Models\users_info;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +41,7 @@ Route::get("/user/{uuid}", function ($uuid) {
   $validator = Validator::make(["uuid" => $uuid], [
     "uuid" => ["required", "uuid", "exists:App\Models\User,uuid"]
   ]);
+
   $validated = $validator->validated();
   return view("user", ["user" => User::findOrFail($validated["uuid"])]);
 })->name("users");
@@ -44,6 +49,7 @@ Route::get("/user/{uuid}", function ($uuid) {
 Route::get("/user_paginator/{name}/{page}", function ($name, $page) {
   return view("user_paginator", ["name" => $name, "page" => $page]);
 })->name("user_paginator");
+
 Route::get("/", function () {
   return view("mainpage");
 })->name("mainpage");
@@ -73,9 +79,11 @@ Route::get("/getCurrentUser", function () {
 Route::get("/historia", function () {
   return view("historia");
 })->name("historia");
-Route::get("/reglas", function () {
-  return view("reglas");
-})->name("reglas");
+
+Route::get("/patchnotes", function () {
+  return view("patchnotes");
+})->name("patchnotes");
+
 Route::get("/como jugar", function () {
   return view("como jugar");
 })->name("como jugar");

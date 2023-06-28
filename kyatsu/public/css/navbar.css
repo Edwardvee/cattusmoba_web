@@ -1,6 +1,7 @@
 /* Firefox */
 html {
     scroll-behavior: smooth !important; 
+
   }
   
 * {
@@ -23,16 +24,16 @@ html {
     border: 3px solid #2c2c2c;
 }
 
-body {
+ body {
     overflow: overlay;
+    margin: 0;
 
 }
 
 .search-bar {
     position: absolute;
-    top: 50%;
-    left: 88%;
-    transform: translate(-50%, -50%);
+    left: 86%;
+    transform: translate(-50%);
     transition: all 1s;
     width: 50px;
     height: 50px;
@@ -42,15 +43,21 @@ body {
     border: 4px solid white;
 }
 
+@media only screen and (max-width: 767px) {
+    .search-bar{
+        left: 70%;
+    }
+}
 .results_pag {
     overflow: hidden;
 }
 
-
+.dropdown-menu {
+    left: auto !important;
+    right: 0;
+  }
 .input-search {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: flex;
     width: 100%;
     height: 42.5px;
     line-height: 30px;
@@ -189,3 +196,44 @@ form #paginator {
     width: 35px;
     height: 35px;
 }
+
+
+ 
+ .horizontalrule{
+     margin: auto;
+     margin-top: 0.5em;
+     margin-bottom: 1em;
+     color: white;
+     opacity: 100%;
+     height: 0.1em;
+     max-width: 90%;
+ }
+ .footer_icon {
+     display: contents;
+     width: 20px;
+ }
+ .OurRed {
+     margin: 10px;
+     text-align: center;
+     justify-self: center;
+     margin-top: 10px;
+     line-height: normal;
+     display: inline-block;
+     vertical-align: middle;
+     color: white;
+     font-size: 30px;
+ }
+ 
+ .Red {
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     user-select: none;
+     margin: 10px;
+     margin-top: 0px;
+ }
+ 
+ .Red:hover {
+     transition-duration: 0.2s;
+     background-color: black;
+ }
+ 

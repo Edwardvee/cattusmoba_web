@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Providers\RouteServiceProvider;
 
 class LoginRequest extends FormRequest
 {
@@ -50,8 +51,8 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
-       return redirect('mainpage');
-
+        return response()->redirectTo(RouteServiceProvider::HOME);
+       //return redirect('mainpage');
     }
 
     /**
