@@ -40,7 +40,7 @@
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="font-size:23px" href="#" id="navbarDarkDropdownMenuLink" role="buztton" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" style="font-size:20px" href="#" id="navbarDarkDropdownMenuLink" role="buztton" data-bs-toggle="dropdown" aria-expanded="false">
               Informacion del juego </a>
             <ul class="dropdown-menu dropdownDark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item dropdownText" href="{{ route('historia') }}">Historia</a></li>
@@ -49,7 +49,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="font-size:23px" href="{{route('heroes')}}">Héroes</a>
+            <a class="nav-link" style="font-size:20px" href="{{route('heroes')}}">Héroes</a>
           </li>
         </ul>
 
