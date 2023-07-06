@@ -1,0 +1,13 @@
+--aiuda--
+--Basic stat and level up syste--
+--camera angle fix x_x--
+--camera angle--
+--te odio daniel fernandez--
+--Minion Targeting each other--
+--IA basica de los minions--
+--minions have spawned--
+--Movimiento basico--
+--test--
+--projecto vacio--
+--Primer push. Update Readme.md--
+--Initial commit--
