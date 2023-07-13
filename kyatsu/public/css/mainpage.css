@@ -21,7 +21,7 @@ header {
 }
 header::before {
     content: "";
-    background: url(https://giffiles.alphacoders.com/153/15370.gif);
+    background: url(../img/BgMP.png);
     position: absolute;
     top: 0px;
     right: 0px;
@@ -56,6 +56,7 @@ header a {
     padding: 10px 30px;
     margin-top: 10px;
     filter: brightness(1);
+    
 }
 header p {
     margin: 0 30%;
@@ -80,19 +81,16 @@ header h1 {
 header h1:hover{
     animation: blur 2s ease-in-out infinite;
 }
-
 .Bdownload {
     border-radius: 10px;
     transition-duration: 0.2s;
 }
-
 .Bdownload:hover {
     transition-duration: 0.2s;
     background-color: #ffffff;
     color: black;
     border-radius: 10px;
 }
-
 .Bdownload:after {
     content: "";
     display: block;
@@ -106,7 +104,6 @@ header h1:hover{
     transition: all 0.5s;
     box-shadow: 0 0 10px 40px black;
 }
-
 .Bdownload:active:after {
     box-shadow: 0 0 0 0 black;
     position: absolute;
@@ -116,20 +113,16 @@ header h1:hover{
     opacity: 1;
     transition: 0s;
 }
-
 .Bdownload:active {
     top: 1px;
 }
-
 .content {
     max-width: 1720px;
     margin: auto;
 }
-
 .cardTitle {
     font-size: 50px;
 }
-
 .CrdRightSide {
     background-color : transparent;
 }
@@ -295,7 +288,7 @@ header h1:hover{
     position: absolute;
     left: 50%;
     margin-left: -30px;
-    bottom: 20px;
+    bottom: 70px;
   }
   
   .arrows path {
@@ -360,11 +353,103 @@ header h1:hover{
     border-bottom: 1px solid rgba(255, 255, 255, 0.85);
 }
 
-/*   I recall the virtues I stood for
-I recall the struggles and the things that we have done!
-I will not be deterred from my vengeance
-I remember the lessons passed on to the Sons!
-I am one of the Emperor's Children
-I am Rylanor and I am the Ancient of Rites!
-So I reject you for now and for always!
-To strike you down I have waited for a million nights!" */
+.caracteristicas-juego{
+    height: 600px;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 500px 100px;
+    grid-template-columns: 1fr 30px 30px 30px 30px 30px 1fr;
+    align-items: center;
+    justify-items: center;
+}
+main#carousel {
+    grid-row: 1 / 2;
+    grid-column: 1 / 8;
+    width: 100vw;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 600px;
+    --items: 5;
+    --middle: 3;
+    --position: 1;
+    pointer-events: none;
+  }
+  
+  div.item {
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background-color: coral;
+    --r: calc(var(--position) - var(--offset));
+    --abs: max(calc(var(--r) * -1), var(--r));
+    transition: all 0.25s linear;
+    transform: rotateY(calc(-10deg * var(--r)))
+      translateX(calc(-300px * var(--r)));
+    z-index: calc((var(--position) - var(--abs)));
+  }
+  
+  div.item:nth-of-type(1) {
+    --offset: 1;
+    background-image: url(../img/AurelionSol.jpg)
+  }
+  div.item:nth-of-type(2) {
+    --offset: 2;
+    background-color: #ff70a6;
+  }
+  div.item:nth-of-type(3) {
+    --offset: 3;
+    background-color: #ff9770;
+  }
+  div.item:nth-of-type(4) {
+    --offset: 4;
+    background-color: #ffd670;
+  }
+  div.item:nth-of-type(5) {
+    --offset: 5;
+    background-color: #e9ff70;
+  }
+  
+  input:nth-of-type(1) {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+  input:nth-of-type(1):checked ~ main#carousel {
+    --position: 1;
+  }
+  
+  input:nth-of-type(2) {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+  }
+  input:nth-of-type(2):checked ~ main#carousel {
+    --position: 2;
+  }
+  
+  input:nth-of-type(3) {
+    grid-column: 4 /5;
+    grid-row: 2 / 3;
+  }
+  input:nth-of-type(3):checked ~ main#carousel {
+    --position: 3;
+  }
+  
+  input:nth-of-type(4) {
+    grid-column: 5 / 6;
+    grid-row: 2 / 3;
+  }
+  input:nth-of-type(4):checked ~ main#carousel {
+    --position: 4;
+  }
+  
+  input:nth-of-type(5) {
+    grid-column: 6 / 7;
+    grid-row: 2 / 3;
+  }
+  input:nth-of-type(5):checked ~ main#carousel {
+    --position: 5;
+  }
+  

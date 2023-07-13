@@ -1,0 +1,6 @@
+<div class='row dev-item-row'><div class='col info-col'><p class='name'>--release ficticia</p><p class='description'>-Movimiento
+-Sistema de camara actualizado
+-IA avanzada
+-Ya no mina mas criptos
+-50 personajes
+-MMORPG no lineal</p></div></div><div class='row dev-item-row'><div class='col info-col'><p class='name'>--solo movimiento</p><p class='description'>Movimiento de personaje</p></div></div>

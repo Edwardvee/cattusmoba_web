@@ -80,8 +80,21 @@
         </div>
 
         <div class="col-12">
-            <h1 class="mx-auto" style="width:250px"> Caracteristicas del juego </h1>
-
+            <h1 class="mx-auto" style="width:250px"º> Caracteristicas del juego </h1>
+            <div class="caracteristicas-juego">
+  <input type="radio" name="position" checked />
+  <input type="radio" name="position" />
+  <input type="radio" name="position" />
+  <input type="radio" name="position" />
+  <input type="radio" name="position" />
+  <main id="carousel">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <main>
+</div>
         </div>
 
 
