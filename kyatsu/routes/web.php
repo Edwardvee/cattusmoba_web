@@ -13,6 +13,7 @@ use App\Http\Controllers\RedisController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\user_info;
 use App\Models\users_info;
+use App\Http\Controllers\HeroesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,9 +64,8 @@ Route::get('/redis', [RedisController::class, 'index'])->name("redis");
 Route::get("/SessionInfo", function (Request $request) {
   return $request->session()->all();
 });
-Route::get("/heroes", function () {
-  return view("heroes");
-})->name("heroes");
+
+Route::get("/heroes/{name}", [HeroesController::class, 'show'])->name("heroes");
 
 
 Route::get("/dasomnya", function () {

@@ -1,10 +1,11 @@
 @extends("maintemplate")
-
 @section("http_headers")
 <title>Kyatsu! - Heroes</title>
-<link href="css/heroes.css" rel="stylesheet">
+<link href="{{url('css/heroes.css')}}" rel="stylesheet">
+
 @endsection
 @section("http_body")
+@php $heroes = $heroes->toArray(); @endphp
 <!-- HONOR A LOS LEALES, LARGA VIDA AL EMPREADOR DE LA HUMANIDAD -->
 
 <body class="ola"> <!-- class ola para bajar el body 120px por el navbar-->
@@ -12,12 +13,12 @@
 <div class="container">
    <div class="row">
      <div class="col"> <!-- descripcion de los heroes -->
-         <h1 id="heroname" class="sub-estetico">Melisa</h1>
+         <h1 id="heroname" class="sub-estetico">{{ $heroes["name"] }}</h1>
           <div class="row">
             <div class="col-8 niggabackground">
                   <h3>Actriz de voz: Ivan Quiroga</h3>
                   <h6>Cumpleaños / 04-06</h6>
-                  <p class="message">Melisa es la bibliotecaria de los caballeros de Favonio de Mondstadt en Kyatsu! y, a pesar de su apariencia sosa, es un ser muy inteligente y una maga con increíble talento que en realidad se cohíbe por su temor al costo del conocimiento</p>
+                  <p class="message">{{ $heroes['description'] }}</p>
             </div> 
          </div>
       </div>
