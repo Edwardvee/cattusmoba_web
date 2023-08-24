@@ -109,6 +109,10 @@ Route::get("/patchnotes", function () {
   return view("patchnotes");
 })->name("patchnotes");
 
+Route::get("/store", function () {
+  return view("store");
+})->name("store");
+
 Route::get("/como jugar", function () {
   return view("como jugar");
 })->name("como jugar");

@@ -1,0 +1,16 @@
+body{
+/*     background-color: blue;
+ */}
+.store{
+    font-size: x-large;
+    margin-top: 100px;
+    color: white;
+    background: rgb(129,161,231);
+    background: linear-gradient(180deg, rgba(129,161,231,1) 0%, rgba(183,205,254,1) 63%, rgba(230,230,230,1) 100%, rgba(255,255,255,1) 100%);
+}
+.price{
+    background-color: yellow;
+}
+.coin{
+    width: 40%;
+}

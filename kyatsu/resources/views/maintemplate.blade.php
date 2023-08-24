@@ -51,6 +51,9 @@
           <li class="nav-item">
             <a class="nav-link" style="font-size:20px" href="{{route('heroes')}}">Héroes</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size:20px" href="{{route('store')}}">Tienda</a>
+          </li>
         </ul>
 
  

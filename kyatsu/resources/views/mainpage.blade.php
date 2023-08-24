@@ -4,25 +4,26 @@
 <title> Kyatsu!</title>
 @endsection
 @section('http_body')
- 
-    <header>
-        <!-- HONOR A LOS LEALES, LARGA VIDA AL EMPREADOR DE LA HUMANIDAD -->
+
+
+
+
+
+
+
+   <header>
         <h1 class="area"> Kyatsu! Arena </h1>
         <p id="rrandommsg"> ¿Eres digno de tanta accion?</p>
         <a class="Bdownload" href="https://tlauncher.org/installer">Jugar ahora</a>
-        <svg class="arrows">
-              <path class="a1" d="M0 0 L30 32 L60 0"></path>
-              <path class="a2" d="M0 20 L30 52 L60 20"></path>
-              <path class="a3" d="M0 40 L30 72 L60 40"></path>
-            </svg>
-    </header>
+
+    </header> 
 
     <div class="content">
         <div class="row">
             <div class="nwn"> 
             <div class="col-12">
             <div class="card mb-3 ewe" style="max-width: 100%;">
-                    <div class="row g-0">
+                    <div class="row">
                         <div class="col-md-3">
                             <img id="myImage2" src="https://media.tenor.com/2kBRRgoejx4AAAAi/league-of-legends.gif" class="img-fluid rounded-start heroImg" alt="...">
                         </div>
@@ -79,25 +80,7 @@
             </div>
         </div>
 
-        <div class="col-12">
-            <h1 class="mx-auto" style="width:250px"º> Caracteristicas del juego </h1>
-            <div class="caracteristicas-juego">
-  <input type="radio" name="position" checked />
-  <input type="radio" name="position" />
-  <input type="radio" name="position" />
-  <input type="radio" name="position" />
-  <input type="radio" name="position" />
-  <main id="carousel">
-    <div class="item"></div>
-    <div class="item"></div>
-    <div class="item"></div>
-    <div class="item"></div>
-    <div class="item"></div>
-    <main>
-</div>
-        </div>
-
-
+ 
 
         </div>
         </div>
