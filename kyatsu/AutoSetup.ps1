@@ -18,6 +18,7 @@ $host.ui.RawUI.WindowTitle = "Auto-Instalador de Laravel"
 
 Set-Variable -Name PHP_VERSION -Option Constant -Value 8.1
 Set-Variable -Name COMPOSER_VERSION -Option Constant -Value 2.2
+Set-Variable -Name NPM_VERSION -Option CONSTANTE -Value 8.19
 Set-Variable -Name REPOSITORY_PATH -Option Constant $pwd
 Set-Variable -Name ADMIN_RIGHTS -Option Constant ([Security.Principal.WindowsPrincipal] ` [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 Set-Variable -Name INSTALL_COMPOSER_DIRECTORY -Value "$env:ProgramData\composer\"
@@ -31,6 +32,7 @@ Write-Host "en el lugar exacto en donde esta ubicado en el repositorio web"-Fore
 Write-Host "No habra el archivo fuera del repositorio web"-ForegroundColor Green
 Write-Host "Version minima de PHP Requerida: " $PHP_VERSION -ForegroundColor Yellow
 Write-Host "Version minima de Composer Requerida: " $COMPOSER_VERSION -ForegroundColor Yellow
+Write-Host "Version minima de NPM Requerida; " $NPM_VERSION -ForegroundColor Yellow
 Write-Host ""
 Write-Host "WARNING: Usted esta trabajando en el branch " $CURRENT_GIT_BRANCH -ForegroundColor Yellow
 Write-Host "Por cada vez que cambies de branch, deberas reejecutar el autoinstalador" -ForegroundColor Yellow
@@ -206,6 +208,9 @@ php artisan optimize --no-interaction
 Write-Host "Borrando cache del respositorio..." -ForegroundColor Green
 php artisan cache:clear --no-interaction
 
+Write-Host "Borrando la cache de las rutas de la consola..." -ForegroundColor Green
+php artisan clear-compiled
+
 Write-Host "Borrando cache de vistas del repositorio..." -ForegroundColor Green
 php artisan view:clear --no-interaction
 
@@ -214,6 +219,24 @@ php artisan migrate --no-interaction --force
 
 Write-Host "Ejecutando la siembra de la base de datos del proyecto..." -ForegroundColor Green
 php artisan db:seed
+
+if (Get-Command npm) {
+    Write-Host("Se ha detectado npm instalado, comprobando version...") -ForegroundColor Yellow
+    if ((npm --version) -ge $NPM_VERSION) {
+        Write-Host("La version de npm es compatible, instalando repositorio....") -ForegroundColor Yellow
+        npm install
+        Write-Host("Se ha instalado npm correctamente") -ForegroundColor Green
+        Write-Host("Compilando Typescript...") -ForegroundColor Yellow
+        tsc -p tsconfig.json
+        Write-Host("TypeScript compilado exitosamente...") -ForegroundColor Green
+    } else {
+        throw ("La version de NPM es imcompatible...");
+    }
+} else {
+    throw ("No se ha detectado NPM, abortando...");
+}
+
+
 
 Write-Host "Instalacion finalizada, avisa si hubo algun error o sigue sin funcionar" -ForegroundColor Green
 Write-Host "Acordate que el comando para iniciar es php artisan serve" -ForegroundColor Green

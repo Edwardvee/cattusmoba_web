@@ -84,8 +84,9 @@ return [
     |
     */
 
-    'locale' => 'en',
-
+    'locale' => 'es',
+    'date_format' => 'd/m/Y',
+    'date_format_javascript' => 'DD/MM/YYYY',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -110,7 +111,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'es_AR',
 
     /*
     |--------------------------------------------------------------------------

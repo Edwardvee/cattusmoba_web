@@ -1,6 +1,34 @@
 "use strict";
 
-/**
+// DateRangePicker
+import { DateOrString } from "daterangepicker";
+
+//Swal
+//import Swal from "sweetalert2";
+
+//import moment from "moment";
+//const moment = require('moment');
+
+var moment: any
+if ((typeof window.moment) === "undefined") {
+    import("moment").then(Imported => {
+    moment = Imported;
+    });
+} else {
+    moment = window.moment; 
+}
+
+var Swal: any = [];
+if ((typeof Swal) === "undefined") {
+    import("sweetalert2").then(Imported => {
+        moment = Imported;
+    });
+} else {
+    //@ts-ignore
+    Swal = window.Swal;
+}
+
+/* 
  * @interface
  * Specifies the data that is received by Kyatsu Moba! Laravel backend
  * on paginator responses
@@ -34,6 +62,9 @@ interface KyatsuProxyInterface {
     page: number,
     name: string,
     method: string,
+    date_method: string,
+    date_start: DateOrString,
+    date_end: DateOrString,
     order: OrderBy
 }
 
@@ -150,7 +181,8 @@ function ziggyStringToController() {
  * 
 */
 
-abstract class Paginator {
+
+export abstract class Paginator {
     public capsulator: HTMLDivElement | HTMLElement;
     public information: KyatsuProxyInterface | ProxyConstructor;
     public abstract ProxyMayChangeURL: boolean;
@@ -164,9 +196,10 @@ abstract class Paginator {
     private makeXHRTimeout: any;
     private makeXHRTimeoutMilliseconds: number = 500;
     public maxSearchLength: number = 16;
+    public responseXHR?: PaginatorResponseInterface;
     public constructor(capsulator: string) {
         let getter = document.getElementById(capsulator);
-        if (getter == null || !(getter instanceof HTMLElement)) {
+        if (!(getter instanceof HTMLElement)) {
             throw new Error("Paginator Capsulator Element not defined nor valid class");
         } else {
             this.capsulator = getter;
@@ -191,31 +224,41 @@ abstract class Paginator {
     }
 
     public defaultProxy(defaultParameters: boolean = false): KyatsuProxyInterface {
-        let CurrentURL: URLSearchParams = new URLSearchParams;
+        let CurrentURL: URLSearchParams = new URLSearchParams(window.location.search);
         let JSON: KyatsuProxyInterface = {
             page: 1,
-            name: "%%",
+            name: "null",
             method: "name",
-            order: OrderBy.DESC,            
+            date_method: "created_at",
+            date_start: moment().subtract(14, "days").format("DD/MM/YYYY") ,
+            date_end: moment().format("DD/MM/YYYY"),
+            order: OrderBy.DESC,
+
         };
         if (defaultParameters == false) {
-        if (CurrentURL.has("page")) {
-            //@ts-ignore
-            JSON.page = CurrentURL.get("page");
+            if (CurrentURL.has("page")) {
+                JSON.page = parseInt(CurrentURL.get("page")!);
+            }
+            if (CurrentURL.has("name")) {
+                JSON.name = CurrentURL.get("name")!;
+            }
+            if (CurrentURL.has("method")) {
+                JSON.method = CurrentURL.get("method")!;
+            }
+            if (CurrentURL.has("date_method")) {
+                JSON.date_method = CurrentURL.get("date_method")!;
+            }
+            if (CurrentURL.has("date_start")) {
+                JSON.date_start = CurrentURL.get("date_start")!;
+            }
+            if (CurrentURL.has("date_end")) {
+                JSON.date_end = CurrentURL.get("date_end")!;
+            }
+            if (CurrentURL.has("order")) {
+                JSON.order = CurrentURL.get("order") as OrderBy;
+            }
         }
-        if (CurrentURL.has("name")) {
-            //@ts-ignore
-            JSON.name = CurrentURL.get("name");
-        }
-        if (CurrentURL.has("method")) {
-            //@ts-ignore
-            JSON.method = CurrentURL.get("method");
-        }
-        if (CurrentURL.has("order")) {
-            JSON.order = CurrentURL.get("order") as OrderBy;
-        }
-    }
-    return JSON;
+        return JSON;
     }
     /**
      * Applies a timeout to XHR Request to prevent HTTP Error 429.
@@ -227,13 +270,13 @@ abstract class Paginator {
      * 
      * @returns {void}
      */
-    public makeXHRAwait($name: string, $page = 1, $order: string, $method: string): void {
+    public makeXHRAwait(object: KyatsuProxyInterface): void {
         if (this.applyTimeout == true) {
             this.makeXHRTimeout = setTimeout(() => {
-                this.makeXHR($name, $page, $order, $method);
+                this.makeXHR(object);
             }, this.makeXHRTimeoutMilliseconds);
         } else {
-            this.makeXHR($name, $page, $order, $method);
+            this.makeXHR(object);
         }
     }
     //public abstract xhrSuccess(response: PaginatorResponseInterface): void;
@@ -247,20 +290,25 @@ abstract class Paginator {
      * 
      * @returns {void}
      */
-    public makeXHR($name: string, $page = 1, $order: string, $method: string): void {
+    public makeXHR(object: KyatsuProxyInterface): void {
         $.ajax({
             method: "GET",
             accepts: {
                 json: "application/json"
             },
-            url: this.getRoute({
+            url: this.getRoute(object),
+            /*url: this.getRoute({
                 name: $name,
                 page: $page,
                 order: $order as OrderBy,
+                date_start: $date_start,
+                date_end: $date_end,
+                date_method: $date_method,
                 method: $method
-            }),
+            }),*/
             //getRoute($name, $page, $order, $method),
             success: (response: PaginatorResponseInterface) => {
+                this.responseXHR = response;
                 this.xhrSuccess(response);
             },
             statusCode: {
@@ -281,10 +329,17 @@ abstract class Paginator {
                             document.createTextNode(
                                 response.responseJSON["message"]
                             )
-                        )
+                        )  
                     );
+                    Swal.fire({
+                        title: "Error",
+                        text: "Ha ocurrido al procesar la informacion de tu solicitud",
+                        icon: "error",
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                      });
                 },
-                
+
             }
         });
     }
@@ -303,17 +358,19 @@ abstract class Paginator {
      * 
      * @see https://stackoverflow.com/questions/45810904/typeerror-set-on-proxy-trap-returned-falsish-for-property
      */
-    public inputHandlerSetup(defaultProxy: any) : ProxyConstructor {
+    public inputHandlerSetup(defaultProxy: any): ProxyConstructor {
         return new Proxy(
             //JSON.parse(document.getElementById("http_data_paginator")!.innerHTML),
             defaultProxy,
             {
                 set: (obj, prop, value) => {
                     if (
-                        typeof prop === "string" &&
-                        !["string", "number"].includes(typeof value)
+                        (typeof prop === "string" &&
+                        !["string", "number"].includes(typeof value))
+                        &&
+                        !(typeof value === "object" && value instanceof Date)
                     ) {
-                        throw "FATAL: La propiedad no es un string o el value provisto no es un string/numbero";
+                        throw "FATAL: Property provided is not a valid string/number/date object";
                     }
                     if (
                         (prop === "page" && isNaN(parseInt(value))) ||
@@ -336,9 +393,18 @@ abstract class Paginator {
                         console.groupEnd();
                         throw new Error("FATAL: Lo provisto en el paginador no son datos validos");
                     }
-                   // document.getElementById("paginator")!.innerHTML = "";
+                    // document.getElementById("paginator")!.innerHTML = "";
                     Object.assign(obj, { [prop]: value });
-                    this.makeXHRAwait(obj["name"], obj["page"], obj["order"], obj["method"]);
+                    this.makeXHRAwait({
+                        page: obj["page"],
+                        name: obj["name"],
+                        method: obj["method"],
+                        date_method: obj["date_method"],
+                        date_start: obj["date_start"],
+                        date_end: obj["date_end"],
+                        order: obj["order"]
+                    } as KyatsuProxyInterface);
+                    //this.makeXHRAwait(obj["name"], obj["page"], obj["order"], obj["method"]);
                     //this.makeXHR(obj["name"], obj["page"], obj["order"], obj["method"]);
                     console.log(obj);
                     if (this.ProxyMayChangeURL == true) {
@@ -376,7 +442,7 @@ abstract class Paginator {
     }*/
 }
 
-abstract class searchPaginator extends Paginator {
+export abstract class searchPaginator extends Paginator {
     public MayBePaginable: boolean = false;
     public ProxyMayChangeURL: boolean = false;
     /**
@@ -411,11 +477,11 @@ abstract class searchPaginator extends Paginator {
                 $(document.createElement("li")).append((): HTMLAnchorElement[] => {
                     var answer: HTMLAnchorElement[] = [];
                     Object.entries(response["data"]).forEach((element: any) => {
-                        answer.push($(document.createElement("a")).html(element["name"]).attr("href", this.getUniqueIdentifier(element["uuid"])).get(0)! );
+                        answer.push($(document.createElement("a")).html(element["name"]).attr("href", this.getUniqueIdentifier(element["uuid"])).get(0)!);
                     });
-                    return answer; 
+                    return answer;
                 })
-                )
+            )
         ).get(0)!
     }
 }
@@ -425,7 +491,7 @@ abstract class searchPaginator extends Paginator {
  * @extends Paginator
  */
 
-abstract class TablePaginator extends Paginator {
+export abstract class TablePaginator extends Paginator {
     public ProxyMayChangeURL: boolean = true;
     public InputCapsulator?: HTMLDivElement;
     /**
@@ -451,9 +517,9 @@ abstract class TablePaginator extends Paginator {
                     //Aca creamos los th
                     var answer: HTMLTableCellElement[] = [];
                     Object.keys(response["data"][0]).forEach(element => {
-                        answer.push($(document.createElement("th")).html(element).on("click", (event) => {
+                        answer.push($(document.createElement("th")).html(element)/*.on("click", (event) => {
                             Object.assign(this.information, { method: $(event.currentTarget).html() });
-                        }).get(0)!);
+                        })*/.get(0)!);
                     })
                     return answer;
                 }
@@ -473,7 +539,7 @@ abstract class TablePaginator extends Paginator {
                         });
                         perLine.push(...this.tableColumnAddon(response["data"][element]["uuid"]));
                         return perLine;
-                    })!.get(0)!
+                    }).get(0)!
                     );
                 });
                 return answer;
@@ -492,9 +558,10 @@ abstract class TablePaginator extends Paginator {
      * @param table HTML Table, if it's not provided the capsulator will be used instead
      * 
      */
-    public cellContentInjector(ThCell: string, callback: any, table? : HTMLTableElement | HTMLElement ): void {
+    public cellContentInjector(ThCell: string, callback: any, table?: HTMLTableElement | HTMLElement): void {
         let tableUsing: HTMLElement = table ?? this.capsulator;
-        let Trow: HTMLElement = tableUsing.querySelector("thead")?.firstChild as HTMLElement;
+        let Trow = $($("thead", tableUsing)).get(0);
+        //let Trow: HTMLElement = tableUsing.querySelector("thead")?.firstChild as HTMLElement;
         let filtered: number;
         if (Trow) {
             filtered = Array.from(Trow.childNodes).findIndex(element => {
@@ -506,6 +573,7 @@ abstract class TablePaginator extends Paginator {
         } else {
             throw new Error("Thead first child not found");
         }
+        //let Tbody = $($("tbody", tableUsing)).get(0)!;
         let Tbody = tableUsing.querySelector("tbody");
         if (Tbody) {
             //tr
@@ -516,14 +584,110 @@ abstract class TablePaginator extends Paginator {
             throw new Error("Tbody not found");
         }
     }
+    /**
+     * This method supports DateRangePicker plugin for date search
+     * However, navaginator implementations are useful nowadays
+     * 
+     * So, it will check if the plugin is installed and succesfully loaded.
+     * If it is. it will use it, if not, it will use navigator implementation.
+     * 
+     * Differences of using each other according to Google Bard
+     * 
+     * Date range picker: Allows to search between ranges, custom css
+     * 
+     * Navigator picker: Simple, no additional configuration, supported by all browsers.
+     * @see https://stackoverflow.com/questions/22627117/how-to-give-specific-range-to-datetime-local-input-type
+     */
+    public HTMLDateInputConstructor(): HTMLDivElement {
+        if (((typeof $.fn.daterangepicker) != undefined)) {
+            let RangeElement: HTMLSpanElement = document.createElement("span");
+            RangeElement.textContent = "Rango Desconocido";
+            $(RangeElement).daterangepicker({
+                locale: {
+                    format: "DD/MM/YYYY"
+                },
+                startDate: Object.getOwnPropertyDescriptor(this.information, "date_start")!.value,
+                endDate: Object.getOwnPropertyDescriptor(this.information, "date_end")!.value,
+                minDate: new Date("1990-01-01"),
+                maxDate: new Date(),
+                showWeekNumbers: true,
+                showISOWeekNumbers: true,
+                timePicker24Hour: true
+            }, (start, end) => {
+                $(RangeElement).html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                $(".daterangepicker").remove();
+                Object.assign(this.information, {
+                    date_start: start.format("DD/MM/YYYY"),
+                    date_end: start.format("DD/MM/YYYY")
+                });
+            });
+            $(RangeElement).html(moment(Object.getOwnPropertyDescriptor(this.information, "date_start")!.value, "DD/MM/YYYY")
+            .format('MMMM D, YYYY') + " - " + moment(Object.getOwnPropertyDescriptor(this.information, "date_end")!.value, "DD/MM/YYYY").format("MMMM D, YYYY"));
+            return $(document.createElement("div")).attr("style", "background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid black; width: 100%")
+                //.append($(document.createElement("i")).addClass("fa fa-calendar"))
+                .append($(RangeElement))
+                /*.append($(document.createElement("i")).addClass("fa fa-caret-down"))*/.get(0)!;
+        } else {
+            throw new Error("Date range picker AND/OR moment libraries ARE NOT LOADED");
+        }
+    }
     public HTMLInputConstructor(): HTMLDivElement {
-        return $(document.createElement("div")).append(
-            $(document.createElement("input")).attr("type", "search").
-            attr("placeholder", "Buscar...").attr("required", "true").on("search", (event) => {
+        return $(document.createElement("div")).append($(document.createElement("input")).
+            attr("placeholder", "Buscar...").attr("type", "search").attr("required", "true").on("search", (event) => {
                 Object.assign(this.information, { name: $(event.currentTarget).val() });
             })
-        ).get(0)!;
-        
+        ).get(0)!
+    }
+    /** Creates SELECT Menus for selecting
+     * name sorting
+     * and
+     * date sorting
+     */
+
+    public SortableNames(response: PaginatorResponseInterface): HTMLDivElement {
+        var DateElements: HTMLOptionElement[] = [];
+        var NonDateElements: HTMLOptionElement[] = [];
+        Object.keys(response["data"][0]).forEach(element => {
+            /*
+           if (!isNaN(new Date(response["data"][0][element]).getTime())) { 
+                DateElements.push($(document.createElement("option")).html(element).on("click", () => {
+                    Object.assign(this.information, { date_method: element });
+                    console.log("It clicked");
+                }).get(0)!);
+            } else {
+                NonDateElements.push($(document.createElement("option")).html(element).on("click", () => {
+                    Object.assign(this.information, { method: element });
+                }).get(0)!);
+            }*/
+            if (!isNaN(new Date(response["data"][0][element]).getTime())) { 
+                DateElements.push($(document.createElement("option")).html(element).get(0)!);
+            } else {
+                NonDateElements.push($(document.createElement("option")).html(element).get(0)!);
+            }
+        })
+/*
+        return $(document.createElement("div")).append($(document.createElement("select")).append(DateElements))
+            .append($(document.createElement("select")).append(NonDateElements)).get(0)!;
+            */
+            return $(document.createElement("div")).append
+            ($(document.createElement("select")).append(DateElements)).on("change", (event) => {
+                if (document.getElementsByClassName("alert-container").length == 0) {
+                    $(event.currentTarget).parent().append(this.Warnable("Se ha cambiado el selector de busqueda de fechas. Selecciona un rango de fecha nuevo para buscar..."));
+
+                }
+            })
+            .append
+            ($(document.createElement("select")).append(NonDateElements).on("change", (event) => {
+                if (document.getElementsByClassName("alert-container").length == 0) {
+                    $(event.currentTarget).parent().append(this.Warnable("Se ha cambiado el selector de busqueda de campos. Ingresa un nuevo termino para buscar..."));
+                }
+            }))
+            .get(0)!;
+    }
+    public Warnable(message: string): HTMLDivElement {
+        return $(document.createElement("div")).addClass("alert-container").append
+        ($(document.createElement("img")).attr("alt", "alert").attr("src", "URLDescriptor").addClass("alert-icon"))
+        .append($(document.createElement("div")).addClass("message").html(message)).get(0)!;
     }
     public hiddenCell(element: HTMLElement, index: number): void {
         console.log("has been injected");
@@ -532,17 +696,29 @@ abstract class TablePaginator extends Paginator {
     }
     public buildHTMLPaginable(response: PaginatorResponseInterface): HTMLDivElement {
         return $(document.createElement("div")).append($(document.createElement("p")).html(
-        "Mostrando pagina " + String(response["current_page"]) + " (" +
-        response["from"] + " a " + response["to"] + " de " +
-        response["total"] + " resultados) filtrados por " + ((Object.getOwnPropertyDescriptor(this.information, "method"))!.value)
-        + " de la busqueda de " + ((Object.getOwnPropertyDescriptor(this.information, "name"))!.value)
-        + " en modo " + ((Object.getOwnPropertyDescriptor(this.information, "order"))!.value)
-        
+            "Mostrando pagina " + String(response["current_page"]) + " (" +
+            response["from"] + " a " + response["to"] + " de " +
+            response["total"] + " resultados) filtrados por " + ((Object.getOwnPropertyDescriptor(this.information, "method"))!.value)
+            + " de la busqueda de " + ((Object.getOwnPropertyDescriptor(this.information, "name"))!.value)
+            + " en modo " + ((Object.getOwnPropertyDescriptor(this.information, "order"))!.value)
+
         )).get(0)!;
+    }
+    public buildHTMLEmpty(): HTMLTableElement | undefined {
+        return $($(document.createElement("table")).addClass("table table-hover")
+            .append($(document.createElement("thead")).addClass("table-dark")))
+            .append($(document.createElement("tr")).append($(document.createElement("th")).html("No hay resultados")))
+            .get(0)!;
     }
     public override xhrSuccess(response: PaginatorResponseInterface): void {
         $(this.capsulator).empty();
-        this.InputCapsulator = this.HTMLInputConstructor();
+        if (response["data"].length == 0) {
+            //@ts-ignore
+            $(this.capsulator).append(this.buildHTMLEmpty());
+            return;
+        }            this.InputCapsulator = this.SortableNames(response);
+        $(this.InputCapsulator).append(this.HTMLInputConstructor());
+        $(this.InputCapsulator).append(this.HTMLDateInputConstructor());            //this.InputCapsulator = this.HTMLInputConstructor();
         $(this.capsulator).append(this.InputCapsulator);
         if (this.MayBePaginable) {
             //@ts-ignore

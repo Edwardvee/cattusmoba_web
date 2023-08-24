@@ -1,5 +1,8 @@
 "use strict";
-class AdministrablePaginator extends TablePaginator {
+
+import { TablePaginator } from "./user_paginator.js";
+
+export class AdministrablePaginator extends TablePaginator {
     public routeUniqueIdentifier: string = "A";
     public routeGenerator: string = "admin.admin_users.index";
     public constructor(capsulator? :string) {
