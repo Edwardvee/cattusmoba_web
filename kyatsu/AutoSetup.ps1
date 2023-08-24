@@ -18,7 +18,7 @@ $host.ui.RawUI.WindowTitle = "Auto-Instalador de Laravel"
 
 Set-Variable -Name PHP_VERSION -Option Constant -Value 8.1
 Set-Variable -Name COMPOSER_VERSION -Option Constant -Value 2.2
-Set-Variable -Name NPM_VERSION -Option CONSTANTE -Value 8.19
+Set-Variable -Name NPM_VERSION -Option Constant -Value 8.19
 Set-Variable -Name REPOSITORY_PATH -Option Constant $pwd
 Set-Variable -Name ADMIN_RIGHTS -Option Constant ([Security.Principal.WindowsPrincipal] ` [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 Set-Variable -Name INSTALL_COMPOSER_DIRECTORY -Value "$env:ProgramData\composer\"
