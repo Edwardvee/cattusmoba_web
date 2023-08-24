@@ -10,6 +10,7 @@ use App\Validators\ValidatorXHR;
 //use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\RedisController;
+use Illuminate\Http\Request;
 use App\Http\Controllers\user_info;
 use App\Models\users_info;
 
@@ -29,41 +30,12 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 */
-//Route::middleware["auth"]
+
 Route::group(["middleware" => ["guest"]], function () {
   Route::get("authentication", function () {
     return view("authentication");
   })->name("authentication");
 });
-
-
-Route::group(["middleware" => ["can: access admin"]], function () {
-  Route::prefix("admin")->group(function () {
-    Route::resource('admin_users', UserManagementController::class);
-  })->name("admin");
-});
-/*
-Route::prefix("admin")->group(function () {
-  Route::resource('admin_users', UserManagementController::class);
-})->name("admin");*/
-//})->name("admin");
-
-
-//Aprender como funcionan las colecciones
-Route::prefix("frontend")->group(function () {
-  Route::get('/user/{name}/{page}', function ($name, $page) {
-    $validator = new ValidatorXHR(["name" => $name, "page" => $page], [
-      'name' => ["required", "string", "max:16"],
-      "page" => ["required", "integer"]
-    ]);
-    $validated = $validator->validator->validated();
-    //return ("%" . $validated["name"] . "%");
-    return User::where("name", "LIKE", "%{$validated["name"]}%")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"]);
-    //return User::where("name", "LIKE", ("%" . $validated["name"] . "%"))->toSql();
-    //Consultar a teruel
-    //return UserCollection::collection(User::where("name", "LIKE", "%" . $validated["name"] . "%")->paginate(15, ["uuid", "name", "created_at"], "page", $validated["page"])->getCollection());
-  })->name("user");
-})->name("frontend");
 
 Route::get("/user/{uuid}", function ($uuid) {
   $validator = Validator::make(["uuid" => $uuid], [
@@ -88,6 +60,9 @@ Route::get("/gameinfo", function () {
 
 Route::get('/redis', [RedisController::class, 'index'])->name("redis");
 
+Route::get("/SessionInfo", function (Request $request) {
+  return $request->session()->all();
+});
 Route::get("/heroes", function () {
   return view("heroes");
 })->name("heroes");
@@ -117,7 +92,11 @@ Route::get("/como jugar", function () {
   return view("como jugar");
 })->name("como jugar");
 
+Route::get("/isBanned", function () {
+  return  (Auth::check()) ? (var_dump(User::findOrFail(Auth::user()?->uuid)->isBanned())) : ("No logueado");
+})->name("isBanned");
 //GET O POST. Cuando nostros accedamos a la ruta / del sitio.
 // Al lado le colocas una coma y definis una funcion sin nombre  (Funciones anonima)-
 // El view es una funcion normal, la cual tiene un parametro.
 require __DIR__ . '/auth.php';
+require __DIR__ . "/admin.php";

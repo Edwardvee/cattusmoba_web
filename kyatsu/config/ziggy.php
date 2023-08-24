@@ -2,18 +2,17 @@
 
 return [
     'routes' => [
-        'frontend' => [
-            '/frontend/user/' => 'frontend.user'
+        'api.frontend' => [
+            '/api/frontend/user/' => 'api.frontend.user'
             // Agrega todas las rutas del grupo frontend que necesites
         ]
     ],
     'groups' => [
-        'frontend' => [
-            'frontend/',
-            "frontend.user"
-        ],
-        'frontend.user' => [
+        'api.frontend.user' => [
             'frontend/user/{name}/{page}'
         ]
+    ],
+    'aliases' => [
+        'admin_users' => 'admin/admin_users',
     ],
 ];

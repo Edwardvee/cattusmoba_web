@@ -18,11 +18,13 @@ $host.ui.RawUI.WindowTitle = "Auto-Instalador de Laravel"
 
 Set-Variable -Name PHP_VERSION -Option Constant -Value 8.1
 Set-Variable -Name COMPOSER_VERSION -Option Constant -Value 2.2
+Set-Variable -Name NPM_VERSION -Option Constant -Value 8.19
 Set-Variable -Name REPOSITORY_PATH -Option Constant $pwd
 Set-Variable -Name ADMIN_RIGHTS -Option Constant ([Security.Principal.WindowsPrincipal] ` [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 Set-Variable -Name INSTALL_COMPOSER_DIRECTORY -Value "$env:ProgramData\composer\"
 Set-Variable -Name CURRENT_GIT_BRANCH -Option Constant -Value (git branch --show-current)
 Set-Variable -Name PROJECT_NAME -Option Constant -Value ("'" + (Split-Path $PSScriptRoot -Leaf) + "'");
+Set-Variable -Name COMPOSER_SETUP_HASH -Option Constant -Value "55CE33D7678C5A611085589F1F3DDF8B3C52D662CD01D4BA75C0EE0459970C2200A51F492D557530C71C15D8DBA01EAE";
 
 Write-Host "Auto-Instalador de Laravel" -ForegroundColor Green
 Write-Host "Antes de proceder, asegurese que abrio este archivo"-ForegroundColor Green
@@ -30,6 +32,7 @@ Write-Host "en el lugar exacto en donde esta ubicado en el repositorio web"-Fore
 Write-Host "No habra el archivo fuera del repositorio web"-ForegroundColor Green
 Write-Host "Version minima de PHP Requerida: " $PHP_VERSION -ForegroundColor Yellow
 Write-Host "Version minima de Composer Requerida: " $COMPOSER_VERSION -ForegroundColor Yellow
+Write-Host "Version minima de NPM Requerida; " $NPM_VERSION -ForegroundColor Yellow
 Write-Host ""
 Write-Host "WARNING: Usted esta trabajando en el branch " $CURRENT_GIT_BRANCH -ForegroundColor Yellow
 Write-Host "Por cada vez que cambies de branch, deberas reejecutar el autoinstalador" -ForegroundColor Yellow
@@ -80,7 +83,7 @@ xamppInstallValidation
 #Write-Host $MYSQL_PATH -ForegroundColor Yellow;
 #Invoke-Expression ('{0} --batch --skip-column-names -u root -e "SHOW DATABASES LIKE {1};"' -f $MYSQL_PATH, $PROJECT_NAME);
 
-function enviromentTest() {
+function PHPenviromentTest() {
     Write-Host "Verificando instalacion de PHP en el entorno" -ForegroundColor Green  
     if (Get-Command php) {
         if (!(php -v -lt $PHP_VERSION)) {
@@ -93,9 +96,10 @@ function enviromentTest() {
     Write-Host "La comprobacion de PHP fue un exito. Version de php instalada: " + (php -v) -ForegroundColor Green
     
 }
-enviromentTest
 
-<# 
+PHPenviromentTest
+
+<#
 function setupComposer() {
     Write-Host "Verificando instalacion de composer en el entorno" -ForegroundColor Green
     if (!([bool](Get-Command composer -ErrorAction SilentlyContinue))) {
@@ -104,7 +108,7 @@ function setupComposer() {
             throw "FATAL: Composer no esta instalado en el entorno y el usuario rechazo explicitamente su instalacion"
         }
         else {
-            Read-Host -Prompt "Para instalar composer se necesita que este script haya sido ejecutado con privilegios de administrador"
+            Write-Host "Para instalar composer se necesita que este script haya sido ejecutado con privilegios de administrador" -ForegroundColor Yellow
             if (!($ADMIN_RIGHTS)) {
                 throw "FATAL: Se intento instalar composer sin privilegios de administrador"
             }
@@ -116,32 +120,22 @@ function setupComposer() {
                 }
                 mkdir $INSTALL_COMPOSER_DIRECTORY
                 Set-Location $INSTALL_COMPOSER_DIRECTORY
-                Write-Host "INFO: Directorio a instalar el composer: " + $INSTALL_COMPOSER_DIRECTORY.toString() -ForegroundColor Cyan
-                $expectedSignature = curl https://composer.github.io/installer.sig;
-                curl -o composer-setup.php https://getcomposer.org/installer
-                $file_hash = (Get-FileHash composer-setup.php -Algorithm SHA384 | Select-Object -ExpandProperty Hash).toLower()
-                Write-Host "INFO: SHA384 esperado:" + $expectedSignature.toString() -ForegroundColor Cyan
-                Write-host "INFO: SHA384 recibido:" + $file_hash.toString() -ForegroundColor Cyan
-                if ($file_hash.toString() -ne $expectedSignature) {
-                    throw "FATAL: El hash 384 del archivo de instalacion descargado no coincide con el provisto en el sitio web"
+                php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+                $FileHash = (Get-FileHash composer-setup.php -Algorithm SHA384 | Select-Object Hash).Hash;
+                Write-host ("Hash recibido: ") -ForegroundColor Yellow
+                Write-Host ($FileHash) -ForegroundColor Yellow;
+                Write-Host ("Hash esperado: " + $COMPOSER_SETUP_HASH) -ForegroundColor Yellow
+                if (($FileHash) -ne ($COMPOSER_SETUP_HASH)) {
+                    php -r "unlink('composer-setup.php');"
+                    throw "FATAL: El hash del composer setup descargado no coincide con el especificado en el auotinstaldor";
+                } else {
+                    Write-Host "HASH Verificado exitosamente, instalando composer..." -ForegroundColor Yellow
+                    php composer-setup.php
+                    php -r "unlink('composer-setup.php');"
+                    Write-Host "Composer se ha instalado con exito, refrescando variables de entorno" -ForegroundColor Green
+                    refreshenv
+                    Write-Host "Variables de entorno refrescadas con exito, continuando instalacion..." -ForegroundColor Green
                 }
-                php composer-setup.php
-                Remove-Item composer-setup.php
-                Write-Host "Composer ha sido instalado correctamente, ahora falta fijar su variable de entorno" -ForegroundColor Green
-                Set-Location $REPOSITORY_PATH
-                #Composer ya ha sido instalado, ahora debemos establecer su variable de entorno asi se puede ejecutar el comando desde todos lados
-                if($path.indexOf($(Get-Variable INSTALL_COMPOSER_DIRECTORY -ValueOnly))) {
-                    Write-Host "Parece que la variable de entorno ya ha sido fijada previamente, asi que saltereemos este paso..." -ForegroundColor Green
-                    return;
-                }
-                $env:PATH += ";$(Get-Variable INSTALL_COMPOSER_DIRECTORY -ValueOnly)"
-                #$path = [Environment]::GetEnvironmentVariable("PATH", "Machine")
-                #$path += ";$(Get-Variable INSTALL_COMPOSER_DIRECTORY -ValueOnly)"
-                #$path = [Environment]::SetEnvironmentVariable("PATH", $path, "Machine")
-                Write-Host "Las variables de entorno fueron configuradas correctamente, este script se reinciara"
-                Read-Host -Prompt "Presione cualquier tecla para continuar"
-                RefreshEnv
-                #Set-Location $REPOSITORY_PATH
             }
         }
     }
@@ -152,9 +146,9 @@ function setupComposer() {
         Write-Host "La comprobacion de composer fue un exito. Version de composer instalada: " + (composer --version) -ForegroundColor Green 
     }
 }
-#> 
 
-#setupComposer
+setupComposer #>
+
 
 Write-Host "Verificando instalacion de composer en el entorno" -ForegroundColor Green
 
@@ -169,7 +163,6 @@ else {
 }
 
 
-
 function testSQL() {
     while (!([bool](Get-Process mysqld -ErrorAction SilentlyContinue))) {
         Write-Host "El servicio MySQL/MariaDB no se encuentra en linea, por favor enciendalo" -ForegroundColor Yellow
@@ -182,6 +175,10 @@ testSQL
 
 if ((Read-Host -prompt "Todas las comprobaciones han sido un exito, desea instalar y configurar el repositorio? SI/NO") -ne "SI") {
     throw "FATAL: Todas las comprobaciones fueron un exito pero el usuario rechazo la configuracion del repositorio"
+}
+
+if ((php -r "echo(boolval(extension_loaded('zip')));") -ne 1) {
+    throw "FATAL: La extension zip de PHP no esta activada, por favor activela...";
 }
 
 Write-Host "Configurando sistema" -ForegroundColor Green
@@ -211,6 +208,9 @@ php artisan optimize --no-interaction
 Write-Host "Borrando cache del respositorio..." -ForegroundColor Green
 php artisan cache:clear --no-interaction
 
+Write-Host "Borrando la cache de las rutas de la consola..." -ForegroundColor Green
+php artisan clear-compiled
+
 Write-Host "Borrando cache de vistas del repositorio..." -ForegroundColor Green
 php artisan view:clear --no-interaction
 
@@ -219,6 +219,24 @@ php artisan migrate --no-interaction --force
 
 Write-Host "Ejecutando la siembra de la base de datos del proyecto..." -ForegroundColor Green
 php artisan db:seed
+
+if (Get-Command npm) {
+    Write-Host("Se ha detectado npm instalado, comprobando version...") -ForegroundColor Yellow
+    if ((npm --version) -ge $NPM_VERSION) {
+        Write-Host("La version de npm es compatible, instalando repositorio....") -ForegroundColor Yellow
+        npm install
+        Write-Host("Se ha instalado npm correctamente") -ForegroundColor Green
+        Write-Host("Compilando Typescript...") -ForegroundColor Yellow
+        tsc -p tsconfig.json
+        Write-Host("TypeScript compilado exitosamente...") -ForegroundColor Green
+    } else {
+        throw ("La version de NPM es imcompatible...");
+    }
+} else {
+    throw ("No se ha detectado NPM, abortando...");
+}
+
+
 
 Write-Host "Instalacion finalizada, avisa si hubo algun error o sigue sin funcionar" -ForegroundColor Green
 Write-Host "Acordate que el comando para iniciar es php artisan serve" -ForegroundColor Green
