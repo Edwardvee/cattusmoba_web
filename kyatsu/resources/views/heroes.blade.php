@@ -5,7 +5,6 @@
 <link href="css/heroes.css" rel="stylesheet">
 @endsection
 @section("http_body")
-<!-- HONOR A LOS LEALES, LARGA VIDA AL EMPREADOR DE LA HUMANIDAD -->
 
 <body class="ola"> <!-- class ola para bajar el body 120px por el navbar-->
   
