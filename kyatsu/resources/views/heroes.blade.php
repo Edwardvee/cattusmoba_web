@@ -5,7 +5,9 @@
 
 @endsection
 @section("http_body")
-@php $heroes = $heroes->toArray(); @endphp
+@php $heroes = $heroes->toArray();
+$heroes_all = $heroes_all->toArray();
+@endphp
 <!-- HONOR A LOS LEALES, LARGA VIDA AL EMPREADOR DE LA HUMANIDAD -->
 
 <body class="ola"> <!-- class ola para bajar el body 120px por el navbar-->
@@ -24,19 +26,17 @@
       </div>
 
      <div class="col-6 pj-container"> <!-- imagenes de los heroes -->
-       <img class="pj" src="{{url('img/melisa.png')}}"> 
+       <img class="pj" src="{{url('img/'.  $heroes['name'] . '.png')}} "> 
      </div>
 
      <div class="col-12 align-self-end niggabackground"> <!--selector de heroes-->
            <button class="heroes" onclick="cambiarImagen('https://media.tenor.com/2kBRRgoejx4AAAAi/league-of-legends.gif', 'Melisa es la bibliotecaria de los caballeros de Favonio de Mondstadt en Kyatsu! y, a pesar de su apariencia sosa, es un ser muy inteligente y una maga con increíble talento que en realidad se cohíbe por su temor al costo del conocimiento','myImage2', 'Holas')"></button>
-           <button class="heroes"></button>
-           <button class="heroes"></button>
-           <button class="heroes"></button>
-           <button class="heroes"></button>
-           <button class="heroes"></button>
-           <button class="heroes"></button>
-           <button class="heroes"></button>
-           <button class="heroes"></button>
+      @php 
+      foreach($heroes_all as $hero_ind){
+        echo "<button class='heroes' onclick='' style='background-image: url(../img/" . $hero_ind['name']  . ".png)'></button>";
+
+      };
+      @endphp
 
      </div> 
 
