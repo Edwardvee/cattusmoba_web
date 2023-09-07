@@ -44,7 +44,7 @@
           <img src="{{url('img/ph-portadaK.jpg')}}" class="cover-image" />
           </div>
           <img src="{{url('img/ph-titleK.png')}}" class="title" />
-          <img src="https://ggayane.github.io/css-experiments/cards/force_mage-character.webp" class="character" />
+          <img src="{{url('img/arquera.png')}}" class="character" />
           </div>
           </a>
       </div>
