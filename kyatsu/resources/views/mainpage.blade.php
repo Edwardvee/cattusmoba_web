@@ -11,12 +11,11 @@
 
 
 
-   <header>
+<header>
         <h1 class="area"> Kyatsu! Arena </h1>
-        <p id="rrandommsg"> ¿Eres digno de tanta accion?</p>
+        <p id="rrandommsg"></p>
         <a class="Bdownload" href="https://tlauncher.org/installer">Jugar ahora</a>
-
-    </header> 
+</header>
 
     <div class="content">
         <div class="row">
