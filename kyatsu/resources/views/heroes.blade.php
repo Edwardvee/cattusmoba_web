@@ -30,10 +30,12 @@ $heroes_all = $heroes_all->toArray();
      </div>
 
      <div class="col-12 align-self-end niggabackground"> <!--selector de heroes-->
-           <button class="heroes" onclick="cambiarImagen('https://media.tenor.com/2kBRRgoejx4AAAAi/league-of-legends.gif', 'Melisa es la bibliotecaria de los caballeros de Favonio de Mondstadt en Kyatsu! y, a pesar de su apariencia sosa, es un ser muy inteligente y una maga con increíble talento que en realidad se cohíbe por su temor al costo del conocimiento','myImage2', 'Holas')"></button>
+        <!-- <button class="heroes" onclick="cambiarImagen('https://media.tenor.com/2kBRRgoejx4AAAAi/league-of-legends.gif', 'Melisa es la bibliotecaria de los caballeros de Favonio de Mondstadt en Kyatsu! y, a pesar de su apariencia sosa, es un ser muy inteligente y una maga con increíble talento que en realidad se cohíbe por su temor al costo del conocimiento','myImage2', 'Holas')"></button>
+-->
       @php 
       foreach($heroes_all as $hero_ind){
-        echo "<button class='heroes' onclick='' style='background-image: url(../img/" . $hero_ind['name']  . ".png)'></button>";
+
+        echo "<a href='" . $hero_ind['name']  . "'><button class='heroes' id='" . $hero_ind['name']  . "' style='background-image: url(../img/" . $hero_ind['name'] ."alt". ".png)'></button></a>";
 
       };
       @endphp
