@@ -1,3 +1,7 @@
+
+.body{
+  margin:0px;
+}
 .ms-header {
   display: flex;
   align-items: center;
@@ -22,8 +26,8 @@
   height: 1.5em;
   overflow: hidden;
   vertical-align: middle;
-  -webkit-mask-image: linear-gradient(transparent, white, white, white, transparent);
-          mask-image: linear-gradient(transparent, white, white, white, transparent);
+ /*  -webkit-mask-image: linear-gradient(transparent, white, white, white, transparent);
+          mask-image: linear-gradient(transparent, white, white, white, transparent); */
   mask-type: luminance;
   mask-mode: alpha;
 }
