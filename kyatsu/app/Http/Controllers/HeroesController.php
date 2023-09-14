@@ -11,7 +11,6 @@ class HeroesController extends Controller{
     public function show(string $heroes): View
     {
         return view('heroes', [
-            'heroes' => Heroes::where('name', $heroes)->firstOrFail(),
             'heroes_all' => Heroes::orderBy('uuid')->get()  
    
         ]);
