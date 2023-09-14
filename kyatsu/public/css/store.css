@@ -1,16 +1,35 @@
-body{
-/*     background-color: blue;
- */}
-.store{
-    font-size: x-large;
-    margin-top: 100px;
-    color: white;
-    background: rgb(129,161,231);
-    background: linear-gradient(180deg, rgba(129,161,231,1) 0%, rgba(183,205,254,1) 63%, rgba(230,230,230,1) 100%, rgba(255,255,255,1) 100%);
+.item{
+ margin-bottom: 1.5em;
+ margin-right: auto;
 }
-.price{
-    background-color: yellow;
+
+.card-body{
+    background-image: url(../img/vbucks.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    filter: brightness(0.9);
+    height: 15em;
 }
-.coin{
-    width: 40%;
+
+.item .btn, .item .btn-primary{
+   opacity: 0%;
+   position: absolute;
+   bottom: 1%;
+   padding: 0.1em;
+}
+.card-body:hover .btn{
+    transition: 0.5s;
+    opacity: 100%;
+    bottom: 20%;
+    padding: 1em;
+ }
+
+.card-title{
+    text-align: center;
+}
+
+.card-text{
+    text-align: center;
+     color: rgb(66, 66, 66);
 }
