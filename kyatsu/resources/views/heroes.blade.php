@@ -6,14 +6,12 @@
 @endsection
 @section("http_body")
 @php 
-
 $heroes_all = $heroes_all->toArray();
 $hero_show = request()->route('name');
 /* for($i = 0; $i < count($heroes_all); $i++)
 { $heroes = array_search('naruto',$heroes_all[$i]); } */
 $heroes = array_search($hero_show, array_column($heroes_all, "name"));
-$heroes = $heroes_all[$heroes]
-
+$heroes = $heroes_all[$heroes];
 @endphp
 <!-- HONOR A LOS LEALES, LARGA VIDA AL EMPREADOR DE LA HUMANIDAD -->
 

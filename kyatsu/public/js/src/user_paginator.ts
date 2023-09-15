@@ -678,7 +678,6 @@ export abstract class TablePaginator extends Paginator {
             ($(document.createElement("select")).append(DateElements)).on("change", (event) => {
                 if (document.getElementsByClassName("alert-container").length == 0) {
                     $(event.currentTarget).parent().append(this.Warnable("Se ha cambiado el selector de busqueda de fechas. Selecciona un rango de fecha nuevo para buscar..."));
-
                 }
             })
             .append 

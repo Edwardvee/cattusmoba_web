@@ -10,17 +10,19 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
   <link href="{{url('css/navbar.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   @yield("http_headers")
 </head>
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="img/empresa.png" width="50" height="50"></img></a>
+      <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="{{url('img/empresa.png')}}" width="50" height="50"></img></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="img/f.png" width="40" height="45"></img></a>
+      <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="{{url('img/f.png')}}" width="40" height="45"></img></a>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item dropdown">
