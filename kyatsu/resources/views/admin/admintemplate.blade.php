@@ -37,7 +37,7 @@
             <a class="nav-link" style="font-size:23px" href="{{ route('heroes','alejandro') }}">Héroes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="font-size:23px" href="javascript:void(0)">Link</a>
+            <a class="nav-link" style="font-size:23px" href="{{ route('admin.admin_users.index') }}">Paginador de usuarios</a>
           </li>
         </ul>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
