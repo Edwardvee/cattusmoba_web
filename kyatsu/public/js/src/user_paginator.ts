@@ -228,7 +228,7 @@ export abstract class Paginator {
             page: 1,
             name: "null",
             method: "name",
-            date_method: "created_at",
+            date_method:     "created_at",
             date_start: moment().subtract(14, "days").format("DD/MM/YYYY") ,
             date_end: moment().format("DD/MM/YYYY"),
             order: OrderBy.DESC,
