@@ -15,7 +15,12 @@ $heroes = array_search($hero_show, array_column($heroes_all, "name"));
 $heroes = $heroes_all[$heroes]
 
 @endphp
-<!-- HONOR A LOS LEALES, LARGA VIDA AL EMPREADOR DE LA HUMANIDAD -->
+
+<script>
+  $(window).on("load", function(){
+    $('#character').addClass('slide-in-right');
+});
+</script>
 
 <body class="ola"> <!-- class ola para bajar el body 120px por el navbar-->
   <div class="container">
@@ -32,7 +37,7 @@ $heroes = $heroes_all[$heroes]
       </div>
 
       <div class="col-6 pj-container"> <!-- imagenes de los heroes -->
-        <img class="pj" src="{{url('img/'.  $heroes['name'] . '.png')}} ">
+        <img id="character" style="opacity: 0;" class="pj" src="{{url('img/'.  $heroes['name'] . '.png')}} ">
       </div>
 
       <div class="col-12 align-self-end niggabackground"> <!--selector de heroes-->
@@ -47,10 +52,39 @@ $heroes = $heroes_all[$heroes]
     </div>
 </body>
 
-<script>
+<style>
+.slide-in-right {
+  opacity: 1;
+	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
 
+@-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+            transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+            transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
 
-</script>
+</style>
 
 
 @endsection("http_body")
