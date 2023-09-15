@@ -71,7 +71,6 @@ interface KyatsuProxyInterface {
 //type getRoute = () => string;
 declare function route(name?: string, params?: object | string): string & { current: () => string };
 
-
 $.ajaxSetup({
     headers: {
         "X-Requested-With": "XMLHttpRequest",
@@ -559,14 +558,20 @@ export abstract class TablePaginator extends Paginator {
      * 
      */
     public cellContentInjector(ThCell: string, callback: any, table?: HTMLTableElement | HTMLElement): void {
+        console.log(ThCell);
+        console.log(callback);
+        console.log(table);
         let tableUsing: HTMLElement = table ?? this.capsulator;
-        let Trow = $($("thead", tableUsing)).get(0);
+        //@ts-ignore
+        window.tableUsing = tableUsing;
+        let Trow = tableUsing.querySelector("table")?.querySelector("thead")?.querySelector("tr");
+        //let Trow = $($("thead", tableUsing)).get(0);
         //let Trow: HTMLElement = tableUsing.querySelector("thead")?.firstChild as HTMLElement;
         let filtered: number;
         if (Trow) {
-            filtered = Array.from(Trow.childNodes).findIndex(element => {
-                element.textContent == ThCell
-            })
+            filtered = Array.from((Trow).childNodes).findIndex((element: any) => {
+                return element.innerHTML === ThCell;
+            });
             if (filtered == -1) {
                 throw new Error("ThCell not found");
             }
@@ -676,7 +681,7 @@ export abstract class TablePaginator extends Paginator {
 
                 }
             })
-            .append
+            .append 
             ($(document.createElement("select")).append(NonDateElements).on("change", (event) => {
                 if (document.getElementsByClassName("alert-container").length == 0) {
                     $(event.currentTarget).parent().append(this.Warnable("Se ha cambiado el selector de busqueda de campos. Ingresa un nuevo termino para buscar..."));
@@ -727,7 +732,16 @@ export abstract class TablePaginator extends Paginator {
         //@ts-ignore
         $(this.capsulator).append(this.buildHTML(response));
     }
-}
+    public UUIDContentInjector(): void {{
+        this.cellContentInjector("uuid",(node: HTMLTableCellElement) => {
+            let UUID: string = node.innerHTML;
+            node.textContent = "";
+            $(node).append($(document.createElement("button")).append($(document.createElement("i")).addClass("bi bi-copy")).addClass("btn btn-primary")
+            .on("click", () => {
+                navigator.clipboard.writeText(UUID);
+            }))
+        })
+    }}}
 
 /*
 

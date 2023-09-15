@@ -27,6 +27,8 @@ class UserManagementController extends Controller
 
     public function index(Request $request)
     {
+        //return view("admin.users");
+        //return view("admin.users");
         if (!$request->Ajax()) {
             return view("admin.users");
         }
@@ -52,7 +54,8 @@ class UserManagementController extends Controller
         }
 
         //DB::enableQueryLog();
-    return User::where($validated["method"], "LIKE", (($validated["name"] == "null")  ? "%" : ("%" . $validated["name"] . "%")))->whereBetween($validated["date_method"], [$validated["date_start"] . " 00:00", $validated["date_end"] . " 23:59"] ) ->orderBy($validated["method"], $validated["order"])->paginate(15, ["*"], "page", $validated["page"]);
+        //User::select
+   return User::where($validated["method"], "LIKE", (($validated["name"] == "null")  ? "%" : ("%" . $validated["name"] . "%")))->whereBetween($validated["date_method"], [$validated["date_start"] . " 00:00", $validated["date_end"] . " 23:59"] ) ->orderBy($validated["method"], $validated["order"])->paginate(15, ["*"], "page", $validated["page"]);
     //return User::whereRaw($validated["method"] . " LIKE " . (($validated["name"] == "null")  ? "'%'" : ("'%" . $validated["name"] . "%'")) . " AND " . $validated["date_method"] . " BETWEEN '" . $validated["date_start"] . " 00:00' " . "AND '" . $validated["date_end"] . " 23:59'")->orderBy($validated["method"], $validated["order"])->toSql(); //paginate(15, ["*"], "page", $validated["page"]);
 
     //dd(DB::getQueryLog());
@@ -77,25 +80,35 @@ class UserManagementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $uuid)
     {
-        //
+        $user = User::FindOrFail($uuid);
+        return view("admin.show_user", ["user" => $user]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $uuid)
     {
-        //
+        $user = User::FindOrFail($uuid);
+        return view("admin.editusers", ["user" => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $uuid)
     {
-        //
+        $user = User::FindOrFail($uuid);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+        ]);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+        return redirect()->route("admin.admin_users.show", ["admin_user" => $uuid]);
     }
 
     /**
