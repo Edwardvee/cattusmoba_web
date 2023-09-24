@@ -4,6 +4,7 @@ declare function route(name?: string, params?: object | string): string & { curr
 
 import { TablePaginator } from "./user_paginator.js";
 export class AdministrablePaginator extends TablePaginator {
+    public MayBePaginable: boolean = true;
     public routeUniqueIdentifier: string = "A";
     public routeGenerator: string = "admin.admin_users.index";
     public constructor(capsulator? :string) {
@@ -11,7 +12,7 @@ export class AdministrablePaginator extends TablePaginator {
         $(this.capsulator).on("DOMNodeInserted", (event) => {
             if ($(event.target).is("table") && (this.responseXHR?.data.length != 0))  {
                 this.BannableContentInjector();
-                this.UUIDContentInjector();
+             //   this.UUIDContentInjector();
             }
         });
     }

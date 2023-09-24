@@ -65,8 +65,8 @@ Route::get("/SessionInfo", function (Request $request) {
   return $request->session()->all();
 });
 
-Route::get("/heroes/{name?}", [HeroesController::class, 'show'])->name("heroes");
-
+//Route::get("/heroes/{name?}", [HeroesController::class, 'show'])->name("heroes");
+Route::get("/heroes", HeroesController::class)->name("heroes");
 
 Route::get("/dasomnya", function () {
   return view("dasomnya");

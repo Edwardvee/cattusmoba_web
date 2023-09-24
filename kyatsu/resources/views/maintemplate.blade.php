@@ -5,19 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @routes(url("ziggy/frontend.js"))
-  <script id="http_data_paginator" type="application/json">
-    <?php echo (json_encode(["name" => "A", "page" => 1])); ?>
-  </script>
-  <script id="route_generator_paginator">
-    getRoute = (function($name, $page) {
-      return route("user", {
-        name: $name,
-        page: $page
-      }, { middleware: 'api' });
-    });
-  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="{{url('js/user_paginator.js')}}" autorun="false"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
@@ -47,7 +35,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="font-size:20px" href="{{route('heroes', 'alejandro')}}">Héroes</a>
+            <a class="nav-link" style="font-size:20px" href="{{route('heroes')}}">Héroes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" style="font-size:20px" href="{{route('store')}}">Tienda</a>

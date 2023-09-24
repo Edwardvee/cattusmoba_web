@@ -32,7 +32,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="font-size:23px" href="{{ route('heroes','alejandro') }}">Héroes</a>
+            <a class="nav-link" style="font-size:23px" href="{{ route('heroes') }}">Héroes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" style="font-size:23px" href="javascript:void(0)">Link</a>
