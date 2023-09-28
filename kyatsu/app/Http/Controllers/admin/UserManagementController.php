@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Enums\OrderBy;
 use Illuminate\Validation\Rules\Enum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ValidationRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -28,37 +28,21 @@ class UserManagementController extends Controller
     public function index(Request $request)
     {
         //return view("admin.users");
-        //return view("admin.users");
         if (!$request->Ajax()) {
-            return view("admin.users");
+               return view("admin.users");
         }
-       // dd($request->all());
-        $validator = Validator::make($request->all(), [
-            'name' => ["required", "string", "max:16"],
-            "page" => ["required", "integer"],
-            //"method" => ["required", "string", new ColumnExists((new User)->getTable())],
-            "method" => ["required", "string", null],
-            "date_method" => ["required", "string", null],
-            "date_start" => ["required", "date_format:d/m/Y"],
-            "date_end" => ["required", "date_format:d/m/Y"],
-            "order" => ["required", new Enum(OrderBy::class)]
-        ]);
-        if ($validator->fails()) {
-            throw new \Illuminate\Validation\ValidationException($validator);
-        }
-        $validated = $validator->validated();
+        $customRequest = app()->makeWith(ValidationRequest::class, ['Model' => new User()]);
+        $customRequest->merge($request->all());
+        $validated = $customRequest->validated();
         foreach($validated as $key => $string) {
             if (Carbon::hasFormat($string, "d/m/Y")) {
                 $validated[$key] = Carbon::createFromFormat("d/m/Y", $string)->toDateString();
             }
-        }
+        }  
+     // dd($validated);
 
-        //DB::enableQueryLog();
-        //User::select
    return User::where($validated["method"], "LIKE", (($validated["name"] == "null")  ? "%" : ("%" . $validated["name"] . "%")))->whereBetween($validated["date_method"], [$validated["date_start"] . " 00:00", $validated["date_end"] . " 23:59"] ) ->orderBy($validated["method"], $validated["order"])->paginate(15, ["*"], "page", $validated["page"]);
     //return User::whereRaw($validated["method"] . " LIKE " . (($validated["name"] == "null")  ? "'%'" : ("'%" . $validated["name"] . "%'")) . " AND " . $validated["date_method"] . " BETWEEN '" . $validated["date_start"] . " 00:00' " . "AND '" . $validated["date_end"] . " 23:59'")->orderBy($validated["method"], $validated["order"])->toSql(); //paginate(15, ["*"], "page", $validated["page"]);
-
-    //dd(DB::getQueryLog());
     }
 
     /**

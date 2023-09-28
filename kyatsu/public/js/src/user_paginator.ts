@@ -189,12 +189,12 @@ export abstract class Paginator {
     public abstract routeGenerator: string;
     //Unique result Route By UUID
     public abstract routeUniqueIdentifier: string;
-    public MayBePaginable: boolean = true;
+    public abstract MayBePaginable: boolean;
     public applyTimeout: boolean = true;
     //@ts-ignore
     private makeXHRTimeout: any;
     private makeXHRTimeoutMilliseconds: number = 500;
-    public maxSearchLength: number = 16;
+    public maxSearchLength: number = 36;
     public responseXHR?: PaginatorResponseInterface;
     public constructor(capsulator: string) {
         let getter = document.getElementById(capsulator);
@@ -219,16 +219,24 @@ export abstract class Paginator {
      * @returns string URL to perform the XHR Request
      */
     public getRoute(object: KyatsuProxyInterface): string {
-        return route(this.routeGenerator, object);
+       // return route(this.routeGenerator, object)
+       return route(this.routeGenerator, object);
     }
-
+    public getIMGRoute(FullPath: boolean): string {
+        if (FullPath) {
+            return (window.location.protocol) + "://" + (window.location.hostname) + ":" + (window.location.port) + "/img/";
+        } else {
+            return "/img/";
+        }
+       // return (window.location.protocol) + "://" + (window.location.hostname) + ":" + (window.location.port) + "/img/";
+    }
     public defaultProxy(defaultParameters: boolean = false): KyatsuProxyInterface {
         let CurrentURL: URLSearchParams = new URLSearchParams(window.location.search);
         let JSON: KyatsuProxyInterface = {
             page: 1,
             name: "null",
             method: "name",
-            date_method:     "created_at",
+            date_method: "created_at",
             date_start: moment().subtract(14, "days").format("DD/MM/YYYY") ,
             date_end: moment().format("DD/MM/YYYY"),
             order: OrderBy.DESC,
@@ -296,19 +304,15 @@ export abstract class Paginator {
                 json: "application/json"
             },
             url: this.getRoute(object),
-            /*url: this.getRoute({
-                name: $name,
-                page: $page,
-                order: $order as OrderBy,
-                date_start: $date_start,
-                date_end: $date_end,
-                date_method: $date_method,
-                method: $method
-            }),*/
-            //getRoute($name, $page, $order, $method),
             success: (response: PaginatorResponseInterface) => {
                 this.responseXHR = response;
-                this.xhrSuccess(response);
+                if (response["data"].length == 0) {
+                    //@ts-ignore
+                    $(this.capsulator).append(this.buildHTMLEmpty());
+                    return;
+                } else {
+                    this.xhrSuccess(response);
+                }
             },
             statusCode: {
                 429: () => {
@@ -373,7 +377,7 @@ export abstract class Paginator {
                     }
                     if (
                         (prop === "page" && isNaN(parseInt(value))) ||
-                        (prop === "name" && (value.length > 16)) ||
+                        (prop === "name" && (value.length > this.maxSearchLength)) ||
                         (prop === "order" && !["ASC", "DESC"].includes(value))
                     ) {
                         console.groupCollapsed("Depuracion del error de validacion");
@@ -392,8 +396,7 @@ export abstract class Paginator {
                         console.groupEnd();
                         throw new Error("FATAL: Lo provisto en el paginador no son datos validos");
                     }
-                    // document.getElementById("paginator")!.innerHTML = "";
-                    Object.assign(obj, { [prop]: value });
+                    Object.assign(obj, { [prop]: encodeURIComponent(value) });
                     this.makeXHRAwait({
                         page: obj["page"],
                         name: obj["name"],
@@ -403,8 +406,6 @@ export abstract class Paginator {
                         date_end: obj["date_end"],
                         order: obj["order"]
                     } as KyatsuProxyInterface);
-                    //this.makeXHRAwait(obj["name"], obj["page"], obj["order"], obj["method"]);
-                    //this.makeXHR(obj["name"], obj["page"], obj["order"], obj["method"]);
                     console.log(obj);
                     if (this.ProxyMayChangeURL == true) {
                         window.history.replaceState(
@@ -415,6 +416,9 @@ export abstract class Paginator {
                     }
                     return true;
                 },
+               /* get: (target, property) => {
+                    return encodeURIComponent(target[property]);
+                }*/
             }
         );
 
@@ -428,6 +432,7 @@ export abstract class Paginator {
             $(this.capsulator).append(this.buildHTMLPaginable(response));
         }
     }
+    public abstract buildHTMLEmpty(): HTMLTableElement | undefined
     /*function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -693,11 +698,6 @@ export abstract class TablePaginator extends Paginator {
         ($(document.createElement("img")).attr("alt", "alert").attr("src", "URLDescriptor").addClass("alert-icon"))
         .append($(document.createElement("div")).addClass("message").html(message)).get(0)!;
     }
-    public hiddenCell(element: HTMLElement, index: number): void {
-        console.log("has been injected");
-        console.log(element);
-        console.log(index);
-    }
     public buildHTMLPaginable(response: PaginatorResponseInterface): HTMLDivElement {
         return $(document.createElement("div")).append($(document.createElement("p")).html(
             "Mostrando pagina " + String(response["current_page"]) + " (" +
@@ -716,11 +716,7 @@ export abstract class TablePaginator extends Paginator {
     }
     public override xhrSuccess(response: PaginatorResponseInterface): void {
         $(this.capsulator).empty();
-        if (response["data"].length == 0) {
-            //@ts-ignore
-            $(this.capsulator).append(this.buildHTMLEmpty());
-            return;
-        }            this.InputCapsulator = this.SortableNames(response);
+        this.InputCapsulator = this.SortableNames(response);
         $(this.InputCapsulator).append(this.HTMLInputConstructor());
         $(this.InputCapsulator).append(this.HTMLDateInputConstructor());            //this.InputCapsulator = this.HTMLInputConstructor();
         $(this.capsulator).append(this.InputCapsulator);

@@ -10,22 +10,28 @@ use Illuminate\Contracts\Validation\ValidationRule;
 class ColumnExists implements ValidationRule
 {
     public bool $validationStatus;
-    public string $tableName;
+    protected string $tableName;
+    protected string $isDatable;
     /**
      * Run the validation rule.
      *
      * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
-    public function __construct($tableName) {
-        $this->tableName = $tableName;
+    public function __construct($model, $date) {
+        $this->tableName = $model->getTable();
+        $this->isDatable = $date;
     }
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $this->validationStatus = Schema::hasColumn($this->tableName, $value) ? true : false;
+        $this->validationStatus = Schema::hasColumn($this->tableName, $value);
+        if ($this->isDatable) {
+            $schema = Schema::getColumnType($this->tableName, $value);
+            $this->validationStatus = ($schema === 'datetime' || $schema === 'timestamp' || $schema === "date");
+        }
     }
-    public function passes() {
+    /*public function passes() {
         return false;
-    }
+    }*/
     /*public function __toString() {
         return "No existe el metodo :value de la tabla " . $this->tableName;
     }*/
