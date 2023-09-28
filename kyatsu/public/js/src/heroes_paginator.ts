@@ -5,13 +5,24 @@ declare function route(name?: string, params?: object | string): string & { curr
 import { DateOrString } from "daterangepicker";
 import { Paginator } from "./user_paginator.js";
 
+var moment: any
+if ((typeof window.moment) === "undefined") {
+    import("moment").then(Imported => {
+    moment = Imported;
+    });
+} else {
+    moment = window.moment; 
+}
+
 interface HeroesPaginatorData {
     uuid: string,
     name: string,
     description: string,
     created_at: DateOrString,
     updated_at: DateOrString,
-    deleted_at?: DateOrString
+    deleted_at?: DateOrString,
+    voice_actor: string,
+    birthdate: DateOrString
 }
 
 interface HeroesPaginatorResponseInterface {
@@ -47,16 +58,16 @@ export class HeroesPaginator extends Paginator {
         let FoundHero: HeroesPaginatorData = Array.from(response["data"]).filter((element: HeroesPaginatorData) => {
             return ((this.information.name === "null") || ((element["uuid"] === this.information.name)));
         })[0];
-        return $(document.createElement("div")).addClass("row").append( 
+        return $(document.createElement("div")).addClass("row").attr("id", "PaginableHere").append( 
             $(document.createElement("div")).addClass("col").append(
                 $(document.createElement("h1")).attr("id", "heroname").addClass("sub-estetico").html(FoundHero["name"])
             ).append(
                 $(document.createElement("div")).addClass("row").append(
-                    $(document.createElement("div")).addClass("col-8 darkbg slide-in-center").attr("style", "opacity: 0;").attr("id", "description")
+                    $(document.createElement("div")).addClass("col-8 darkbg slide-in-center").attr("style", "opacity: 1;").attr("id", "description")
         .append(
-            $(document.createElement("h3")).html("Actriz de voz: Desconocido")
+            $(document.createElement("h3")).html("Actriz de voz: " + FoundHero["voice_actor"])
         ).append(
-            $(document.createElement("h6")).html("Cumpleaños: NULL")
+            $(document.createElement("h6")).html("Cumpleaños: " + moment(FoundHero["birthdate"]).format("DD/MM/YYYY"))
         ).append(
             $(document.createElement("p")).addClass("message").html(FoundHero["description"])
         )
@@ -64,8 +75,8 @@ export class HeroesPaginator extends Paginator {
         append(
             $(document.createElement("div")).addClass("col-6 pj-container").
         append(
-            $(document.createElement("img")).attr("id", "character").attr("style", "opacity: 0;").addClass("pj slide-in-right")
-        .attr("src", this.getIMGRoute() + FoundHero["uuid"] + ".png")))
+            $(document.createElement("img")).attr("id", "character").attr("style", "opacity: 1;").addClass("pj slide-in-right")
+        .attr("src", this.getIMGRoute(false) + "heros_img/" +  FoundHero["uuid"] + ".png")))
         .get(0)!;
         
         /*<div class="col"> <!-- descripcion de los heroes -->
@@ -85,8 +96,14 @@ export class HeroesPaginator extends Paginator {
         append((): HTMLAnchorElement[] => {
             var answer: HTMLAnchorElement[] = [];
             Object.entries(response["data"]).forEach((element: any) => {
-                answer.push($(document.createElement("a")).attr("href", element['name']).append($(document.createElement("button")).addClass("heroes").attr("style",
-                "background-image: url(" + this.getIMGRoute() + element["name"] + "alt.png"
+                answer.push($(document.createElement("a"))./*attr("href", element[1]['name']).*/on("click", () => {
+                    console.log(element[1]["uuid"]);
+                    Object.assign(this.information, {
+                        method: "uuid",
+                        name: element[1]["uuid"]
+                    });
+                }).append($(document.createElement("button")).addClass("heroes").attr("style",
+                "background-image: url(" + this.getIMGRoute(false) + "heros_img/" + element[1]["uuid"] + "_alt.png"
                 )).get(0)!);
             });
             return answer;
@@ -100,9 +117,15 @@ export class HeroesPaginator extends Paginator {
         //@ts-ignore
         $(this.capsulator).append(this.buildHTML(response));
         if (this.MayBePaginable) {
-            $(this.capsulator.getElementsByClassName("paginable-ts")[0]).append(
-                $(this.buildHTMLPaginable(response))
+            //@ts-ignore
+            $((this.capsulator).firstChild).append(this.buildHTMLPaginable(response));
+          /*  $(this.capsulator.getElementsByTagName("row")).filter(
+                $(window.HEROES_PAGINATOR.capsulator.firstChild).append(window.HEROES_PAGINATOR.buildHTMLPaginable(window.HEROES_PAGINATOR.responseXHR))
+
             )
+            $(this.capsulator.getElementsByClassName("")[0]).append(
+                $(this.buildHTMLPaginable(response))
+            )*/
         }
     }
     /**

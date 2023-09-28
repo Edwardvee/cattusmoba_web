@@ -15,31 +15,36 @@ class HeroesSeeder extends Seeder
     public function run(): void
     {
         Heroes::create([
-            "name" => "Heroe 1",
+            "uuid" => "3f7b5693-bcdd-4bdb-b02f-47931a77715a",
+            "name" => "Nala",
             "voice_actor" => "Ivan Qurioga",
             "description" => "Heroe description 1",
             "birthdate" => "2023-08-09 23:55",
         ]);
         Heroes::create([
-            "name" => "Heroe 2",
+            "uuid" => "795773be-63a5-4d48-83d1-fb6a2a744ce6",
+            "name" => "Arquera",
             "voice_actor" => "Ivan Qurioga",
             "description" => "Heroe description 1",
             "birthdate" => "2023-08-09 23:55",
         ]);
         Heroes::create([
+            "uuid" => "81187dfb-317e-423f-b52d-d948619714b4",
             "name" => "Heroe 3",
             "voice_actor" => "Ivan Qurioga",
             "description" => "Heroe description 1",
             "birthdate" => "2023-08-09 23:55",
         ]);
         Heroes::create([
-            "name" => "Heroe 4",
+            "uuid" => "d3396877-948f-4f10-bfa1-13bb07171be2",
+            "name" => "Nagatoro",
             "voice_actor" => "Ivan Qurioga",
             "description" => "Heroe description 1",
             "birthdate" => "2023-08-09 23:55",
         ]);
         Heroes::create([
-            "name" => "Heroe 5",
+            "uuid" => "90b2b001-072d-4e42-8bb7-4a0346c4834c",
+            "name" => "Rem",
             "voice_actor" => "Ivan Qurioga",
             "description" => "Heroe description 1",
             "birthdate" => "2023-08-09 23:55",

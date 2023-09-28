@@ -194,7 +194,7 @@ export abstract class Paginator {
     //@ts-ignore
     private makeXHRTimeout: any;
     private makeXHRTimeoutMilliseconds: number = 500;
-    public maxSearchLength: number = 16;
+    public maxSearchLength: number = 36;
     public responseXHR?: PaginatorResponseInterface;
     public constructor(capsulator: string) {
         let getter = document.getElementById(capsulator);
@@ -222,8 +222,13 @@ export abstract class Paginator {
        // return route(this.routeGenerator, object)
        return route(this.routeGenerator, object);
     }
-    public getIMGRoute(): string {
-        return (window.location.protocol) + "://" + (window.location.hostname) + ":" + (window.location.port) + "/img/";
+    public getIMGRoute(FullPath: boolean): string {
+        if (FullPath) {
+            return (window.location.protocol) + "://" + (window.location.hostname) + ":" + (window.location.port) + "/img/";
+        } else {
+            return "/img/";
+        }
+       // return (window.location.protocol) + "://" + (window.location.hostname) + ":" + (window.location.port) + "/img/";
     }
     public defaultProxy(defaultParameters: boolean = false): KyatsuProxyInterface {
         let CurrentURL: URLSearchParams = new URLSearchParams(window.location.search);
@@ -372,7 +377,7 @@ export abstract class Paginator {
                     }
                     if (
                         (prop === "page" && isNaN(parseInt(value))) ||
-                        (prop === "name" && (value.length > 16)) ||
+                        (prop === "name" && (value.length > this.maxSearchLength)) ||
                         (prop === "order" && !["ASC", "DESC"].includes(value))
                     ) {
                         console.groupCollapsed("Depuracion del error de validacion");

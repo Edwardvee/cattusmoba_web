@@ -32,7 +32,7 @@ class ValidationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:16'],
+            'name' => ['required', 'string', 'max:36'],
             'page' => ['required', 'integer'],
             'method' => [
                 'required',
