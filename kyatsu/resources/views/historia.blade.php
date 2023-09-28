@@ -158,7 +158,6 @@
     function updateIcons() {
     var scrollTop = $(window).scrollTop();
     var windowHeight = $(window).height();
-    console.log("lol");
     // Calcula las posiciones de las secciones en la página
     var onePosition = $("#one").offset().top;
     var twoPosition = $("#two").offset().top;
@@ -177,7 +176,7 @@
     }
 }
 
-// Ejecuta la función cada 350 milisegundos
-setInterval(updateIcons, 350);
+// Ejecuta la función cada 10 milisegundos mo testear
+setInterval(updateIcons, 10);
 </script>
 @endsection("http_body")
