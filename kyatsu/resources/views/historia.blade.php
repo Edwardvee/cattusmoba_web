@@ -155,31 +155,29 @@
         poop.classList.remove("bi-arrow-right-circle");
         poop.classList.add("bi-arrow-right-circle-fill");
     }
+    function updateIcons() {
+    var scrollTop = $(window).scrollTop();
+    var windowHeight = $(window).height();
+    console.log("lol");
+    // Calcula las posiciones de las secciones en la página
+    var onePosition = $("#one").offset().top;
+    var twoPosition = $("#two").offset().top;
+    var threePosition = $("#three").offset().top;
+    var fourPosition = $("#four").offset().top;
 
-    $(document).ready(function() {
-        var two = $("#two").position();
-        var three = $("#three").position();
-        var four = $("#four").position();
-        $(window).on("scroll", function() {
-            var pointer = $("#pointer").scrollTop();
-            console.log(pointer);
-            switch (true) {
-                case (pointer > 0 && pointer < 607):
-                    iconChange("L1");  
-                    break;
-                case (pointer > 607 && pointer < 1607):
-                    iconChange("L2");
-                    break;
-                case (pointer > 1607 && pointer < 2608):
-                    iconChange("L3");
-                    break;
-                case (pointer > 2608):
-                    iconChange("L4");
-                    break;
-                default:
-                    break;
-            }
-        });
-    });
+    // Establece clases en los elementos de la guía según la posición de desplazamiento
+    if (scrollTop >= onePosition && scrollTop < twoPosition) {
+        iconChange("L1");
+    } else if (scrollTop >= twoPosition && scrollTop < threePosition) {
+        iconChange("L2");
+    } else if (scrollTop >= threePosition && scrollTop < fourPosition) {
+        iconChange("L3");
+    } else if (scrollTop >= fourPosition) {
+        iconChange("L4");
+    }
+}
+
+// Ejecuta la función cada 350 milisegundos
+setInterval(updateIcons, 350);
 </script>
 @endsection("http_body")

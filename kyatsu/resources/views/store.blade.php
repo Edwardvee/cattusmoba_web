@@ -218,8 +218,8 @@ document.addEventListener("DOMContentLoaded", function() {
     $('.mercadopago-button').css('width', '100%');
     $('.mercadopago-button').css('color', 'black'); 
     $('.mercadopago-button').css('content', "PAGAR CON MERCADO PAGO");
-    var boton = document.getElementsByClassName("mercadopago-button");
-    boton.innerHTML = "Potente";
+    var boton = document.getElementsByClassName("btnn col");
+    boton.value = "Potente";
     let currentProduct;
 
     function abrirVentanaPago(preferenceId) {
@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     data: {producto: currentProduct},
 
                     success: function(res){
-                        alert("Compra concretada con éxito");
+                        alert("Compra realizada con éxito");
                     },
                     
                     error: function(res){
