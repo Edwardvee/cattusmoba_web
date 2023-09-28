@@ -699,3 +699,7 @@ a{
     user-select:none;
     cursor: pointer;
 }
+
+.mp{
+   padding-left: 100%;
+}
