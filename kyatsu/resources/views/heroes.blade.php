@@ -29,8 +29,14 @@
 
 @endsection
 @section("http_body")
-
-<!-- HONOR A LOS LEALES, LARGA VIDA AL EMPREADOR DE LA HUMANIDAD -->
+<script>
+  $(window).on("load", function(){
+    $('#character').addClass('slide-in-right');
+});
+$(window).on("load", function(){
+    $('#description').addClass('scale-in-center');
+});
+</script>
 
 <body class="ola"> <!-- class ola para bajar el body 120px por el navbar-->
   <div class="container" id="paginator_heroes">
@@ -38,32 +44,22 @@
       <div class="col"> <!-- descripcion de los heroes -->
         <h1 id="heroname" class="sub-estetico">Buscando heroes....</h1>
         <div class="row">
-          <div class="col-8 niggabackground">
-            <h3>Actriz de voz: Buscando...</h3>
+          <div id="description"  style="opacity: 0;" class="col-8 darkbg">
+            <h4>Actriz de voz: {{ $heroes['voice_actor'] }}</h4>
             <h6>Cumpleaños: Buscando...</h6>
-            <p class="message">Cargando mensaje...</p>
+            <p class="message">{{ $heroes['description'] }}</p>
           </div>
         </div>
       </div>
 
       <div class="col-6 pj-container"> <!-- imagenes de los heroes -->
-        <img class="pj" src="url('img/'.  $heroes['name'] . '.png') ">
+        <img id="character" style="opacity: 0;" class="pj" src="{{url('img/'.  $heroes['name'] . '.png')}} ">
       </div>
 
-      <div class="col-12 align-self-end niggabackground"> <!--selector de heroes-->
-        <!-- <button class="heroes" onclick="cambiarImagen('https://media.tenor.com/2kBRRgoejx4AAAAi/league-of-legends.gif', 'Melisa es la bibliotecaria de los caballeros de Favonio de Mondstadt en Kyatsu! y, a pesar de su apariencia sosa, es un ser muy inteligente y una maga con increíble talento que en realidad se cohíbe por su temor al costo del conocimiento','myImage2', 'Holas')"></button>
--->
-
-        "<a href='hero name'><button class='heroes' id='" . $hero_ind[name] . "' style='background-image: url(../img/hero_ind[name])'></button></a> </div>
-
+      <div class="col-12 align-self-end darkbg"> <!--selector de heroes-->
+        "<a href='" . $hero_ind[name] . "'><button class='heroes' id='" . $hero_ind[name] . "' style='background-image: url(../img/heronamealt.png)'></button></a> </div>
       </div>
     </div>
 </body>
-
-<script>
-
-
-</script>
-
 
 @endsection

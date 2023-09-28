@@ -27,7 +27,7 @@ export class AdministrablePaginator extends TablePaginator {
             //Aca creamos los th
             var answer: HTMLTableCellElement[] = [];
             answer.push($(document.createElement("th")).html("Ver informacion").get(0)!);
-            answer.push($(document.createElement("th")).html("Borrar").get(0)!);
+      //      answer.push($(document.createElement("th")).html("Borrar").get(0)!);
             return answer;
         })();
     }
@@ -36,8 +36,10 @@ export class AdministrablePaginator extends TablePaginator {
             //Aca creamos los th
             console.log(uuid);
             var answer: HTMLTableCellElement[] = [];
-            answer.push($(document.createElement("td")).append($(document.createElement("a")).attr("href", route("admin.admin_users.show", {admin_user: uuid})).html("Editar usuario")).get(0)!);
-            answer.push($(document.createElement("td")).append($(document.createElement("a")).attr("href", "https://example.com")).html("Borrar usuario").get(0)!);
+       //     answer.push($(document.createElement("td")).append($(document.createElement("a"))))
+            answer.push($(document.createElement("td")).append($(document.createElement("a")).addClass("btn btn-success").attr("href", route("admin.admin_users.show", {admin_user: uuid})).append($(document.createElement("i")).addClass("bi bi-pencil-square")
+            )).get(0)!);
+      //      answer.push($(document.createElement("td")).append($(document.createElement("a")).attr("href", "https://example.com")).html("Borrar usuario").get(0)!);
             return answer;
         })(uuid);
     }

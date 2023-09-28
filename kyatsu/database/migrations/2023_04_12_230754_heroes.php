@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create("heroes", function (Blueprint $table) {
             $table->uuid();
             $table->string("name", 32)->unique();
-        //    $table->string("actress", 32);
+            $table->string("voice_actor");
             $table->text("description");
-        //    $table->datetime("birthdate");
+            $table->datetime("birthdate");
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

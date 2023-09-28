@@ -4,7 +4,6 @@
 }
 
 .card-body{
-    background-image: url(../img/vbucks.png);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -18,12 +17,7 @@
    bottom: 1%;
    padding: 0.1em;
 }
-.card-body:hover .btn{
-    transition: 0.5s;
-    opacity: 100%;
-    bottom: 20%;
-    padding: 1em;
- }
+
 
 .card-title{
     text-align: center;
@@ -33,3 +27,16 @@
     text-align: center;
      color: rgb(66, 66, 66);
 }
+
+.text{
+
+}
+
+.desvanecer:hover {
+    opacity: 0.07;
+    -webkit-transition: opacity 500ms;
+    -moz-transition: opacity 500ms;
+    -o-transition: opacity 500ms;
+    -ms-transition: opacity 500ms;
+    transition: opacity 500ms;
+  }
