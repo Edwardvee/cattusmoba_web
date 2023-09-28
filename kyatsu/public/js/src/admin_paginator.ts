@@ -12,7 +12,7 @@ export class AdministrablePaginator extends TablePaginator {
         $(this.capsulator).on("DOMNodeInserted", (event) => {
             if ($(event.target).is("table") && (this.responseXHR?.data.length != 0))  {
                 this.BannableContentInjector();
-             //   this.UUIDContentInjector();
+                this.UUIDContentInjector();
             }
         });
     }
