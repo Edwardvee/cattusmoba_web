@@ -1,133 +1,97 @@
-  @extends("maintemplate")
+@extends("maintemplate")
 
-  @section("http_body")
-  <head>
-    <title>Kyatsu - Tienda</title>
-    <link rel="stylesheet" href="{{url('css/store.css')}}">
-  </head>
-  <body> 
-<div class="megaContainer row">
-  <div class="container col-3">
-    <div class = card>
-      <div class = image>
-        <img href = "#" src={{url('img/moneda1.png')}}> 
-      </div>
-      <div class = content>
-        <h3>1 Nicois</h3>
-        <p>No seas rata y compra mas de 1</p>
-      </div>
-    </div>    
-    </div>
+@section("http_body")
 
-    <div class="container col-3">
-    <div class = card>
-      <div class = image>
-        <img href = "#" src={{url('img/moneda1.png')}}> 
+<head>
+  <title>Kyatsu - Tienda</title>
+  <link rel="stylesheet" href="{{url('css/store.css')}}">
+</head>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="container este">
+        <div class="card">
+          <div class="imgBx">
+            <img src={{url('img/ivangor.png')}}>
+          </div>
+          <div class="contentBx">
+            <h2>500 Quirocoins</h2>
+            <div class="size">
+              <p class="text-light">No seas rata y compra mas de 500</p>
+            </div>
+            <div class="color">
+              <p class="text-light">USD 15.99</p>
+            </div>
+            <a href="#">Comprar</a>
+          </div>
+        </div>
       </div>
-      <div class = content>
-        <h3>50 Nicoins</h3>
-       <p>50 Nicoins (no confunindirse con 50 sombras de grey)</p>  
-      </div>
-    </div>    
-    </div>
-    <div class="container col-3">
-    <div class = card>
-      <div class = image>
-        <img href = "#" src={{url('img/moneda1.png')}}> 
-      </div>
-      <div class = content>
-        <h3>500+2 Nicoins<</h3>
-        <p>te regalamos 2 Nicoins para que sepas que sos el 2 en todo</p>
-    </div>
-    </div>    
     </div>
 
- <div class = "container col-3">
-    <div class = card>
-      <div class = image>
-        <img href = "#" src={{url('img/moneda1.png')}}> 
+    <div class="col-md-3">
+      <div class="container est">
+        <div class="card">
+          <div class="imgBx">
+            <img src={{url('img/ivangor.png')}}>
+          </div>
+          <div class="contentBx">
+            <h2>1000 Quirocoins</h2>
+              <div class="size">
+                <p class="text-light">puto el que no compra</p>
+              </div>
+              <div class="color">
+              <p class="text-light">USD 24.59</p>
+            </div>
+            <a href="#">Comprar</a>
+          </div>
+        </div>
       </div>
-      <div class = content>
-        <h3>>5E+1321 Nicoins</h3>
-        <p>Ahora el Nicoin vale menos que el peso pero mas que el dolar</p>
+    </div>
+
+    <div class="col-md-3">
+      <div class="container es">
+        <div class="card">
+          <div class="imgBx">
+            <img src={{url('img/ivangor.png')}}>
+          </div>
+          <div class="contentBx">
+            <h2>1500 Quirocoins</h2>
+            <div class="size">
+              <p class="text-light">si no compras mas te va a dar colera</p>
+            </div>
+            <div class="color">
+              <p class="text-light">USD 49.99</p>
+            </div>
+            <a href="#">Comprar</a>
+          </div>
+        </div>
       </div>
-    </div>    
+    </div>
+
+    <div class="col-md-3">
+      <div class="container t">
+        <div class="card">
+          <div class="imgBx">
+            <img src={{url('img/ivangor.png')}}>
+          </div>
+          <div class="contentBx">
+            <h2>2500 Quirocoins</h2>
+            <div class="size">
+              <p class="text-light">el Quirocoins vale menos que el peso pero mas que el dolar</p>
+            </div>
+            <div class="color">
+              <p class="text-light">USD 99.99</p>
+            </div>
+            <a href="#">Comprar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
-
-  </div>
-</body>
-
-<style>
-* { 
-  margin : 0;
-  padding: 0;
-  box-sizing : border-box;
-  font-family : "Poppins", sans-serif;
-}
-body {
-  display : flex;
-  align-items : center;
-  justify-content : center;  
-  background-color: #43345d;
-  min-height : 800px;
-}
-
-.container {
-  position : relative;
-  width : 1100px;
-  display : flex;
-  align-items : center;
-  justify-content : center;
-  padding : 30px;  
-}
-
-.container .card {
-  position: relative;
-  max-width : 300px;
-  height : 215px;  
-  background-color : #fff;
-  margin : 30px 10px;
-  padding : 20px 15px;
-  display : flex;
-  flex-direction : column;
-  box-shadow : 0 5px 20px rgba(0,0,0,0.5);
-  transition : 0.3s ease-in-out;
-  border-radius : 15px;
-}
-.container .card:hover {
-  height : 320px;    
-}
-
-.container .card .image {
-  position : relative;
-  width : 260px;
-  height : 260px;
-  top : -40%;
-  left: 8px;
-  box-shadow : 0 5px 20px rgba(0,0,0,0.2);
-  z-index : 1;
-}
-
-.container .card .image img {
-  max-width : 100%;
-  border-radius : 15px;
-}
-
-.container .card .content {
-  position : relative;
-  top : -140px;
-  padding : 10px 15px;
-  color : #111;
-  text-align : center;
-  visibility : hidden;
-  opacity : 0;
-  transition : 0.3s ease-in-out;
-}
-
-.container .card:hover .content {
-   margin-top : 30px;
-   visibility : visible;
-   opacity : 1;
-   transition-delay: 0.2s;
-}
-</style>
+</div>
