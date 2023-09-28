@@ -45,15 +45,15 @@ $(window).on("load", function(){
         <h1 id="heroname" class="sub-estetico">Buscando heroes....</h1>
         <div class="row">
           <div id="description"  style="opacity: 0;" class="col-8 darkbg">
-            <h4>Actriz de voz: {{ $heroes['voice_actor'] }}</h4>
+            <h4>Actriz de voz: Voice Actor</h4>
             <h6>Cumpleaños: Buscando...</h6>
-            <p class="message">{{ $heroes['description'] }}</p>
+            <p class="message">Descripcion</p>
           </div>
         </div>
       </div>
 
       <div class="col-6 pj-container"> <!-- imagenes de los heroes -->
-        <img id="character" style="opacity: 0;" class="pj" src="{{url('img/'.  $heroes['name'] . '.png')}} ">
+        <img id="character" style="opacity: 0;" class="pj" src="HeroesName.png ">
       </div>
 
       <div class="col-12 align-self-end darkbg"> <!--selector de heroes-->

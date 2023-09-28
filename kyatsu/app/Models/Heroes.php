@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class Heroes extends Model
 {
     use HasUuids;
-
+    protected $primaryKey = "uuid";
+    public $incrementing = false;
     use SoftDeletes;
     protected $table = 'heroes';
     protected $info = [

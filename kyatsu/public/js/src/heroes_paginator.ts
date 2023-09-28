@@ -45,11 +45,14 @@ export class HeroesPaginator extends Paginator {
     }
     public buildHTML(response: HeroesPaginatorResponseInterface): HTMLDivElement {
         let FoundHero: HeroesPaginatorData = Array.from(response["data"]).filter((element: HeroesPaginatorData) => {
-            return (element["uuid"] === this.information.name)
+            return ((this.information.name === "null") || ((element["uuid"] === this.information.name)));
         })[0];
-        return $(document.createElement("div")).addClass("row").append(  $(document.createElement("div")).addClass("col").append(
-            $(document.createElement("h1")).attr("id", "heroname").addClass("sub-estetico").html(FoundHero["name"])
-        ).append($(document.createElement("row")).append($(document.createElement("div")).addClass("col-8 niggabackground")
+        return $(document.createElement("div")).addClass("row").append( 
+            $(document.createElement("div")).addClass("col").append(
+                $(document.createElement("h1")).attr("id", "heroname").addClass("sub-estetico").html(FoundHero["name"])
+            ).append(
+                $(document.createElement("div")).addClass("row").append(
+                    $(document.createElement("div")).addClass("col-8 darkbg slide-in-center").attr("style", "opacity: 0;").attr("id", "description")
         .append(
             $(document.createElement("h3")).html("Actriz de voz: Desconocido")
         ).append(
@@ -58,9 +61,11 @@ export class HeroesPaginator extends Paginator {
             $(document.createElement("p")).addClass("message").html(FoundHero["description"])
         )
         ))).
-        append($(document.createElement("div")).addClass("col-6 pj-container paginable-ts")).
-        append($(document.createElement("img")).addClass("pj")
-        .attr("src", this.getIMGRoute() + FoundHero["name"]) + ".png")
+        append(
+            $(document.createElement("div")).addClass("col-6 pj-container").
+        append(
+            $(document.createElement("img")).attr("id", "character").attr("style", "opacity: 0;").addClass("pj slide-in-right")
+        .attr("src", this.getIMGRoute() + FoundHero["uuid"] + ".png")))
         .get(0)!;
         
         /*<div class="col"> <!-- descripcion de los heroes -->
