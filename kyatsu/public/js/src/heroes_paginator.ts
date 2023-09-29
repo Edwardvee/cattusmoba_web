@@ -78,17 +78,6 @@ export class HeroesPaginator extends Paginator {
             $(document.createElement("img")).attr("id", "character").attr("style", "opacity: 1;").addClass("pj slide-in-right")
         .attr("src", this.getIMGRoute(false) + "heros_img/" +  FoundHero["uuid"] + ".png")))
         .get(0)!;
-        
-        /*<div class="col"> <!-- descripcion de los heroes -->
-        <h1 id="heroname" class="sub-estetico">Nombre de Heroe</h1>
-        <div class="row">
-          <div class="col-8 niggabackground">
-            <h3>Actriz de voz: Ivan Quiroga</h3>
-            <h6>Cumpleaños / 04-06</h6>
-            <p class="message">Mensaje</p>
-          </div>
-        </div>
-      </div>*/
     }
     public buildHTMLPaginable(response: HeroesPaginatorResponseInterface): HTMLDivElement {
         return $(document.createElement("div")).addClass("col-12 align-self-end niggabackground").
@@ -96,7 +85,7 @@ export class HeroesPaginator extends Paginator {
         append((): HTMLAnchorElement[] => {
             var answer: HTMLAnchorElement[] = [];
             Object.entries(response["data"]).forEach((element: any) => {
-                answer.push($(document.createElement("a"))./*attr("href", element[1]['name']).*/on("click", () => {
+                answer.push($(document.createElement("a")).on("click", () => {
                     console.log(element[1]["uuid"]);
                     Object.assign(this.information, {
                         method: "uuid",
@@ -110,22 +99,12 @@ export class HeroesPaginator extends Paginator {
 
         }).
         get(0)!
-//echo "<a href='" . $hero_ind['name'] . "'><button class='heroes' id='" . $hero_ind['name'] . "' style='background-image: url(../img/" . $hero_ind['name'] ."alt". ".png)'></button></a>" ; }; @endphp </div>
     }
     public override xhrSuccess(response: HeroesPaginatorResponseInterface): void {
         $(this.capsulator).empty();
-        //@ts-ignore
-        $(this.capsulator).append(this.buildHTML(response));
+        $(<HTMLDivElement>this.capsulator).append(this.buildHTML(response));
         if (this.MayBePaginable) {
-            //@ts-ignore
-            $((this.capsulator).firstChild).append(this.buildHTMLPaginable(response));
-          /*  $(this.capsulator.getElementsByTagName("row")).filter(
-                $(window.HEROES_PAGINATOR.capsulator.firstChild).append(window.HEROES_PAGINATOR.buildHTMLPaginable(window.HEROES_PAGINATOR.responseXHR))
-
-            )
-            $(this.capsulator.getElementsByClassName("")[0]).append(
-                $(this.buildHTMLPaginable(response))
-            )*/
+            $(<HTMLDivElement>(this.capsulator).firstChild).append(this.buildHTMLPaginable(response));
         }
     }
     /**

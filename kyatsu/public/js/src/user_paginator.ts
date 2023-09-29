@@ -12,10 +12,10 @@ import { DateOrString } from "daterangepicker";
 var moment: any
 if ((typeof window.moment) === "undefined") {
     import("moment").then(Imported => {
-    moment = Imported;
+        moment = Imported;
     });
 } else {
-    moment = window.moment; 
+    moment = window.moment;
 }
 
 var Swal: any = [];
@@ -219,8 +219,8 @@ export abstract class Paginator {
      * @returns string URL to perform the XHR Request
      */
     public getRoute(object: KyatsuProxyInterface): string {
-       // return route(this.routeGenerator, object)
-       return route(this.routeGenerator, object);
+        // return route(this.routeGenerator, object)
+        return route(this.routeGenerator, object);
     }
     public getIMGRoute(FullPath: boolean): string {
         if (FullPath) {
@@ -228,7 +228,7 @@ export abstract class Paginator {
         } else {
             return "/img/";
         }
-       // return (window.location.protocol) + "://" + (window.location.hostname) + ":" + (window.location.port) + "/img/";
+        // return (window.location.protocol) + "://" + (window.location.hostname) + ":" + (window.location.port) + "/img/";
     }
     public defaultProxy(defaultParameters: boolean = false): KyatsuProxyInterface {
         let CurrentURL: URLSearchParams = new URLSearchParams(window.location.search);
@@ -237,7 +237,7 @@ export abstract class Paginator {
             name: "null",
             method: "name",
             date_method: "created_at",
-            date_start: moment().subtract(14, "days").format("DD/MM/YYYY") ,
+            date_start: moment().subtract(14, "days").format("DD/MM/YYYY"),
             date_end: moment().format("DD/MM/YYYY"),
             order: OrderBy.DESC,
 
@@ -332,7 +332,7 @@ export abstract class Paginator {
                             document.createTextNode(
                                 response.responseJSON["message"]
                             )
-                        )  
+                        )
                     );
                     Swal.fire({
                         title: "Error",
@@ -340,7 +340,7 @@ export abstract class Paginator {
                         icon: "error",
                         allowOutsideClick: false,
                         showConfirmButton: false,
-                      });
+                    });
                 },
 
             }
@@ -369,7 +369,7 @@ export abstract class Paginator {
                 set: (obj, prop, value) => {
                     if (
                         (typeof prop === "string" &&
-                        !["string", "number"].includes(typeof value))
+                            !["string", "number"].includes(typeof value))
                         &&
                         !(typeof value === "object" && value instanceof Date)
                     ) {
@@ -416,20 +416,18 @@ export abstract class Paginator {
                     }
                     return true;
                 },
-               /* get: (target, property) => {
-                    return encodeURIComponent(target[property]);
-                }*/
+                /* get: (target, property) => {
+                     return encodeURIComponent(target[property]);
+                 }*/
             }
         );
 
     }
     public xhrSuccess(response: PaginatorResponseInterface): void {
         $(this.capsulator).empty();
-        //@ts-ignore
-        $(this.capsulator).append(this.buildHTML(response));
+        $(this.capsulator).append(<HTMLElement>this.buildHTML(response));
         if (this.MayBePaginable) {
-            //@ts-ignore
-            $(this.capsulator).append(this.buildHTMLPaginable(response));
+            $(this.capsulator).append(<HTMLElement>this.buildHTMLPaginable(response));
         }
     }
     public abstract buildHTMLEmpty(): HTMLTableElement | undefined
@@ -536,10 +534,11 @@ export abstract class TablePaginator extends Paginator {
                     //Por cada key(registro) creamos un tr y le haremos un foreach de cada td
                     answer.push($(document.createElement("tr")).append((): HTMLTableCellElement[] => {
                         var perLine: HTMLTableCellElement[] = [];
-                        Object.entries(response["data"][element]).forEach(element2 => {
+                        Object.entries(response["data"][element]).forEach((element2: any) => {
                             // agregar ?? null a element2[1] si se quiere que los campos vacios digan nulo
-                            perLine.push($(document.createElement("td")).html(String(element2[1]))!.get(0)!);
-
+                            perLine.push($(document.createElement("td")).html((): string => {
+                                return String(!(isNaN(Date.parse(element2[1]))) ? moment(element2[1]).format("DD/MM/YYYY HH:MM:SS") :  element2[1]);
+                            } )!.get(0)!);
                         });
                         perLine.push(...this.tableColumnAddon(response["data"][element]["uuid"]));
                         return perLine;
@@ -563,15 +562,12 @@ export abstract class TablePaginator extends Paginator {
      * 
      */
     public cellContentInjector(ThCell: string, callback: any, table?: HTMLTableElement | HTMLElement): void {
-        console.log(ThCell);
-        console.log(callback);
-        console.log(table);
+        // console.log(ThCell);
+        //console.log(callback);
+        // console.log(table);
         let tableUsing: HTMLElement = table ?? this.capsulator;
-        //@ts-ignore
-        window.tableUsing = tableUsing;
+        //    window.tableUsing = tableUsing;
         let Trow = tableUsing.querySelector("table")?.querySelector("thead")?.querySelector("tr");
-        //let Trow = $($("thead", tableUsing)).get(0);
-        //let Trow: HTMLElement = tableUsing.querySelector("thead")?.firstChild as HTMLElement;
         let filtered: number;
         if (Trow) {
             filtered = Array.from((Trow).childNodes).findIndex((element: any) => {
@@ -583,7 +579,6 @@ export abstract class TablePaginator extends Paginator {
         } else {
             throw new Error("Thead first child not found");
         }
-        //let Tbody = $($("tbody", tableUsing)).get(0)!;
         let Tbody = tableUsing.querySelector("tbody");
         if (Tbody) {
             //tr
@@ -632,7 +627,7 @@ export abstract class TablePaginator extends Paginator {
                 });
             });
             $(RangeElement).html(moment(Object.getOwnPropertyDescriptor(this.information, "date_start")!.value, "DD/MM/YYYY")
-            .format('MMMM D, YYYY') + " - " + moment(Object.getOwnPropertyDescriptor(this.information, "date_end")!.value, "DD/MM/YYYY").format("MMMM D, YYYY"));
+                .format('MMMM D, YYYY') + " - " + moment(Object.getOwnPropertyDescriptor(this.information, "date_end")!.value, "DD/MM/YYYY").format("MMMM D, YYYY"));
             return $(document.createElement("div")).attr("style", "background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid black; width: 100%")
                 //.append($(document.createElement("i")).addClass("fa fa-calendar"))
                 .append($(RangeElement))
@@ -669,23 +664,23 @@ export abstract class TablePaginator extends Paginator {
                     Object.assign(this.information, { method: element });
                 }).get(0)!);
             }*/
-            if (!isNaN(new Date(response["data"][0][element]).getTime())) { 
+            if (!isNaN(new Date(response["data"][0][element]).getTime())) {
                 DateElements.push($(document.createElement("option")).html(element).get(0)!);
             } else {
                 NonDateElements.push($(document.createElement("option")).html(element).get(0)!);
             }
         })
-/*
-        return $(document.createElement("div")).append($(document.createElement("select")).append(DateElements))
-            .append($(document.createElement("select")).append(NonDateElements)).get(0)!;
-            */
-            return $(document.createElement("div")).append
+        /*
+                return $(document.createElement("div")).append($(document.createElement("select")).append(DateElements))
+                    .append($(document.createElement("select")).append(NonDateElements)).get(0)!;
+                    */
+        return $(document.createElement("div")).append
             ($(document.createElement("select")).append(DateElements)).on("change", (event) => {
                 if (document.getElementsByClassName("alert-container").length == 0) {
                     $(event.currentTarget).parent().append(this.Warnable("Se ha cambiado el selector de busqueda de fechas. Selecciona un rango de fecha nuevo para buscar..."));
                 }
             })
-            .append 
+            .append
             ($(document.createElement("select")).append(NonDateElements).on("change", (event) => {
                 if (document.getElementsByClassName("alert-container").length == 0) {
                     $(event.currentTarget).parent().append(this.Warnable("Se ha cambiado el selector de busqueda de campos. Ingresa un nuevo termino para buscar..."));
@@ -695,8 +690,8 @@ export abstract class TablePaginator extends Paginator {
     }
     public Warnable(message: string): HTMLDivElement {
         return $(document.createElement("div")).addClass("alert-container").append
-        ($(document.createElement("img")).attr("alt", "alert").attr("src", "URLDescriptor").addClass("alert-icon"))
-        .append($(document.createElement("div")).addClass("message").html(message)).get(0)!;
+            ($(document.createElement("img")).attr("alt", "alert").attr("src", "URLDescriptor").addClass("alert-icon"))
+            .append($(document.createElement("div")).addClass("message").html(message)).get(0)!;
     }
     public buildHTMLPaginable(response: PaginatorResponseInterface): HTMLDivElement {
         return $(document.createElement("div")).append($(document.createElement("p")).html(
@@ -721,66 +716,32 @@ export abstract class TablePaginator extends Paginator {
         $(this.InputCapsulator).append(this.HTMLDateInputConstructor());            //this.InputCapsulator = this.HTMLInputConstructor();
         $(this.capsulator).append(this.InputCapsulator);
         if (this.MayBePaginable) {
-            //@ts-ignore
-            $(this.capsulator).append(this.buildHTMLPaginable(response));
+            $(this.capsulator).append(<HTMLElement>this.buildHTMLPaginable(response));
         }
-        //@ts-ignore
-        $(this.capsulator).append(this.buildHTML(response));
+        $(this.capsulator).append(<HTMLElement>this.buildHTML(response));
     }
-    public UUIDContentInjector(): void {{
-        this.cellContentInjector("uuid",(node: HTMLTableCellElement) => {
-            let UUID: string = node.innerHTML;
-            node.textContent = "";
-            $(node).append($(document.createElement("button")).append($(document.createElement("i")).addClass("bi bi-copy")).addClass("btn btn-primary")
-            .on("click", () => {
-                navigator.clipboard.writeText(UUID);
-            }))
+    public CopyContentInjector(column: string): void {
+        {
+            this.cellContentInjector(column, (node: HTMLTableCellElement) => {
+                let UUID: string = node.innerHTML;
+                node.textContent = "";
+                $(node).append($(document.createElement("button")).append($(document.createElement("i")).addClass("bi bi-copy")).addClass("btn btn-primary")
+                    .on("click", () => {
+                        navigator.clipboard.writeText(UUID);
+                    }))
+            })
+        }
+    }
+    public NullableContentInjector(column: string): void {
+        this.cellContentInjector(column, (node: HTMLTableCaptionElement)=> {
+            if (node.textContent === "null") {
+                node.textContent = "";
+            }
+        });
+    }
+    public ColorableContentInjector(column: string, color: string): void {{
+        this.cellContentInjector(column ,(node: HTMLTableCellElement) => {
+            $(node).attr("style", "color: " + color);
         })
-    }}}
-
-/*
-
-/* var searchUser = cacher(searchUsers); 
-var searchUsers = debounce(searchUsers, 600);
-let thisScript = document.currentScript;
-/*
-if (thisScript.getAttribute("autorun") == "true") {
-    $(document).ready(function () {
-        let preload = information["name"];
-        information["name"] = preload;
-    });
+    }}
 }
-
-var searchcontent = document.getElementById("search-content");
-searchcontent.addEventListener("input", function (event) {
-    if (this.value == 0) {
-      erase();
-    }
-});
-
-let resultsbox = document.getElementById("paginator");
-let searchcontent = document.getElementById("search-content");
-
-function erase() {
-    let resultsbox = document.getElementById("paginator");
-    let searchcross = document.getElementById("searcherase");
-    let searchcontent = document.getElementById("search-content");
-    searchcontent.value = "";
-    resultsbox.innerHTML = "";
-    resultsbox.classList.add("invisible");
-}
-function checkEmpty() {
-    let resultsbox = document.getElementById("paginator");
-    let searchcontent = document.getElementById("search-content");
-    searchcontent.addEventListener("input", (e) => {
-        if (
-            searchcontent.value == "" ||
-            searchcontent.value == null ||
-            searchcontent.value == 0
-        ) {
-            erase();
-        } else {
-            resultsbox.removeAttribute("class ");
-        }
-    });
-}*/
