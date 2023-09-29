@@ -5,7 +5,7 @@
 @endsection
 @section("http_body")
 
-<main class="parent">
+<main class="parent" onscroll="updateIcons();">
     <div id="pointer">.</div>
     <div class="pepe">
         <section id="one">
@@ -126,17 +126,9 @@
 </main>
 <script>
     function scrollGo(id, button) {
+        console.log(id);
         id.scrollIntoView({block: "end", behavior: "smooth"});
-        let iconos = document.getElementsByClassName("iconoubi");
-        for (i = 0; i < iconos.length; i++) {
-            iconos[i].classList.remove("bi-arrow-right-circle");
-            iconos[i].classList.remove("bi-arrow-right-circle-fill");
-            iconos[i].classList.add("bi-arrow-right-circle");
-        }
-        let iconmod = button + "icon";
-        let poop = document.getElementById(iconmod);
-        poop.classList.remove("bi-arrow-right-circle");
-        poop.classList.add("bi-arrow-right-circle-fill");
+        iconChange(button);
         /*
    const info = id.getBoundingClientRect();
     scroll(info.x, info.y);
@@ -144,6 +136,7 @@
     }
 
     function iconChange(icon) {
+        //console.log("en donde me tocaron");
         let iconos = document.getElementsByClassName("iconoubi");
         for (i = 0; i < iconos.length; i++) {
             iconos[i].classList.remove("bi-arrow-right-circle");
@@ -155,6 +148,7 @@
         poop.classList.remove("bi-arrow-right-circle");
         poop.classList.add("bi-arrow-right-circle-fill");
     }
+
     function updateIcons() {
     var scrollTop = $(window).scrollTop();
     var windowHeight = $(window).height();
@@ -176,7 +170,5 @@
     }
 }
 
-// Ejecuta la función cada 10 milisegundos mo testear
-setInterval(updateIcons, 10);
 </script>
 @endsection("http_body")
