@@ -71,12 +71,26 @@ header a {
     color: black;
     border-radius: 10px;
 }
-
+section{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    max-height: 1080px;
+    max-width: 1920px;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: auto;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+}
 /*Seccion heroes */
 
 .heroes-image {
     /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../img/hola.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../img/herobg2.png);
     /* Set a specific height */
     height: 100vh;
     max-height: 1080px;
@@ -91,6 +105,9 @@ header a {
 .heroImg{
     max-height: 600px;
     height: 450px;
-
     width: auto;
+}
+.heroesDesc{
+    background-color: transparent;
+    border: 0;
 }
