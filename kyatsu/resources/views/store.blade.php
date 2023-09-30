@@ -132,6 +132,7 @@
 <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
 data-preference-id="1244103756-03d83682-d70c-4d1a-b96e-3674266ab724" >
 </script> 
+<!-- <script src="https://sdk.mercadopago.com/js/v2"></script> --> 
 </div>
 </div>
 </div>

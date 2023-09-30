@@ -126,7 +126,6 @@
 </main>
 <script>
     function scrollGo(id, button) {
-        console.log(id);
         id.scrollIntoView({block: "end", behavior: "smooth"});
         iconChange(button);
         /*
@@ -136,7 +135,6 @@
     }
 
     function iconChange(icon) {
-        //console.log("en donde me tocaron");
         let iconos = document.getElementsByClassName("iconoubi");
         for (i = 0; i < iconos.length; i++) {
             iconos[i].classList.remove("bi-arrow-right-circle");
@@ -150,25 +148,26 @@
     }
 
     function updateIcons() {
-    var scrollTop = $(window).scrollTop();
-    var windowHeight = $(window).height();
-    // Calcula las posiciones de las secciones en la página
-    var onePosition = $("#one").offset().top;
-    var twoPosition = $("#two").offset().top;
-    var threePosition = $("#three").offset().top;
-    var fourPosition = $("#four").offset().top;
+      var scrollTop = $(window).scrollTop();
+      var windowHeight = $(window).height();
+      // Calcula las posiciones de las secciones en la página
+      var onePosition = $("#one").offset().top;
+      var twoPosition = $("#two").offset().top;
+      var threePosition = $("#three").offset().top;
+      var fourPosition = $("#four").offset().top;
 
-    // Establece clases en los elementos de la guía según la posición de desplazamiento
-    if (scrollTop >= onePosition && scrollTop < twoPosition) {
-        iconChange("L1");
-    } else if (scrollTop >= twoPosition && scrollTop < threePosition) {
-        iconChange("L2");
-    } else if (scrollTop >= threePosition && scrollTop < fourPosition) {
-        iconChange("L3");
-    } else if (scrollTop >= fourPosition) {
-        iconChange("L4");
+
+      // Establece clases en los elementos de la guía según la posición de desplazamiento
+      if (scrollTop >= onePosition && scrollTop < twoPosition) {
+          iconChange("L1");
+      } else if (scrollTop >= twoPosition && scrollTop < threePosition) {
+          iconChange("L2");
+      } else if (scrollTop >= threePosition && scrollTop < fourPosition) {
+          iconChange("L3");
+      } else if (scrollTop >= fourPosition) {
+          iconChange("L4");
+      }
     }
-}
 
 </script>
 @endsection("http_body")
