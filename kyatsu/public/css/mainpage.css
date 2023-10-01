@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    scroll-padding-top: 30px;
 }
 header{
     position: relative;
@@ -63,12 +64,22 @@ header a {
 .Bdownload {
     border-radius: 10px;
     transition-duration: 0.2s;
+    box-shadow: 0 4px 0 black;
+
+}
+.Bdownload:active{
+  box-shadow: none;
+  transform: translateY(4px);
+  transition: all .1s;
 }
 .Bdownload:hover {
     transition-duration: 0.2s;
     background-color: #ffffff;
     color: black;
     border-radius: 10px;
+      box-shadow: none;
+  transform: translateY(4px);
+  transition: all .1s;
 }
 section{
     height: 100vh;
@@ -140,8 +151,7 @@ section{
     
 }
 .heroImg{
-    max-height: 100vh;
-    height: 500px;
+    height: clamp(500px, 80vh, 900px);
     width: auto;
 }
 .heroesDesc{
