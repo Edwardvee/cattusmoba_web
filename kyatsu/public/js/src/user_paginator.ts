@@ -34,7 +34,7 @@ if ((typeof Swal) === "undefined") {
  * on paginator responses
  * 
  */
-interface PaginatorResponseInterface {
+export interface PaginatorResponseInterface {
     current_page: number,
     data: string[] | void | any,
     first_page_url: string,
@@ -54,11 +54,11 @@ interface PaginatorResponseInterface {
     total: number
 }
 
-enum OrderBy {
+export enum OrderBy {
     ASC = "ASC",
     DESC = "DESC"
 }
-interface KyatsuProxyInterface {
+export interface KyatsuProxyInterface {
     page: number,
     name: string,
     method: string,
@@ -69,7 +69,7 @@ interface KyatsuProxyInterface {
 }
 
 //type getRoute = () => string;
-declare function route(name?: string, params?: object | string): string & { current: () => string };
+export declare function route(name?: string, params?: object | string): string & { current: () => string };
 
 $.ajaxSetup({
     headers: {
@@ -194,6 +194,16 @@ export abstract class Paginator {
     //@ts-ignore
     private makeXHRTimeout: any;
     private makeXHRTimeoutMilliseconds: number = 500;
+    public JSON: KyatsuProxyInterface = {
+        page: 1,
+        name: "null",
+        method: "name",
+        date_method: "created_at",
+        date_start: moment().subtract(14, "days").format("DD/MM/YYYY"),
+        date_end: moment().format("DD/MM/YYYY"),
+        order: OrderBy.DESC,
+
+    };
     public maxSearchLength: number = 36;
     public responseXHR?: PaginatorResponseInterface;
     public constructor(capsulator: string) {
@@ -232,16 +242,7 @@ export abstract class Paginator {
     }
     public defaultProxy(defaultParameters: boolean = false): KyatsuProxyInterface {
         let CurrentURL: URLSearchParams = new URLSearchParams(window.location.search);
-        let JSON: KyatsuProxyInterface = {
-            page: 1,
-            name: "null",
-            method: "name",
-            date_method: "created_at",
-            date_start: moment().subtract(14, "days").format("DD/MM/YYYY"),
-            date_end: moment().format("DD/MM/YYYY"),
-            order: OrderBy.DESC,
-
-        };
+        let JSON = this.JSON;
         if (defaultParameters == false) {
             if (CurrentURL.has("page")) {
                 JSON.page = parseInt(CurrentURL.get("page")!);
