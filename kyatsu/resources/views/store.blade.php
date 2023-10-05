@@ -132,6 +132,7 @@
 <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
 data-preference-id="1244103756-03d83682-d70c-4d1a-b96e-3674266ab724" >
 </script> 
+<!-- <script src="https://sdk.mercadopago.com/js/v2"></script> --> 
 </div>
 </div>
 </div>
@@ -218,8 +219,8 @@ document.addEventListener("DOMContentLoaded", function() {
     $('.mercadopago-button').css('width', '100%');
     $('.mercadopago-button').css('color', 'black'); 
     $('.mercadopago-button').css('content', "PAGAR CON MERCADO PAGO");
-    var boton = document.getElementsByClassName("mercadopago-button");
-    boton.innerHTML = "Potente";
+    var boton = document.getElementsByClassName("btnn col");
+    boton.value = "Potente";
     let currentProduct;
 
     function abrirVentanaPago(preferenceId) {
@@ -245,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     data: {producto: currentProduct},
 
                     success: function(res){
-                        alert("Compra concretada con éxito");
+                        alert("Compra realizada con éxito");
                     },
                     
                     error: function(res){

@@ -11,16 +11,14 @@ export class AdministrablePaginator extends TablePaginator {
         super(capsulator ?? "paginator_admin");
         $(this.capsulator).on("DOMNodeInserted", (event) => {
             if ($(event.target).is("table") && (this.responseXHR?.data.length != 0))  {
-                this.BannableContentInjector();
-                this.UUIDContentInjector();
+                this.ColorableContentInjector("banned_at", "red");
+                this.ColorableContentInjector("deleted_at", "red");
+                this.CopyContentInjector("uuid");
+                this.NullableContentInjector("deleted_at");
+                this.NullableContentInjector("banned_at");
             }
         });
     }
-    public BannableContentInjector(): void {{
-        this.cellContentInjector("banned_at",(node: HTMLTableCellElement) => {
-            $(node).attr("style", "color: red");
-        })
-    }}
 
     protected tableRowAddon(): HTMLTableCellElement[] {
         return ((): HTMLTableCellElement[] => {

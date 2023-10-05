@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    scroll-padding-top: 30px;
 }
 header{
     position: relative;
@@ -16,7 +17,6 @@ header{
     display: -ms-flex;
     display: -o-flex;
 }
-/* The hero image */
 .hero-image {
     /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../img/BgMP.png);
@@ -64,22 +64,83 @@ header a {
 .Bdownload {
     border-radius: 10px;
     transition-duration: 0.2s;
+    box-shadow: 0 4px 0 black;
+
+}
+.Bdownload:active{
+  box-shadow: none;
+  transform: translateY(4px);
+  transition: all .1s;
 }
 .Bdownload:hover {
     transition-duration: 0.2s;
     background-color: #ffffff;
     color: black;
     border-radius: 10px;
+      box-shadow: none;
+  transform: translateY(4px);
+  transition: all .1s;
 }
+section{
+    height: 100vh;
+    width: 100vw;
+    max-height: 1080px;
+    max-width: 1920px;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: auto;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+}
+.tracking-in-expand-fwd {
+	-webkit-animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+ @-webkit-keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-700px);
+            transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-700px);
+            transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
 
 /*Seccion heroes */
 
 .heroes-image {
     /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../img/hola.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../img/herobg2.png);
     /* Set a specific height */
     height: 100vh;
-    max-height: 1080px;
+    max-height: 100vh;
     width: 100vw;
     max-width: 1920px;
     /* Position and center the image to scale nicely on all screens */
@@ -87,10 +148,199 @@ header a {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    
 }
 .heroImg{
-    max-height: 600px;
-    height: 450px;
-
+    height: clamp(500px, 80vh, 900px);
     width: auto;
+}
+.heroesDesc{
+    background-color: transparent;
+    border: 0;
+}
+.reveal{
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: 2s all ease;
+  }
+.reveal.active{
+    transform: translateY(0);
+    opacity: 1;
+}
+.reveal-l{
+    position:relative;
+    transform: translateX(-150px);
+    opacity: 0;
+    transition: 2s all ease;
+}
+.reveal-l.active{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Zonas */
+
+.zonas{
+    background-color: black;
+        /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../img/zonas.png);
+        /* Set a specific height */
+        height: 100vh;
+        max-height: 1080px;
+        width: 100vw;
+        max-width: 1920px;
+        /* Position and center the image to scale nicely on all screens */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+}
+.items {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            user-select: none;
+          }
+          
+          .items .item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: all 300ms ease-in-out;
+            z-index: -1;
+            opacity: 0;
+          }
+          
+          .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          
+          .item.active {
+            width: 350px;
+            height: 350px;
+            opacity: 1;
+            z-index: 99;
+            box-shadow: 0px 0px 105px -35px rgba(0, 0, 0, 0.75);
+          }
+          
+          .item.prev {
+            z-index: 2;
+            opacity: 0.25;
+            transform: translate(-125%, -50%);
+          }
+          
+          .item.next {
+            z-index: 2;
+            opacity: 0.25;
+            transform: translate(25%, -50%);
+          }
+          
+          .items .button-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 275px;
+            z-index: 100;
+          }
+          
+          .button-container .buttone {
+            color: #fff;
+            font-size: 32px;
+            cursor: pointer;
+            position: relative;
+            opacity: 0.75;
+            transition: all 300ms ease-in-out;
+          }
+          
+          .button-container .buttone:hover {
+            opacity: 1;
+          }
+          
+          .button-container .buttone:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 1);
+            border-radius: 50%;
+            z-index: -99;
+          }
+          
+          .button-container .buttone:nth-child(1) {
+            float: left;
+          }
+          
+          .button-container .buttone:nth-child(2) {
+            float: right;
+          }
+
+
+
+/* Noticias */
+.noticias{
+  background-color: black;
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../img/bgnews.png);
+  /* Set a specific height */
+  height: 100vh;
+  max-height: 1080px;
+  width: 100vw;
+  max-width: 1920px;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+
+button.heroesDesc:before {
+	position: absolute;
+	transform: translateX(0%) translateY(38px);
+	font-size: 15px;
+	transition: 200ms;
+	color: transparent;
+	font-weight: bold;
+}
+button.adc:before {
+	content: 'Daño';
+
+}
+button.tank:before {
+	content: 'Tanque';
+}
+button.sup:before {
+	content: 'Soporte';
+}
+button.heroesDesc:hover::before {
+	color: #fff;
+}
+
+button.heroesDesc:hover img {
+		animation: bounce 2s infinite linear;
+}
+
+/* @keyframes bounce {
+	0% {transform: translateX(-50%) translateY(-50%)}
+	25% {transform: translateX(-50%) translateY(-65%)}
+	50% {transform: translateX(-50%) translateY(-50%)}
+	75% {transform: translateX(-50%) translateY(-35%)}
+	100% {transform: translateX(-50%) translateY(-50%)}
+} */
+
+button.heroesDesc:focus {
+	outline: none;
 }

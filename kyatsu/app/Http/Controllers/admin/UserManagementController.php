@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Validation\Rules\Enum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidationRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
-use App\Rules\ColumnExists;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 class UserManagementController extends Controller
 {
     public function __construct(Request $request) {
@@ -84,11 +80,23 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, string $uuid)
     {
-        $user = User::FindOrFail($uuid);
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            "uuid" => ["required", "uuid"],
+            'name' => [
+            'required', 
+            'string',
+            'max:255',   
+            Rule::unique(User::class, 'name')->ignore($request->uuid, "uuid"),     
+            ],
+            'email' => [
+            'required',
+            'string',
+            'email',
+            'max:255',
+            Rule::unique(User::class, 'email')->ignore($request->uuid, "uuid"),
+            ],
         ]);
+        $user = User::FindOrFail($uuid);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
