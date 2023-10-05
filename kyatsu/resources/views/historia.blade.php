@@ -8,6 +8,8 @@
 <main class="parent" onscroll="updateIcons();">
     <div id="pointer">.</div>
     <div class="pepe">
+<!--     <div class="snap-container">
+  <div class="snap-section">  -->
         <section id="one">
             <a data-toggle="modal" data-target="#exampleModal"> La arena </a>
        <!--      <h1> La arena</h1> -->
@@ -101,7 +103,9 @@
   </div>
 </div>
         </section>
-
+<!--         </div>
+</div> -->
+ 
       <div  class="guide" >
         <ul style="list-style-type: none; padding-left: 20px; padding-top: 10px">
             <li>

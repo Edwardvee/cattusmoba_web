@@ -1,0 +1,26 @@
+div.foro{
+    margin-top: 5em;
+    background-color: rgb(224, 224, 224);
+}
+
+div.post{
+    margin-top: 1%;
+    border-radius: 7.5px;
+}
+div.welcome{
+    margin-bottom: 5em;
+}
+.user-pfp img{
+  width: inherit;
+  max-width: 8em;
+}
+
+
+.post-content {
+    width: inherit;
+    padding: 1em;
+}
+
+.post-date p{
+    font-size: smaller;
+}

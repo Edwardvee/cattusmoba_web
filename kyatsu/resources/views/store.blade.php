@@ -130,8 +130,10 @@
 </div>
 <div class="btnn col">
 <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-data-preference-id="1244103756-03d83682-d70c-4d1a-b96e-3674266ab724" >
-</script> 
+data-preference-id="1244103756-31b59552-533c-4ddd-bc6a-b9c2e17583f6" data-source="button">
+</script>
+</script>
+
 <!-- <script src="https://sdk.mercadopago.com/js/v2"></script> --> 
 </div>
 </div>
@@ -218,7 +220,6 @@ document.addEventListener("DOMContentLoaded", function() {
     $('.mercadopago-button').css('background-color', 'transparent');
     $('.mercadopago-button').css('width', '100%');
     $('.mercadopago-button').css('color', 'black'); 
-    $('.mercadopago-button').css('content', "PAGAR CON MERCADO PAGO");
     var boton = document.getElementsByClassName("btnn col");
     boton.value = "Potente";
     let currentProduct;
@@ -257,5 +258,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } 
         }
     });
-
+    let mpbtn = document.getElementsByClassName("mercadopago-button")
+    mpbtn[0].textContent = "Pagar con Mercado Pago";
 </script>
+
