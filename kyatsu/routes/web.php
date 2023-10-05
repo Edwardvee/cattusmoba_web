@@ -87,6 +87,10 @@ Route::get("/patchnotes", function () {
 Route::get("/store", function () {
   return view("store");
 })->name("store");
+Route::get("/foro", function () {
+  return view("foro");
+})->name("foro");
+
 
 Route::get("/como jugar", function () {
   return view("como jugar");
