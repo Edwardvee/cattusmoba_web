@@ -31,7 +31,7 @@
                                     <button class="heroesDesc sup m-3" onclick="cambiarImagen('https://media.tenor.com/WocrE_nW-pQAAAAi/lisichka.gif', 'Texto de la imagen 2','myImage2')"><img src="{{url('img/sup.png')}}"></button>
                                     <button class="heroesDesc tank m-3" onclick="cambiarImagen('https://media.tenor.com/Px7kBr6Kq5kAAAAi/mordekaiser-morde.gif', 'Texto de la imagen 3','myImage2')"><img src="{{url('img/shield.png')}}"></button>
                                   </div>
-                    <p style="color: rgb(152, 210, 245)" id="message">Los daños se enfocan claramente en hacer daño.</p>
+                    <p style="color: rgb(152, 210, 245)" id="message">Texto de la imagen 1</p>
               </div>
         </div>
 
@@ -69,11 +69,6 @@
 
         </div>
     </section>
-
-    
-    
-
-
 
 </main>
 
@@ -129,8 +124,6 @@ function reveal() {
 
 window.addEventListener("scroll", reveal);
 
-
-
 const slider = document.querySelector(".items");
 		const slides = document.querySelectorAll(".item");
 		const button = document.querySelectorAll(".buttone");
@@ -177,5 +170,4 @@ const slider = document.querySelector(".items");
 
 </style>
 @endsection("http_body")
-
 

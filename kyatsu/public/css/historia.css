@@ -140,3 +140,16 @@ section:not(:last-child) {
   
 }
 
+/*.snap-container {
+  height: 100vh;
+  overflow: auto;  
+  scroll-snap-type: y mandatory;  
+}
+
+.snap-section {
+  text-align: center;
+  scroll-snap-align: start;
+  min-height: 60vh;  
+}   */
+
+
