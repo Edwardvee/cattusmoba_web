@@ -1,52 +1,121 @@
-@extends("maintemplate")
-
+@extends('maintemplate')
 @section("http_headers")
-<title>Kyatsu! - Heroes</title>
 <link href="css/gameinfo.css" rel="stylesheet">
+<title> Kyatsu!</title>
 @endsection
-@section("http_body")
+@section('http_body')
 
-<head>
-  <title>Kyatsu - Info</title>
-</head>
+<script>
+  function reveal() {
+  var reveals = document.querySelectorAll(".reveal");
+  var revealsl = document.querySelectorAll(".reveal-l");
 
-<body class="html">
-  <div class="col">
- <div class="row">
-  <div class="col-6 d-flex justify-content-center align-items-center">
-    <img src="https://cdn-icons-png.flaticon.com/512/1496/1496108.png">
+  for (var i = 0; i < reveals.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals[i].classList.add("active");
+    } else {
+      reveals[i].classList.remove("active");
+    }
+  }
+  for (var i = 0; i < revealsl.length; i++) {
+    var windowHeightl = window.innerHeight;
+    var elementTopl = revealsl[i].getBoundingClientRect().top;
+    var elementVisiblel = 150;
+
+    if (elementTopl < windowHeightl - elementVisiblel) {
+      revealsl[i].classList.add("active");
+    } else {
+      revealsl[i].classList.remove("active");
+    }
+  }
+}
+
+</script>
+<header>
+<div class="hero-image">
+  <div class="hero-text">
+      <h3> TE DAMOS LA BIENVENIDA A LA ARENA</h3>
+      <h1> APRENDE LOS FUNDAMENTOS </h1>
   </div>
-  <div class="col-6 ">
-    <h1>Como jugar</h1>
-     <div class="row">
-      <div clasS="col-8 niggabackground">
-        <p>Kyatsu! es un enfrentamiento estrategico entre equipos, en el cual debes elegir un personaje con habilidades unicas y colaborar con tus compañeros para destruir la base enemiga. Coordina tus acciones, mejora tu personaje y domina el mapa, utilizando tácticas de combate y tomando decisiones rápidas para obtener la victoria en batallas intensas y competitivas.</p>
-       <center> <button class="playnow">JUEGA AHORA!</button>
-      </div>
-     </div>
-  </div>
- </div>
+</div>
+</header>
 
- <div class="row">
-  <div class="col-6">
-    <h1>Personajes</h1>
-     <div class="row">
-      <div clasS="col-8 niggabackground">
-        <p>Elige a tu personaje favorito, hay una gran cantidad de ellos para seleccionar, ya sea que quieras tener un rol mas agresivo o ser esa alma bondadosa que cura a sus aliados, hay un lugar para ti en Kyatsu!</p>
-       <center> <button class="playnow">JUEGA AHORA!</button>
-      </div>
-     </div>
+<main>
+    <!-- Heroes -->
+    <section >
+<div class="hero-image quees reveal">
+  <div class="hero-text">
+      <h3> ¿ Qué es Kyatsu! Arena ?</h3>
+      <p>Kyatsu es un juego de estrategia por equipos en el que dos equipos de cinco campeones se enfrentan para ver quién destruye antes la base del otro. Elige de entre un elenco de 10 campeones para realizar jugadas épicas, asesinar rivales y derribar torretas para alzarte con la victoria.</p>
   </div>
-  <div class="col-6 d-flex justify-content-center align-items-center">
-    <img src="{{url('img/IvanAborigen.png')}}" width="50%" height="50%">
-  </div>
- </div>
+</div>
+</section>
 
- </div>
-</body>
+ 
+</main>
 
-@php
-  echo(auth()->user())
-  @endphp
-  <P> a </P>
+<script>
+/*   var MPtext = ["¿Eres digno de tanta accion?", "Se parte de la historia", "¿Seras nuestro nakama?",
+        "Te odiamos Nico", "¿Es la primera vez que te vemos?", "Welcome to the jungle", "¿Como llegaste a aqui?"
+    ];
+    var rand = Math.floor(Math.random() * MPtext.length);
+    var randtext = MPtext[rand];
+    document.getElementById("rrandommsg").innerHTML = randtext;
+
+ */
+
+
+window.addEventListener("scroll", reveal);
+
+const slider = document.querySelector(".items");
+		const slides = document.querySelectorAll(".item");
+		const button = document.querySelectorAll(".buttone");
+
+		let current = 0;
+		let prev = 3;
+		let next = 1;
+
+		for (let i = 0; i < button.length; i++) {
+			button[i].addEventListener("click", () => i == 0 ? gotoPrev() : gotoNext());
+		}
+
+		const gotoPrev = () => current > 0 ? gotoNum(current - 1) : gotoNum(slides.length - 1);
+
+		const gotoNext = () => current < 3 ? gotoNum(current + 1) : gotoNum(0);
+
+		const gotoNum = number => {
+			current = number;
+			prev = current - 1;
+			next = current + 1;
+
+			for (let i = 0; i < slides.length; i++) {
+				slides[i].classList.remove("active");
+				slides[i].classList.remove("prev");
+				slides[i].classList.remove("next");
+			}
+
+			if (next == 4) {
+				next = 0;
+			}
+
+			if (prev == -1) {
+				prev = 3;
+			}
+
+			slides[current].classList.add("active");
+			slides[prev].classList.add("prev");
+			slides[next].classList.add("next");
+		}
+
+</script>
+<style>
+
+
+</style>
 @endsection("http_body")
+
+

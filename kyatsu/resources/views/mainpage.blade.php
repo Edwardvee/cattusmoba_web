@@ -70,6 +70,15 @@
         </div>
     </section>
 
+    <section >
+<div class="hero-image quees reveal">
+  <div class="hero-text">
+      <h3> ¿ Qué es Kyatsu! Arena ?</h3>
+      <p>Kyatsu es un juego de estrategia por equipos en el que dos equipos de cinco campeones se enfrentan para ver quién destruye antes la base del otro. Elige de entre un elenco de 10 campeones para realizar jugadas épicas, asesinar rivales y derribar torretas para alzarte con la victoria.</p>
+  </div>
+</div>
+</section>
+
 </main>
 
 <script>
