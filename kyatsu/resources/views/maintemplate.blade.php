@@ -38,6 +38,7 @@
               </div>   
               <a href="{{route('heroes')}}" class="nav-item nav-link">Héroes</a>
               <a href="{{route('store')}}" class="nav-item nav-link">Tienda</a>
+              <a class="nav-item nav-link" href="{{route('foro')}}">Foro</a>
             </div>
                   <form action="" class="search-bar">
                   <input maxlength="16" id="search-content" class="input-search" type="search" placeholder="Busca un jugador" required onkeyup="javascript:checkEmpty();javascript:searchUsers(this.value);">
