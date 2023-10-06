@@ -14,7 +14,7 @@ class ForoController extends Controller
     public function index(Request $request)
     {  
         if($request->ajax()){
-        return Foro::all();
+        return json_encode(Foro::all());
         }
         return view("foro");
        

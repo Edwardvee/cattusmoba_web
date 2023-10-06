@@ -17,17 +17,25 @@
         $(document).ready(function() {
             $.ajax({
                 url: "{{route('foro')}}",
+                dataType: 'JSON',
                 success: function(forum_results) {
-                   forum_results.forEach(post => {
-                    let post = 
-                   });
+                    let foroDiv = $('.foro');
+                    forum_results.forEach(post => {
+                        console.log(post)
+                        $($(document.createElement('div')).addClass("container-fluid post border").append($(document.createElement('div')).addClass('row').append($(document.createElement('div')).addClass('col-lg-2 col-sm-12 post-user-info').append($(document.createElement('div')).addClass('row d-flex text-center').append($(document.createElement('div')).addClass('col-12 mt-3 mb-3 user-name').append($(document.createElement('a')).attr('href', '#').html(Object.values(post)[2]))).append($(document.createElement('div')).addClass('col-12 mt-2 mb-5 user-pfp').append($(document.createElement('img')).attr('src', 'https://pm1.aminoapps.com/6407/de5edd6e322153713245e23c17b54ab662c5b0d8_00.jpg').addClass('rounded-1 shadow'))).append($(document.createElement('div')).addClass('col-12 mt-4 post-date text-wrap').append($(document.createElement('p')).addClass('text-muted').html(Object.values(post)[6]))))).append($(document.createElement('div')).addClass('col-lg-8 col-sm-10 post-content').append($(document.createElement('div')).addClass('row').append($(document.createElement('a')).addClass('text-muted id' + Object.values(post)[0] ).attr('href','#').attr('onmouseover','this.className = "text-muted text-decoration-underline id' + Object.values(post)[0] + '"').attr('onmouseout','this.className = "text-muted id' + Object.values(post)[0] + '"').html(">>" + Object.values(post)[0]))).append($(document.createElement('div')).addClass('container-fluid').html(Object.values(post)[3]))).append($(document.createElement('div')).addClass('col-lg-2 col-sm-2 post-buttons').append($(document.createElement('div')).addClass('row d-flex text-center').append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-chat').attr('onclick','reply()').attr('onmouseover','this.className = "bi bi-chat-fill"').attr('onmouseout','this.className = "bi bi-chat"')).append($(document.createElement('p')).html(Object.values(post)[4]))).append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-heart').attr('onclick','like()').attr('onmouseover','this.className = "bi bi-heart-fill"').attr('onmouseout','this.className = "bi bi-heart"')).append($(document.createElement('p')).html(Object.values(post)[5]))).append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-flag').attr('onclick','flag()').attr('onmouseover','this.className = "bi bi-flag-fill"').attr('onmouseout','this.className = "bi bi-flag"'))))))).appendTo(foroDiv);
+                        if(Object.values(post)[1]){
+                            $($(document.createElement('a')).addClass('text-mute fst-italic text-end').html( "--Respondiendo a: " + Object.values(post)[1])).appendTo($(".id" + Object.values(post)[0]))
+                        }
+                    }
+                    
+                    );
                 }
             })
         });
     </script>
 
 
-    <div class="container-fluid post border">
+    <!-- <div class="container-fluid post border">
         <div class="row">
             <div class="col-lg-2 col-sm-12 post-user-info">
                 <div class="row d-flex text-center">
@@ -42,21 +50,7 @@
             </div>
             <div class="col-lg-8 col-sm-10 post-content">
                 <div class="row"><a href="#" class="text-muted" onmouseover="this.className = 'text-muted text-decoration-underline'" onmouseout="this.className = 'text-muted'">>>000000</a></div>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque convallis ex quis nunc
-                lacinia, sit amet congue urna malesuada. Sed sit amet maximus felis. Suspendisse ultrices nisl elit,
-                suscipit malesuada dolor malesuada quis. Curabitur mollis augue non erat viverra, at suscipit mauris
-                vestibulum. Aenean vulputate sem sit amet quam dictum suscipit. Sed
-                pharetra accumsan lectus, in
-                scelerisque libero consectetur at. Phasellus nec semper urna. Curabitur sagittis auctor massa porta
-                venenatis. Pellentesque placerat magna massa, ut placerat dolor vestibulum in. Phasellus a sapien in
-                dolor euismod luctus eu vitae urna. Suspendisse aliquam tempus finibus. Maecenas auctor non tortor
-                eget suscipit. Quisque eleifend ut ex eu interdum. Etiam sodales ligula at congue accumsan.
-                Vestibulum pulvinar porta lorem, ornare fermentum tortor convallis tempus.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque convallis ex quis nunc
-                lacinia, sit amet congue urna malesuada. Sed sit amet maximus felis. Suspendisse ultrices nisl elit,
-                suscipit malesuada dolor malesuada quis. Curabitur mollis augue non erat viverra, at suscipit mauris
-                vestibulum. Aenean vulputate sem sit amet quam dictum suscipit. Sed
-                pharetra accumsan lectus.
+              
             </div>
             <div class="col-lg-2 col-sm-2 post-buttons">
                 <div class="row d-flex text-center">
@@ -77,7 +71,9 @@
         </div>
     </div>
 
-
+ -->
 
 
 </div>
+
+@endsection
