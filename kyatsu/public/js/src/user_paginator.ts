@@ -194,7 +194,7 @@ export abstract class Paginator {
     //@ts-ignore
     private makeXHRTimeout: any;
     private makeXHRTimeoutMilliseconds: number = 500;
-    public JSON: KyatsuProxyInterface = {
+    public readonly JSON: KyatsuProxyInterface = {
         page: 1,
         name: "null",
         method: "name",
@@ -206,6 +206,7 @@ export abstract class Paginator {
     };
     public maxSearchLength: number = 36;
     public responseXHR?: PaginatorResponseInterface;
+    public oldResponseXHR?: PaginatorResponseInterface;
     public constructor(capsulator: string) {
         let getter = document.getElementById(capsulator);
         if (!(getter instanceof HTMLElement)) {
@@ -307,13 +308,14 @@ export abstract class Paginator {
             url: this.getRoute(object),
             success: (response: PaginatorResponseInterface) => {
                 this.responseXHR = response;
-                if (response["data"].length == 0) {
+               // if (response["data"].length == 0) {
                     //@ts-ignore
-                    $(this.capsulator).append(this.buildHTMLEmpty());
-                    return;
-                } else {
-                    this.xhrSuccess(response);
-                }
+                 //   $(this.capsulator).append(this.buildHTMLEmpty());
+                 //   return;
+                // else {
+                    this.xhrSuccess(response, (response.data.length != 0));
+                //}
+                this.oldResponseXHR = this.responseXHR;
             },
             statusCode: {
                 429: () => {
@@ -424,11 +426,13 @@ export abstract class Paginator {
         );
 
     }
-    public xhrSuccess(response: PaginatorResponseInterface): void {
+    public xhrSuccess(response: PaginatorResponseInterface, anything: boolean): void {
         $(this.capsulator).empty();
+        if (anything) {
         $(this.capsulator).append(<HTMLElement>this.buildHTML(response));
-        if (this.MayBePaginable) {
+            if (this.MayBePaginable) {
             $(this.capsulator).append(<HTMLElement>this.buildHTMLPaginable(response));
+            }
         }
     }
     public abstract buildHTMLEmpty(): HTMLTableElement | undefined
@@ -710,16 +714,27 @@ export abstract class TablePaginator extends Paginator {
             .append($(document.createElement("tr")).append($(document.createElement("th")).html("No hay resultados")))
             .get(0)!;
     }
-    public override xhrSuccess(response: PaginatorResponseInterface): void {
+    public override xhrSuccess(response: PaginatorResponseInterface, anything: boolean): void {
+
+        //Reiniciar en caso de resultado vacio
+        if (anything == false && this.oldResponseXHR == null) {
+         //   Object.assign(this.information, this.JSON)
+            window.location.href = window.location.origin + window.location.pathname;
+            return;
+        }
         $(this.capsulator).empty();
-        this.InputCapsulator = this.SortableNames(response);
+        this.InputCapsulator = this.SortableNames((anything) ? response : this.oldResponseXHR!);
         $(this.InputCapsulator).append(this.HTMLInputConstructor());
         $(this.InputCapsulator).append(this.HTMLDateInputConstructor());            //this.InputCapsulator = this.HTMLInputConstructor();
         $(this.capsulator).append(this.InputCapsulator);
-        if (this.MayBePaginable) {
-            $(this.capsulator).append(<HTMLElement>this.buildHTMLPaginable(response));
-        }
-        $(this.capsulator).append(<HTMLElement>this.buildHTML(response));
+        if (anything) {
+            if (this.MayBePaginable) {
+                $(this.capsulator).append(<HTMLElement>this.buildHTMLPaginable(response));
+            }
+            $(this.capsulator).append(<HTMLElement>this.buildHTML(response));
+        } else {
+            this.buildHTMLEmpty();
+        } 
     }
     public CopyContentInjector(column: string): void {
         {
