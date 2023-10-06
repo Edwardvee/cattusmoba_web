@@ -1,0 +1,35 @@
+div.foro{
+    margin-top: 5em;
+    background-color: rgb(224, 224, 224);
+}
+
+div.post{
+    margin-top: 1%;
+    border-radius: 7.5px;
+}
+div.welcome{
+    margin-bottom: 5em;
+}
+.user-pfp img{
+  width: inherit;
+  max-width: 8em;
+}
+
+div.user-name a{
+    text-decoration: none;
+    color: black;
+}
+
+.post-content {
+    width: inherit;
+    padding: 1em;
+}
+.post-content a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.post-date p{
+    font-size: smaller;
+}
