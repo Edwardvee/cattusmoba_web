@@ -18,7 +18,57 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+         <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="{{url('img/empresa.png')}}" width="50" height="50"></a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ route('mainpage')}}"><img src="{{url('img/f.png')}}" width="40" height="45"></a>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav">
+              <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">  Informacion del juego</a>
+                <div class="dropdown-menu dropdownDark">
+                  <li><a class="dropdown-item dropdownText" href="{{ route('historia') }}">Historia</a></li>
+                  <li><a class="dropdown-item dropdownText" href="{{ route('patchnotes') }}">Notas del parche</a></li>
+                  <li><a class="dropdown-item dropdownText" href="{{ route('gameinfo') }}">Cómo jugar</a></li>
+                </div>
+              </div>   
+              <a href="{{route('heroes')}}" class="nav-item nav-link">Héroes</a>
+              <a href="{{route('store')}}" class="nav-item nav-link">Tienda</a>
+            </div>
+                  <form action="" class="search-bar">
+                  <input maxlength="16" id="search-content" class="input-search" type="search" placeholder="Busca un jugador" required onkeyup="javascript:checkEmpty();javascript:searchUsers(this.value);">
+                  <div id="paginator" class="invisible"> </div>
+                  <i class="fa fa-search"></i>
+                  <a class="a-search" id="searcherase" href="javascript:void(0)" onClick="erase()" id="clear-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                    </svg></a>
+              </form>
+            <div class="navbar-nav">
+                @guest
+                    <a class="nav-item"><a href="{{route('authentication')}}" class="button btn btn-secondary">Ingresa</a> </div>
+                 @endguest
+                 @auth
+                    <div class="dropdown dropdown-auto" style="padding-right: 20px">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        @php echo(auth()->user()->name); @endphp
+                        </button>
+                        <ul class="dropdown-menu" style="max-width: auto">
+                          <li><a class="dropdown-item" href="{{route('users', ['uuid' => auth()->user()->uuid])}}">Perfil</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesion</a></li>
+                        </ul>
+                      </div>      
+                @endauth
+
+            </div>
+        </div>
+    </div>
+</nav>
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="{{ route('dasomnya') }}"><img src="{{url('img/empresa.png')}}" width="50" height="50"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -61,6 +111,8 @@
         @guest
         <a class="nav-item"><a href="{{route('authentication')}}" class="button btn btn-secondary">Ingresa</a> </div>
         @endguest
+
+
         @auth
         <div class="dropdown dropdown-auto" style="padding-right: 20px">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,18 +128,10 @@
         
       </div> 
     </div>
-  </nav>
+  </nav> -->
 
   @yield("http_body")
 
-  <!-- <script>
-    const clearInput = () => {
-      const input = document.getElementsByTagName("input")[0];
-      input.value = "";
-    }
-    const clearBtn = document.getElementById("clear-btn");
-    clearBtn.addEventListener("click", clearInput);
-  </script> -->
 
 
 

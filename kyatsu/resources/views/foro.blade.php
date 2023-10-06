@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-lg-2 col-sm-12 post-user-info">
                     <div class="row d-flex text-center">
-                        <div class="col-12 mt-3 user-name">
-                            <p>Nombre de usuario</p>
+                        <div class="col-12 mt-3 mb-3 user-name">
+                            <a href="#">Nombre de usuario</a>
                         </div>
                         <div class="col-12 mt-2 mb-5 user-pfp"><img class="rounded-1 shadow"
                                 src="https://pm1.aminoapps.com/6407/de5edd6e322153713245e23c17b54ab662c5b0d8_00.jpg"
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-sm-10 post-content">
-                    <div class="row"><p class="text-muted">>>000000</p> <i></i></div>
+                    <div class="row"><a href="#" class="text-muted" onmouseover="this.className = 'text-muted text-decoration-underline'" onmouseout="this.className = 'text-muted'">>>000000</a></div>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque convallis ex quis nunc
                     lacinia, sit amet congue urna malesuada. Sed sit amet maximus felis. Suspendisse ultrices nisl elit,
                     suscipit malesuada dolor malesuada quis. Curabitur mollis augue non erat viverra, at suscipit mauris
@@ -65,6 +65,8 @@
                 </div>
             </div>
         </div>
+
+             
 
 
     </div>
