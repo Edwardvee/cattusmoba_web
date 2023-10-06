@@ -13,7 +13,11 @@ use App\Http\Controllers\RedisController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\user_info;
 use App\Models\users_info;
+use App\Models\Foro;
+
 use App\Http\Controllers\HeroesController;
+use App\Http\Controllers\ForoController;
+use Doctrine\DBAL\Schema\Index;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,10 +91,10 @@ Route::get("/patchnotes", function () {
 Route::get("/store", function () {
   return view("store");
 })->name("store");
-Route::get("/foro", function () {
-  return view("foro");
-})->name("foro");
 
+Route::resource('foro', ForoController::class);
+Route::get('/foro',[ForoController::class , 'index'])->name('foro');
+Route::get('/foro/create',[ForoController::class , 'create'])->name('foro.create');
 
 Route::get("/como jugar", function () {
   return view("como jugar");
