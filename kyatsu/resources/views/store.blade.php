@@ -2,6 +2,7 @@
 
 @section("http_body")
 
+<script src="https://sdk.mercadopago.com/js/v2"></script> 
 <head>
   <title>Kyatsu - Tienda</title>
   <link rel="stylesheet" href="{{url('css/store.css')}}">
@@ -129,12 +130,40 @@
 <div id="submit">Comprar</div>
 </div>
 <div class="btnn col">
-<script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
-data-preference-id="1244103756-31b59552-533c-4ddd-bc6a-b9c2e17583f6" data-source="button">
-</script>
-</script>
 
-<!-- <script src="https://sdk.mercadopago.com/js/v2"></script> --> 
+<?php
+$access_token='TEST-6678738600000427-092909-610f68117364afd8e10da0ca791ba649-1244103756';
+MercadoPago\SDK::setAccessToken($access_token);
+$preference=new MercadoPago\Preference();
+?>
+
+
+<div class="contenedor-btn"></div>
+
+<script>
+var public_key='TEST-ec0c3fc0-d331-4cc3-8edd-0474d32047ab';
+const mp = new MercadoPago(public_key,{
+  locale:'es-AR'
+});
+const checkout = mp.checkout({
+  preference:{
+    id:'YOUR_PREFERENCE_ID'
+  },
+render:{
+  container:'.contenedor-btn',
+  label:'pagar', 
+}
+});
+</script> 
+
+
+
+
+
+
+
+
+
 </div>
 </div>
 </div>
@@ -258,7 +287,5 @@ document.addEventListener("DOMContentLoaded", function() {
             } 
         }
     });
-    let mpbtn = document.getElementsByClassName("mercadopago-button")
-    mpbtn[0].textContent = "Pagar con Mercado Pago";
 </script>
 
