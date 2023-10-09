@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\UserManagementController;
+use App\Http\Controllers\NoticiasController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -55,9 +56,8 @@ Route::get("/user_paginator/{name}/{page}", function ($name, $page) {
   return view("user_paginator", ["name" => $name, "page" => $page]);
 })->name("user_paginator");
 
-Route::get("/", function () {
-  return view("mainpage");
-})->name("mainpage");
+Route::get("/", [NoticiasController::class , 'index']
+)->name("mainpage");
 
 Route::get("/gameinfo", function () {
   return view("gameinfo");
@@ -91,6 +91,7 @@ Route::get("/patchnotes", function () {
 Route::get("/store", function () {
   return view("store");
 })->name("store");
+Route::resource('noticias', NoticiasController::class);
 
 Route::resource('foro', ForoController::class);
 Route::get('/foro',[ForoController::class , 'index'])->name('foro');

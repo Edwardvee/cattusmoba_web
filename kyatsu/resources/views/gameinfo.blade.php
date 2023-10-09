@@ -59,14 +59,6 @@
 </main>
 
 <script>
-/*   var MPtext = ["¿Eres digno de tanta accion?", "Se parte de la historia", "¿Seras nuestro nakama?",
-        "Te odiamos Nico", "¿Es la primera vez que te vemos?", "Welcome to the jungle", "¿Como llegaste a aqui?"
-    ];
-    var rand = Math.floor(Math.random() * MPtext.length);
-    var randtext = MPtext[rand];
-    document.getElementById("rrandommsg").innerHTML = randtext;
-
- */
 
 
 window.addEventListener("scroll", reveal);

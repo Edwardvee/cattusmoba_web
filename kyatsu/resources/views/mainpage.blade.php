@@ -66,17 +66,31 @@
     <section>
         <div style="color: #A6DEFF; padding-top: 80px;" class="noticias">
             <center><h1> - Noticias - </h1></center>
-
+            <div class="card-group gap-5">
+      @foreach ($noticiasget as $noticia)
+          <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                        <img src="{{url('img/'.  $noticia["name"] .'.png')}}" class="img-fluid rounded-start" alt="..." style="height: 100%">
+                        </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                            <p class="card-text"><small class="text-muted">{{ $noticia["category"] }}</small></p>
+                            <h5 class="card-title">{{$noticia["name"] }}</h5>
+                            <p class="card-text newsText">{{ $noticia["content"] }}</p>
+                            <p class="card-text"><small class="text-muted">Subido el {{ $noticia["created_at"] }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+      @endforeach
+  </div>
         </div>
     </section>
 
     <section >
-<div class="hero-image quees reveal">
-  <div class="hero-text">
-      <h3> ¿ Qué es Kyatsu! Arena ?</h3>
-      <p>Kyatsu es un juego de estrategia por equipos en el que dos equipos de cinco campeones se enfrentan para ver quién destruye antes la base del otro. Elige de entre un elenco de 10 campeones para realizar jugadas épicas, asesinar rivales y derribar torretas para alzarte con la victoria.</p>
-  </div>
-</div>
+<div class="a quees reveal">
+
 </section>
 
 </main>
@@ -175,7 +189,6 @@ const slider = document.querySelector(".items");
 
 </script>
 <style>
-
 
 </style>
 @endsection("http_body")

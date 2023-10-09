@@ -344,3 +344,15 @@ button.heroesDesc:hover img {
 button.heroesDesc:focus {
 	outline: none;
 }
+
+.newsText{
+  max-height: 70px;
+  overflow: auto;
+}
+.card-group{
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  transform: translate(-30%, -30%);
+  user-select: none;
+}
