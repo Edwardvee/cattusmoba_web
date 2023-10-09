@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutMP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Validators\ValidatorXHR;
@@ -51,5 +52,7 @@ Route::middleware(["throttle:api"])->prefix("frontend")->group(function () {
 */
 
 })->name("frontend");
+
+Route::resource('mp', CheckoutMP::class);
 
 //Route::middleware(["throttle:api", "can: access admin", "auth", "forbid-banned-user"])->prefix("frontend")->group(function () {

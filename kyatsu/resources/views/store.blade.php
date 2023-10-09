@@ -129,50 +129,62 @@
 </svg>
 <div id="submit">Comprar</div>
 </div>
-<div class="btnn col">
+
+
+<div class="btnn col mplol" >pagar</div>
+
 
 <?php
 $access_token='TEST-6678738600000427-092909-610f68117364afd8e10da0ca791ba649-1244103756';
 MercadoPago\SDK::setAccessToken($access_token);
 $preference=new MercadoPago\Preference();
+$preference->back_urls=array(
+  "success"=>"google.com",
+  "failure"=>"youtube.com",
+  "pending"=>"ornnhub.com"
+);
+$productos=[];
+$item = new MercadoPago\Item();
+$item->title="Quirocoins";
+$item->quantity=1;
+$item->unit_price=1500;
+array_push($productos, $item);
+$preference->id;
+$preference->items=$productos;
+$preference->save();
+
 ?>
 
+</div>
+</div>
+</div>
+</div>
+</div>
 
-<div class="contenedor-btn"></div>
 
 <script>
 var public_key='TEST-ec0c3fc0-d331-4cc3-8edd-0474d32047ab';
-const mp = new MercadoPago(public_key,{
-  locale:'es-AR'
-});
-const checkout = mp.checkout({
-  preference:{
-    id:'YOUR_PREFERENCE_ID'
-  },
-render:{
-  container:'.contenedor-btn',
-  label:'pagar', 
+function botonmp() {
+  const mp = new MercadoPago(public_key, {
+                  locale: 'es-AR'
+              });
+          
+              const checkout = mp.checkout({
+                  preference: {
+                      id: '<?php echo $preference->id; ?>',
+                  },
+              });
+              // Abre el formulario de pago
+              checkout.open();
 }
-});
-</script> 
+var botonMP = document.querySelector('.mplol');
+if (botonMP) {
+    botonMP.addEventListener('click', function () {
+        // Ejecuta tu función personalizada cuando se haga clic en el botón
+        botonmp();
+    });
+}
 
-
-
-
-
-
-
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-<script>
 
  /*  modal 1er item */
 var modal = document.getElementById("myModal");
@@ -249,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function() {
     $('.mercadopago-button').css('background-color', 'transparent');
     $('.mercadopago-button').css('width', '100%');
     $('.mercadopago-button').css('color', 'black'); 
-    var boton = document.getElementsByClassName("btnn col");
+    var boton = document.getElementsByClassName("btnn col mplol");
     boton.value = "Potente";
     let currentProduct;
 
@@ -287,5 +299,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } 
         }
     });
+  let mercadobuton = document.getElementsByClassName('mplol')[0];
+  mercadobuton.innerHTML = "<i class='bi bi-cash-stack'></i> Pagar con Mercado Pago" 
 </script>
 
