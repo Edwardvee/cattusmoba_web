@@ -1,5 +1,5 @@
 @extends('maintemplate')
-<link href="css/foro.css" rel="stylesheet">
+<link href="{{url('css/foro.css')}}" rel="stylesheet">
 @section('http_headers')
 <title>Kyatsu! - Foro</title>
 @endsection
@@ -10,21 +10,53 @@
     <div class="welcome">
         <h1>Bienvenido al foro!</h1>
     </div>
+    <div class="textbox_n">
+        <form id="post_something">
+        <input type="text" name="parentPost" id="parentPost" value="0" style="display: none">
+        <textarea class="form-control" name="content" id="content_post"  rows="10"></textarea>
+        <button type="submit" class="btn btn-primary mx-auto">Subir!</button>
+        </form>
+    </div>
  <hr class="mb-3">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
     </script>
     <script>
+        function forumButton(){
+         let textboxforum = document.getElementsByClassName('textbox_n')[0];
+         if(textboxforum){
+            textboxforum.className = "textbox_f";
+         }
+         else {
+            let textboxforum = document.getElementsByClassName('textbox_f')[0];
+            textboxforum.className = "textbox_n";
+
+         }
+        }
+        $("#post_something").submit(function(e){
+            e.preventDefault();
+            var content_text = $("#content_post").val(); 
+            var isChildOf = $("#parentPost").val();
+            $.ajax({
+                url: "{{route('foro.post')}}",
+                type: "POST",
+                data: {
+                    isChildOf: isChildOf,
+                    content: content_text
+                }
+            })
+        });
+        
         $(document).ready(function() {
             $.ajax({
-                url: "{{route('foro')}}",
+                url: "@if(Request::url() === '/foro'){route('foro')} @endif @if(Request::url() === '/foro/hilo/'){route(foro.show, id)}@endif",
                 dataType: 'JSON',
                 success: function(forum_results) {
                     let foroDiv = $('.foro');
                     forum_results.forEach(post => {
                         console.log(post)
-                        $($(document.createElement('div')).addClass("container-fluid post border").append($(document.createElement('div')).addClass('row').append($(document.createElement('div')).addClass('col-lg-2 col-sm-12 post-user-info').append($(document.createElement('div')).addClass('row d-flex text-center').append($(document.createElement('div')).addClass('col-12 mt-3 mb-3 user-name').append($(document.createElement('a')).attr('href', '#').html(Object.values(post)[2]))).append($(document.createElement('div')).addClass('col-12 mt-2 mb-5 user-pfp').append($(document.createElement('img')).attr('src', 'https://pm1.aminoapps.com/6407/de5edd6e322153713245e23c17b54ab662c5b0d8_00.jpg').addClass('rounded-1 shadow'))).append($(document.createElement('div')).addClass('col-12 mt-4 post-date text-wrap').append($(document.createElement('p')).addClass('text-muted').html(Object.values(post)[6]))))).append($(document.createElement('div')).addClass('col-lg-8 col-sm-10 post-content').append($(document.createElement('div')).addClass('row').append($(document.createElement('a')).addClass('text-muted id' + Object.values(post)[0] ).attr('href','#').attr('onmouseover','this.className = "text-muted text-decoration-underline id' + Object.values(post)[0] + '"').attr('onmouseout','this.className = "text-muted id' + Object.values(post)[0] + '"').html(">>" + Object.values(post)[0]))).append($(document.createElement('div')).addClass('container-fluid').html(Object.values(post)[3]))).append($(document.createElement('div')).addClass('col-lg-2 col-sm-2 post-buttons').append($(document.createElement('div')).addClass('row d-flex text-center').append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-chat').attr('onclick','reply()').attr('onmouseover','this.className = "bi bi-chat-fill"').attr('onmouseout','this.className = "bi bi-chat"')).append($(document.createElement('p')).html(Object.values(post)[4]))).append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-heart').attr('onclick','like()').attr('onmouseover','this.className = "bi bi-heart-fill"').attr('onmouseout','this.className = "bi bi-heart"')).append($(document.createElement('p')).html(Object.values(post)[5]))).append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-flag').attr('onclick','flag()').attr('onmouseover','this.className = "bi bi-flag-fill"').attr('onmouseout','this.className = "bi bi-flag"'))))))).appendTo(foroDiv);
+                        $($(document.createElement('div')).addClass("container-fluid post border").append($(document.createElement('div')).addClass('row').append($(document.createElement('div')).addClass('col-lg-2 col-sm-12 post-user-info').append($(document.createElement('div')).addClass('row d-flex text-center').append($(document.createElement('div')).addClass('col-12 mt-3 mb-3 user-name').append($(document.createElement('a')).attr('href', '#').html(Object.values(post)[2]))).append($(document.createElement('div')).addClass('col-12 mt-2 mb-5 user-pfp').append($(document.createElement('img')).attr('src', 'https://pm1.aminoapps.com/6407/de5edd6e322153713245e23c17b54ab662c5b0d8_00.jpg').addClass('rounded-1 shadow'))).append($(document.createElement('div')).addClass('col-12 mt-4 post-date text-wrap').append($(document.createElement('p')).addClass('text-muted').html(Object.values(post)[6]))))).append($(document.createElement('div')).addClass('col-lg-8 col-sm-10 post-content').append($(document.createElement('div')).addClass('row').append($(document.createElement('a')).addClass('text-muted id' + Object.values(post)[0] ).attr('href','{{route("foro.show", "")}}' + '/' + Object.values(post)[0]).attr('onmouseover','this.className = "text-muted text-decoration-underline id' + Object.values(post)[0] + '"').attr('onmouseout','this.className = "text-muted id' + Object.values(post)[0] + '"').html(">>" + Object.values(post)[0]))).append($(document.createElement('div')).addClass('container-fluid').html(Object.values(post)[3]))).append($(document.createElement('div')).addClass('col-lg-2 col-sm-2 post-buttons').append($(document.createElement('div')).addClass('row d-flex text-center').append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-chat').attr('onclick','reply()').attr('onmouseover','this.className = "bi bi-chat-fill"').attr('onmouseout','this.className = "bi bi-chat"')).append($(document.createElement('p')).html(Object.values(post)[4]))).append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-heart').attr('onclick','like()').attr('onmouseover','this.className = "bi bi-heart-fill"').attr('onmouseout','this.className = "bi bi-heart"')).append($(document.createElement('p')).html(Object.values(post)[5]))).append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-flag').attr('onclick','flag()').attr('onmouseover','this.className = "bi bi-flag-fill"').attr('onmouseout','this.className = "bi bi-flag"'))))))).appendTo(foroDiv);
                         if(Object.values(post)[1] && Object.values(post)[1]>0){
-                            $($(document.createElement('a')).addClass('text-mute fst-italic text-end').html( "   --Respondiendo a: " + Object.values(post)[1])).appendTo($(".id" + Object.values(post)[0]))
+                            $($(document.createElement('a')).attr('href','{{route("foro.show", "")}}' + '/' + Object.values(post)[1]).addClass('text-mute fst-italic text-end').html( "   --Respondiendo a: " + Object.values(post)[1])).appendTo($(".id" + Object.values(post)[0]))
                         }
                     }
                     
@@ -33,7 +65,7 @@
             })
         });
     </script>
-    <a href="#head"><svg xmlns="http://www.w3.org/2000/svg" id="fixedbutton" width="5vw" height="5vh" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+    <a href="#head"><svg xmlns="http://www.w3.org/2000/svg" onclick="forumButton()" id="fixedbutton" width="5vw" height="5vh" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 </svg></a>
 

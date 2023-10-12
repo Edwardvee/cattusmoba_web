@@ -10,6 +10,12 @@ div.post{
 div.welcome{
     margin-bottom: 5em;
 }
+div.textbox_f{
+    display: block;
+}
+div.textbox_n{
+    display: none;
+}
 .user-pfp img{
   width: inherit;
   max-width: 8em;

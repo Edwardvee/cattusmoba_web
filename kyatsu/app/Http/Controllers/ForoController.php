@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Foro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class ForoController extends Controller
 {
@@ -25,7 +26,21 @@ class ForoController extends Controller
      */
     public function create()
     {
-        
+
+    }
+    public function post(Request $request)
+    {
+            Foro::insert(array(
+                'user_poster' => auth()->user()->name,
+                'isChildOf' => $request->isChildOf,
+                'content' => $request->content,
+                'reply_count' => 0,
+                'like_count' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'deleted_at' => NULL
+            ));
+            return back();
     }
 
     /**
@@ -39,9 +54,12 @@ class ForoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Foro $foro)
+    public function show($id, Request $request)
     {
-        //
+        if($request->ajax()){
+            return json_encode(Foro::query()->where('id','=',$id)->union(Foro::query()->where('isChildOf','=',$id))->get());
+            }
+            return view("foro", ['id' => $id]); 
     }
 
     /**
