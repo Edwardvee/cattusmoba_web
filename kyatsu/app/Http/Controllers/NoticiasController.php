@@ -13,8 +13,13 @@ class NoticiasController extends Controller
     public function index(Request $request)
     {
        $noticiasget = noticias::all();
+        if ($noticiasget->isNotEmpty()){
+            return view('mainpage' , ['noticiasget' => noticias::findOrFail(1)->limit(3)->get()]);
 
-       return view('mainpage' , ['noticiasget' => noticias::find(1)->limit(3)->get()]);
+        }
+        else{
+            return view('mainpage', ['noticiasget' => []]);
+        }
     }
 
     /**
