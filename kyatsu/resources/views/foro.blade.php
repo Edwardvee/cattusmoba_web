@@ -64,8 +64,16 @@
                 }
             })
         });
+        // Get the button
+
     </script>
     <a href="#head"><svg xmlns="http://www.w3.org/2000/svg" onclick="forumButton()" id="fixedbutton" width="5vw" height="5vh" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+
+<a onclick="topFunction()" id="myBtn"><svg xmlns="http://www.w3.org/2000/svg" width="5vw" height="5vh" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+</svg></a>
+
+    <a href="#head"><svg xmlns="http://www.w3.org/2000/svg" id="fixedbutton" width="5vw" height="5vh" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 </svg></a>
 
@@ -115,7 +123,43 @@
     position: fixed;
     bottom: 0px;
     right: 0px; 
-    margin-bottom: 10px ;
+    margin-bottom: 2% ;
+}
+#fixedbutton:hover{
+    color: #66a3ff;
+    transform: translateY(-0.25em);
+}
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 7%;
+  right: 0px;
+  cursor: pointer;
+  margin-bottom: 2% ;
+}
+
+#myBtn:hover {
 }
 </style>
+<script>
+    let mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
 @endsection
