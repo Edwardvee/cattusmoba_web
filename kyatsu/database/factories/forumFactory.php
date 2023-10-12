@@ -15,25 +15,22 @@ class forumFactory extends Factory
      * Define the model's default state.
      *
      * @return array<string, mixed>
-     */
+     */ 
     protected $model = Foro::class;
 
     public function definition(): array
     {
-        function Hola()
-        {
-        }
         return [
             /*             'id' => fake()->unique()->numberBetween(1,234),
  */
-            'user_poster' => fake()->name(),
-            'isChildOf' => fake()->numberBetween(2, 25),
-            'content' => fake()->words(120),
-            'reply_count' => fake()->numberBetween(0, 13),
-            'like_count' => fake()->numberBetween(0, 432),
-            'created_at' => fake()->dateTimeThisYear(),
+            'user_poster' => $this->faker->firstName(),
+            'isChildOf' => $this->faker->numberBetween(0, 25),
+            'content' => $this->faker->paragraph(6),
+            'reply_count' => $this->faker->numberBetween(0, 13),
+            'like_count' => $this->faker->numberBetween(0, 432),
+            'created_at' => $this->faker->dateTime(),
+            'updated_at' => $this->faker->dateTime(),
             'deleted_at' => NULL
-
         ];
     }
 }
