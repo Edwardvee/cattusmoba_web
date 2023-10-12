@@ -91,6 +91,10 @@ Route::get("/patchnotes", function () {
 Route::get("/store", function () {
   return view("store");
 })->name("store");
+Route::get("/store/{status}", function () {
+  return view("store");
+})->name("store.status");
+
 Route::resource('noticias', NoticiasController::class);
 
 Route::resource('foro', ForoController::class);

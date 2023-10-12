@@ -134,26 +134,27 @@
 <div class="btnn col mplol" >pagar</div>
 
 
-<?php
+@php
 $access_token='TEST-6678738600000427-092909-610f68117364afd8e10da0ca791ba649-1244103756';
 MercadoPago\SDK::setAccessToken($access_token);
 $preference=new MercadoPago\Preference();
 $preference->back_urls=array(
-  "success"=>"google.com",
-  "failure"=>"youtube.com",
-  "pending"=>"ornnhub.com"
+  "success"=>"localhost:8000/store/exito",
+  "failure"=>"localhost:8000/store/error",
+  "pending"=>"localhost:8000/store/pendiente"
 );
 $productos=[];
 $item = new MercadoPago\Item();
 $item->title="Quirocoins";
 $item->quantity=1;
-$item->unit_price=1500;
+$item->unit_price=1;
 array_push($productos, $item);
 $preference->id;
 $preference->items=$productos;
 $preference->save();
 
-?>
+
+@endphp
 
 </div>
 </div>
@@ -182,6 +183,8 @@ if (botonMP) {
     botonMP.addEventListener('click', function () {
         // Ejecuta tu función personalizada cuando se haga clic en el botón
         botonmp();
+   
+      
     });
 }
 
@@ -301,5 +304,26 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   let mercadobuton = document.getElementsByClassName('mplol')[0];
   mercadobuton.innerHTML = "<i class='bi bi-cash-stack'></i> Pagar con Mercado Pago" 
+ 
+
+    let urlpag = window.location.toString()
+    console.log(urlpag)
+    if(urlpag.search('http://localhost:8000/store/exito') != -1){
+      
+     let previoustab = window.open("http://localhost:8000/store");
+      previoustab.close()
+
+      alert('exito')
+    }
+    else if(urlpag.search('http://localhost:8000/store/error') != -1){
+      let previoustab = window.open("http://localhost:8000/store");
+      previoustab.close()    }
+    else if(urlpag.search('http://localhost:8000/store/pendiente') != -1){
+      let previoustab = window.open("http://localhost:8000/store");
+        previoustab.close()
+      alert('pendiente')
+    }
+   
+
 </script>
 
