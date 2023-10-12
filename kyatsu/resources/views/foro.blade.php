@@ -10,7 +10,7 @@
     <div class="welcome">
         <h1>Bienvenido al foro!</h1>
     </div>
-
+ <hr class="mb-3">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
     </script>
     <script>
@@ -23,8 +23,8 @@
                     forum_results.forEach(post => {
                         console.log(post)
                         $($(document.createElement('div')).addClass("container-fluid post border").append($(document.createElement('div')).addClass('row').append($(document.createElement('div')).addClass('col-lg-2 col-sm-12 post-user-info').append($(document.createElement('div')).addClass('row d-flex text-center').append($(document.createElement('div')).addClass('col-12 mt-3 mb-3 user-name').append($(document.createElement('a')).attr('href', '#').html(Object.values(post)[2]))).append($(document.createElement('div')).addClass('col-12 mt-2 mb-5 user-pfp').append($(document.createElement('img')).attr('src', 'https://pm1.aminoapps.com/6407/de5edd6e322153713245e23c17b54ab662c5b0d8_00.jpg').addClass('rounded-1 shadow'))).append($(document.createElement('div')).addClass('col-12 mt-4 post-date text-wrap').append($(document.createElement('p')).addClass('text-muted').html(Object.values(post)[6]))))).append($(document.createElement('div')).addClass('col-lg-8 col-sm-10 post-content').append($(document.createElement('div')).addClass('row').append($(document.createElement('a')).addClass('text-muted id' + Object.values(post)[0] ).attr('href','#').attr('onmouseover','this.className = "text-muted text-decoration-underline id' + Object.values(post)[0] + '"').attr('onmouseout','this.className = "text-muted id' + Object.values(post)[0] + '"').html(">>" + Object.values(post)[0]))).append($(document.createElement('div')).addClass('container-fluid').html(Object.values(post)[3]))).append($(document.createElement('div')).addClass('col-lg-2 col-sm-2 post-buttons').append($(document.createElement('div')).addClass('row d-flex text-center').append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-chat').attr('onclick','reply()').attr('onmouseover','this.className = "bi bi-chat-fill"').attr('onmouseout','this.className = "bi bi-chat"')).append($(document.createElement('p')).html(Object.values(post)[4]))).append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-heart').attr('onclick','like()').attr('onmouseover','this.className = "bi bi-heart-fill"').attr('onmouseout','this.className = "bi bi-heart"')).append($(document.createElement('p')).html(Object.values(post)[5]))).append($(document.createElement('div')).addClass('col-12 mt-3').append($(document.createElement('i')).addClass('bi bi-flag').attr('onclick','flag()').attr('onmouseover','this.className = "bi bi-flag-fill"').attr('onmouseout','this.className = "bi bi-flag"'))))))).appendTo(foroDiv);
-                        if(Object.values(post)[1]){
-                            $($(document.createElement('a')).addClass('text-mute fst-italic text-end').html( "--Respondiendo a: " + Object.values(post)[1])).appendTo($(".id" + Object.values(post)[0]))
+                        if(Object.values(post)[1] && Object.values(post)[1]>0){
+                            $($(document.createElement('a')).addClass('text-mute fst-italic text-end').html( "   --Respondiendo a: " + Object.values(post)[1])).appendTo($(".id" + Object.values(post)[0]))
                         }
                     }
                     
