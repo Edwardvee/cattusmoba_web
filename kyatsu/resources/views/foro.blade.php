@@ -33,7 +33,9 @@
             })
         });
     </script>
-
+    <a href="#head"><svg xmlns="http://www.w3.org/2000/svg" id="fixedbutton" width="5vw" height="5vh" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+</svg></a>
 
     <!-- <div class="container-fluid post border">
         <div class="row">
@@ -76,4 +78,12 @@
 
 </div>
 
+<style>
+    #fixedbutton {
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    margin-bottom: 10px ;
+}
+</style>
 @endsection
