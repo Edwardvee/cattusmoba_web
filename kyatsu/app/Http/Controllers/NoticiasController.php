@@ -12,9 +12,9 @@ class NoticiasController extends Controller
      */
     public function index(Request $request)
     {
-       $noticiasget = noticias::all();
-
-       return view('mainpage' , ['noticiasget' => noticias::find(1)->limit(3)->get()]);
+        $ultimasNoticias = Noticias::orderBy('created_at', 'desc')->take(3)->get();
+    
+        return view('mainpage', ['noticiasget' => $ultimasNoticias]);
     }
 
     /**
