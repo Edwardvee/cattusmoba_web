@@ -15,7 +15,7 @@ class ForoController extends Controller
     public function index(Request $request)
     {  
         if($request->ajax()){
-        return json_encode(Foro::all());
+        return json_encode(Foro::orderBy('id','desc')->get());
         }
         return view("foro");
        
@@ -30,17 +30,20 @@ class ForoController extends Controller
     }
     public function post(Request $request)
     {
-            Foro::insert(array(
-                'user_poster' => auth()->user()->name,
-                'isChildOf' => $request->isChildOf,
-                'content' => $request->content,
-                'reply_count' => 0,
-                'like_count' => 0,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'deleted_at' => NULL
-            ));
-            return back();
+        if($request->token){
+        Foro::insert(array(
+            'user_poster' => auth()->user()->name,
+            'isChildOf' => $request->isChildOf,
+            'content' => $request->content,
+            'reply_count' => 0,
+            'like_count' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'deleted_at' => NULL
+        ));
+        return back();
+    }
+
     }
 
     /**
@@ -48,12 +51,14 @@ class ForoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**
      * Display the specified resource.
      */
+   
+
     public function show($id, Request $request)
     {
         if($request->ajax()){
