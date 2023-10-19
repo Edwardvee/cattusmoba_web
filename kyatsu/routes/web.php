@@ -88,6 +88,8 @@ Route::get("/patchnotes", function () {
   return view("patchnotes");
 })->name("patchnotes");
 
+
+
 Route::get("/store", function () {
   return view("store");
 })->name("store");
@@ -95,7 +97,9 @@ Route::get("/store/{status}", function () {
   return view("store");
 })->name("store.status");
 
+
 Route::resource('noticias', NoticiasController::class);
+Route::get("/noticias", [NoticiasController::class , 'notPerera'])->name("noticias");
 
 Route::resource('foro', ForoController::class);
 Route::get('/foro',[ForoController::class , 'index'])->name('foro');

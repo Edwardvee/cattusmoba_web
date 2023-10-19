@@ -16,6 +16,12 @@ class NoticiasController extends Controller
     
         return view('mainpage', ['noticiasget' => $ultimasNoticias]);
     }
+    public function notPerera(Request $request)
+    {
+        $ultimasNoticias = Noticias::orderBy('created_at', 'desc')->get();
+    
+        return view('noticias', ['getnoticias' => $ultimasNoticias]);
+    }
 
     /**
      * Show the form for creating a new resource.

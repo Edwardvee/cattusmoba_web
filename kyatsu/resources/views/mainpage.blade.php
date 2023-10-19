@@ -68,7 +68,7 @@
             <center><h1> - Noticias - </h1></center>
             <div class="card-group gap-5">
       @foreach ($noticiasget as $noticia)
-          <div class="card mb-4" style="max-width: 540px;">
+          <div class="card mb-4" style="">
                     <div class="row g-0">
                         <div class="col-md-4">
                         <img src="{{url('img/'.  $noticia["name"] .'.png')}}" class="img-fluid rounded-start" alt="..." style="height: 100%">

@@ -317,7 +317,6 @@ button.heroesDesc:before {
 }
 button.adc:before {
 	content: 'Daño';
-
 }
 button.tank:before {
 	content: 'Tanque';
@@ -350,9 +349,5 @@ button.heroesDesc:focus {
   overflow: auto;
 }
 .card-group{
-  position: absolute;
-  top: 30%;
-  left: 30%;
-  transform: translate(-30%, -30%);
-  user-select: none;
+  margin: 5%;
 }
