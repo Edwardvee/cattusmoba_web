@@ -15,7 +15,7 @@ class ForoController extends Controller
     public function index(Request $request)
     {  
         if($request->ajax()){
-        return json_encode(Foro::orderBy('id','desc')->get());
+        return json_encode(Foro::orderBy('id','desc')->take(20)->get());
         }
         return view("foro");
        
