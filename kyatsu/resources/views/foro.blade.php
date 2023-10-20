@@ -17,7 +17,7 @@
                 <input type="text" name="parentPost" id="parentPost" value="0" style="display: none">
                 <textarea class="form-control" name="content" id="content_post" rows="10"></textarea>
                 <div class="d-flex my-3 justify-content-end">
-                    <button type="submit" onclick="forumButton()" class="btn btn-primary"><i class="bi bi-send"></i>
+                    <button type="submit" onclick="forumButton()" id="submit_comment" class="btn btn-primary"><i class="bi bi-send"></i>
                         Subir!</button>
                 </div>
             </form>
@@ -33,6 +33,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script>
+
             function forumButton() {
                 let textboxforum = document.getElementsByClassName('textbox_n')[0];
                 if (textboxforum) {
@@ -43,8 +44,14 @@
 
                 }
             }
-
-            $("#cargando").hide()
+           @php 
+           if(!auth()->user()){
+            echo "$('#submit_comment').click(function(){
+                window.location = '" . url('authentication') . "'
+            }); $('#submit_comment').text('Inicia sesion para comentar!');";
+           }
+           @endphp
+            $("#cargando").hide();
 
             function callAjax() {
                 $(document).ready(function() {

@@ -98,13 +98,13 @@ Route::get("/store/{status}", function () {
   return view("store");
 })->name("store.status");
 
-/* Route::get("/extras", function () {
+Route::get("/extras", function () {
   return view("extras");
-})->name("extras"); */
+})->name("extras"); 
 
-/* 
-Route::resource('extras', HeroesController::class);
-Route::get("/extras", [HeroesController::class , 'heroes4extra'])->name("extras"); */
+
+/* Route::resource('extras', HeroesController::class);
+Route::get("/extras", [HeroesController::class , 'heroes4extra'])->name("extras"); */ 
 
 Route::resource('noticias', NoticiasController::class);
 Route::get("/noticias", [NoticiasController::class , 'notPerera'])->name("noticias");

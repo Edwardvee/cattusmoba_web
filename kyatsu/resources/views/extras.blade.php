@@ -22,14 +22,6 @@
     
     </div>
     
-  <!--    @foreach ($getheroes as $heroes)
-    
-                        <div class="row g-0">
-                        <img src="{{url('img/heros_img/'.  $heroes["uuid"] .'.png')}}" class="img-fluid rounded-start" alt="..." style="height: 100%">
-                        </div>
-        
-    
-     @endforeach -->
     <script src="./script.js"></script>
   </body>
 
