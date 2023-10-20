@@ -1,72 +1,68 @@
-@section("http_body")
-
-  <head>
+<head>
     <title>Ta Te Ti</title>
-    <link rel="stylesheet" href="./style.css">
-  </head>
-  <body>
+</head>
+<body>
     <div class="d-flex text-center">
-      <h1 class="text-center">Ta-Te-Ti</h1>
-   <center> <div id="board">
-      <div class="cells"></div>
-      <div class="cells"></div>
-      <div class="cells"></div>
-      <div class="cells"></div>
-      <div class="cells"></div>
-      <div class="cells"></div>
-      <div class="cells"></div>
-      <div class="cells"></div>
-      <div class="cells"></div>
-      <button id="reset-button">Reiniciar Juego</button>
-    </div></center>
-    
+        <h1 class="text-center">Ta-Te-Ti</h1>
+        <center>
+            <div id="board">
+                <div class="cells player"></div>
+                <div class="cells player"></div>
+                <div class="cells player"></div>
+                <div class="cells player"></div>
+                <div class="cells player"></div>
+                <div class="cells player"></div>
+                <div class="cells player"></div>
+                <div class="cells player"></div>
+                <div class="cells player"></div>
+                <button id="reset-button">Reiniciar Juego</button>
+            </div>
+        </center>
     </div>
-    
-  <!--    @foreach ($getheroes as $heroes)
-    
-                        <div class="row g-0">
-                        <img src="{{url('img/heros_img/'.  $heroes["uuid"] .'.png')}}" class="img-fluid rounded-start" alt="..." style="height: 100%">
-                        </div>
-        
-    
-     @endforeach -->
-    <script src="./script.js"></script>
-  </body>
+    <div class="col-12">
+    @foreach ($getheroes as $heroes)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <a><button class="heroes" style="background-image: url('img/heros_img/@php echo $heroes["uuid"];@endphp.png')"></a>
+    @endforeach
+    </div>
+</body>
 <style>
+  .heroes{
+    width: 120px;
+    height: 120px;
+    background-size: cover ;
+  }
     #board {
-  display: flex;
-  flex-wrap: wrap;
-  width: 300px;
-  height: 300px;
-}
+        display: flex;
+        flex-wrap: wrap;
+        width: 300px;
+        height: 300px;
+    }
 
-.cells {
-  width: 30%;
-  height: 100px;
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 60px;
-  cursor: pointer;
-}
+    .cells {
+        width: 30%;
+        height: 100px;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 60px;
+        cursor: pointer;
+    }
+
+    .player-x {
+        background-image: url('ruta_imagen_jugador_x.png');
+        background-size: cover;
+    }
+
+    .player-o {
+        background-image: url('ruta_imagen_jugador_o.png');
+        background-size: cover;
+    }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <script>
 const cells = document.querySelectorAll(".cells");
 const winConditions = [
@@ -79,7 +75,17 @@ const winConditions = [
   [0, 4, 8],
   [2, 4, 6]
 ];
-let currentPlayer = "X";
+
+function Player(name, token, url) {
+  this.name = name;
+  this.token = token;
+  this.url = url;
+}
+
+const player1 = new Player("ivan", "X", "{{url('img/heros_img/90b2b001-072d-4e42-8bb7-4a0346c4834c.png')}}");
+const player2 = new Player("manuel", "O", "{{url('img/heros_img/795773be-63a5-4d48-83d1-fb6a2a744ce6.png')}}");
+
+
 let gameEnd = false;
 
 cells.forEach(cell => {
@@ -88,17 +94,17 @@ cells.forEach(cell => {
       return;
     }
     if (cell.textContent === "") {
-      cell.textContent = currentPlayer;
+      cell.html = Player.url;
       if (checkWin()) {
         gameEnd = true;
-        alert(`${currentPlayer} es el ganador!`);
+        alert(Player.name + ' es el ganador!');
         showResetButton(); // Muestra el botón de reinicio
       } else if (checkTie()) {
         gameEnd = true;
         alert("Excelente juego, es un empate!");
         showResetButton(); // Muestra el botón de reinicio
       } else {
-        currentPlayer = currentPlayer === "X" ? "O" : "X";
+          currentPlayer = currentPlayer === "X" ? "O" : "X";
       }
     }
   });
@@ -113,7 +119,7 @@ resetButton.addEventListener("click", () => {
 function checkWin() {
   return winConditions.some(condition => {
     return condition.every(index => {
-      return cells[index].textContent === currentPlayer;
+      return cells[index].textContent === player1.ficha;
     });
   });
 }
@@ -140,4 +146,3 @@ function resetGame() {
 }
 
 </script>
-@endsection("http_body")

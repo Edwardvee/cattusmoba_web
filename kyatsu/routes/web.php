@@ -19,6 +19,7 @@ use App\Models\Foro;
 use App\Http\Controllers\HeroesController;
 use App\Http\Controllers\ForoController;
 use Doctrine\DBAL\Schema\Index;
+use App\Models\Heroes;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,9 +103,15 @@ Route::get("/store/{status}", function () {
   return view("extras");
 })->name("extras"); */
 
-/* 
-Route::resource('extras', HeroesController::class);
-Route::get("/extras", [HeroesController::class , 'heroes4extra'])->name("extras"); */
+
+
+//Route::get("/extras", [HeroesController::class , 'heroes4extra'])->name("extras"); 
+Route::get("extras2", function () {
+      $heroesparaextras = heroes::orderBy('created_at', 'desc')->get();
+   
+      return view('extras', ['getheroes' => $heroesparaextras]);
+});
+
 
 Route::resource('noticias', NoticiasController::class);
 Route::get("/noticias", [NoticiasController::class , 'notPerera'])->name("noticias");

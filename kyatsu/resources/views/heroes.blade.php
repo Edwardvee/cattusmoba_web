@@ -59,7 +59,6 @@
       </div>
 
       <div class="col-12 align-self-end darkbg"> <!--selector de heroes-->
-        "<a href='" . $hero_ind[name] . "'><button class='heroes' id='" . $hero_ind[name] . "' style='background-image: url(../img/heronamealt.png)'></button></a> </div>
     </div>
   </div>
 </body>
