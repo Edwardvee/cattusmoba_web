@@ -102,9 +102,9 @@ Route::get("/store/{status}", function () {
   return view("extras");
 })->name("extras"); */
 
-
+/* 
 Route::resource('extras', HeroesController::class);
-Route::get("/extras", [HeroesController::class , 'heroes4extra'])->name("extras");
+Route::get("/extras", [HeroesController::class , 'heroes4extra'])->name("extras"); */
 
 Route::resource('noticias', NoticiasController::class);
 Route::get("/noticias", [NoticiasController::class , 'notPerera'])->name("noticias");
