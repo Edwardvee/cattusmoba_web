@@ -106,9 +106,8 @@ Route::get("/extras", function () {
 
 
 //Route::get("/extras", [HeroesController::class , 'heroes4extra'])->name("extras"); 
-Route::get("extras2", function () {
+Route::get("extras", function () {
       $heroesparaextras = heroes::orderBy('created_at', 'desc')->get();
-   
       return view('extras', ['getheroes' => $heroesparaextras]);
 });
 

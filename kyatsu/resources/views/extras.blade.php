@@ -19,30 +19,8 @@
             </div>
         </center>
     </div>
-<<<<<<< HEAD
     <div class="col-12">
     @foreach ($getheroes as $heroes)
-=======
-    
-    <script src="./script.js"></script>
-  </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> c1234f17f31581670613803e6a139e60c5c96293
-
-
     <a><button class="heroes" style="background-image: url('img/heros_img/@php echo $heroes["uuid"];@endphp.png')"></a>
     @endforeach
     </div>
@@ -102,7 +80,7 @@ function Player(name, token, url) {
   this.url = url;
 }
 
-const player1 = new Player("ivan", "X", "{{url('img/heros_img/90b2b001-072d-4e42-8bb7-4a0346c4834c.png')}}");
+const player1 = new Player("ivan", "X", "<img style='width: inherit'src='{{url('img/heros_img/90b2b001-072d-4e42-8bb7-4a0346c4834c.png')}}'></img>");
 const player2 = new Player("manuel", "O", "{{url('img/heros_img/795773be-63a5-4d48-83d1-fb6a2a744ce6.png')}}");
 
 
@@ -114,7 +92,7 @@ cells.forEach(cell => {
       return;
     }
     if (cell.textContent === "") {
-      cell.html = Player.url;
+      cell.innerHTML = currentPlayer.url;
       if (checkWin()) {
         gameEnd = true;
         alert(Player.name + ' es el ganador!');
@@ -123,8 +101,6 @@ cells.forEach(cell => {
         gameEnd = true;
         alert("Excelente juego, es un empate!");
         showResetButton(); // Muestra el botón de reinicio
-      } else {
-          currentPlayer = currentPlayer === "X" ? "O" : "X";
       }
     }
   });
