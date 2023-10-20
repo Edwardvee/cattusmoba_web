@@ -30,4 +30,11 @@ class HeroesController extends Controller
     //Si haces un where con el name, solo te devolvera un solo resultado y no paginara correctamente.
     return Heroes::whereBetween($validated["date_method"], [$validated["date_start"] . " 00:00", $validated["date_end"] . " 23:59"] ) ->orderBy($validated["method"], $validated["order"])->paginate(15, ["*"], "page", $validated["page"]);
     }
+    
+    public function heroes4extra(Request $request)
+    {
+        $heroesparaextras = heroes::orderBy('created_at', 'desc')->get();
+    
+        return view('extras', ['getheroes' => $heroesparaextras]);
+    }
 }
