@@ -19,8 +19,28 @@
             </div>
         </center>
     </div>
+<<<<<<< HEAD
     <div class="col-12">
     @foreach ($getheroes as $heroes)
+=======
+    
+    <script src="./script.js"></script>
+  </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> c1234f17f31581670613803e6a139e60c5c96293
 
 
     <a><button class="heroes" style="background-image: url('img/heros_img/@php echo $heroes["uuid"];@endphp.png')"></a>

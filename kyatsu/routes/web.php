@@ -99,9 +99,9 @@ Route::get("/store/{status}", function () {
   return view("store");
 })->name("store.status");
 
-/* Route::get("/extras", function () {
+Route::get("/extras", function () {
   return view("extras");
-})->name("extras"); */
+})->name("extras"); 
 
 
 
