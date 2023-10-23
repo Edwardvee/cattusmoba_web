@@ -17,6 +17,8 @@ use App\Models\Foro;
 
 use App\Http\Controllers\HeroesController;
 use App\Http\Controllers\ForoController;
+use App\Models\banReason;
+use Cog\Laravel\Ban\Models\Ban;
 use Doctrine\DBAL\Schema\Index;
 
 /*
@@ -91,6 +93,14 @@ Route::get("/patchnotes", function () {
 Route::get("/store", function () {
   return view("store");
 })->name("store");
+
+Route::get("/banned", function () {
+ // $banned = Ban::latest(Auth::user()->uuid);
+  $banned = (Ban::where("bannable_id", Auth::user()->uuid)->latest()->get()->toArray())[0];
+  $banner = User::Find($banned['created_by_id'])->name;
+  $ban_reason = banReason::Find($banned['ban_reason_uuid'])->name;
+  return view("banned", ["banned" => $banned, "banner" => $banner, "ban_reason" => $ban_reason]);
+})->middleware(["auth", "banned"]);
 
 Route::resource('foro', ForoController::class);
 Route::get('/foro',[ForoController::class , 'index'])->name('foro');

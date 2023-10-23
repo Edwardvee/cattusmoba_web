@@ -1,13 +1,7 @@
 @extends("admin.admintemplate")
 
 @section("http_headers")
-<script type="text/javascript">
-    $(document).ready(() => {
-        $("#edit_user_url").attr("href", route("admin.admin_users.edit", {
-            admin_user: "{{$user['uuid']}}"
-        }))
-    });
-</script>
+
 
 @endsection
 @section("http_body")
@@ -31,6 +25,9 @@
             <div class="row">
                 <div class="col-auto me-auto">
                 <a class="btn btn-primary" id="edit_user_url">Editar este usuario</a>
+                </div>
+                <div class="col-auto me-auto">
+                <a class="btn btn-primary" href="{{route('admin.bannable.create', ['uuid' => $user['uuid']])}}">Banear este usuario</a>
                 </div>
                 <div class="col-auto">
                 <a class="btn btn-danger" id="edit_user_url"><i class="bi bi-trash"></i></a>

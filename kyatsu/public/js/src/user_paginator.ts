@@ -315,7 +315,8 @@ export abstract class Paginator {
                 // else {
                     this.xhrSuccess(response, (response.data.length != 0));
                 //}
-                this.oldResponseXHR = this.responseXHR;
+                
+                this.oldResponseXHR ??= this.responseXHR;
             },
             statusCode: {
                 429: () => {
@@ -447,6 +448,11 @@ export abstract class Paginator {
             timeout = setTimeout(later, wait);
         };
     }*/
+    public reboot(): void {
+        new URL(window.location.href).search = "";
+        this.information = this.inputHandlerSetup(this.defaultProxy());
+        Object.assign(this.information, { name: "null" });
+    }
 }
 
 export abstract class searchPaginator extends Paginator {
@@ -711,29 +717,31 @@ export abstract class TablePaginator extends Paginator {
     public buildHTMLEmpty(): HTMLTableElement | undefined {
         return $($(document.createElement("table")).addClass("table table-hover")
             .append($(document.createElement("thead")).addClass("table-dark")))
-            .append($(document.createElement("tr")).append($(document.createElement("th")).html("No hay resultados")))
+            .append($(document.createElement("tr")).append($(document.createElement("th")).html("No hay resultados"))).
+            append($(document.createElement("button")).html("Reiniciar busqueda...").on("click", () => {
+                this.reboot();
+            }))
             .get(0)!;
     }
     public override xhrSuccess(response: PaginatorResponseInterface, anything: boolean): void {
 
         //Reiniciar en caso de resultado vacio
         if (anything == false && this.oldResponseXHR == null) {
-         //   Object.assign(this.information, this.JSON)
-            window.location.href = window.location.origin + window.location.pathname;
+            this.reboot();
             return;
         }
         $(this.capsulator).empty();
-        this.InputCapsulator = this.SortableNames((anything) ? response : this.oldResponseXHR!);
-        $(this.InputCapsulator).append(this.HTMLInputConstructor());
-        $(this.InputCapsulator).append(this.HTMLDateInputConstructor());            //this.InputCapsulator = this.HTMLInputConstructor();
-        $(this.capsulator).append(this.InputCapsulator);
         if (anything) {
+            this.InputCapsulator = this.SortableNames((anything) ? response : this.oldResponseXHR!);
+            $(this.InputCapsulator).append(this.HTMLInputConstructor());
+            $(this.InputCapsulator).append(this.HTMLDateInputConstructor());            //this.InputCapsulator = this.HTMLInputConstructor();
+            $(this.capsulator).append(this.InputCapsulator);
             if (this.MayBePaginable) {
                 $(this.capsulator).append(<HTMLElement>this.buildHTMLPaginable(response));
             }
             $(this.capsulator).append(<HTMLElement>this.buildHTML(response));
         } else {
-            this.buildHTMLEmpty();
+            $(this.capsulator).append(<HTMLElement>this.buildHTMLEmpty());
         } 
     }
     public CopyContentInjector(column: string): void {

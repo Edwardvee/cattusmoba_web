@@ -45,6 +45,8 @@ return [
     |
     */
 
-    'redirect_url' => null,
-
+    'redirect_url' => "/banned",
+    'models' => [
+        'ban' => \App\Models\BanModel::class,
+    ],
 ];

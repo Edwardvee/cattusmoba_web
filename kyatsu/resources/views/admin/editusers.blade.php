@@ -61,4 +61,3 @@
 
 
     @endsection
-    <!DOCTYPE html>
