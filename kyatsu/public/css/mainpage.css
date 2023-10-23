@@ -317,7 +317,6 @@ button.heroesDesc:before {
 }
 button.adc:before {
 	content: 'Daño';
-
 }
 button.tank:before {
 	content: 'Tanque';
@@ -343,4 +342,12 @@ button.heroesDesc:hover img {
 
 button.heroesDesc:focus {
 	outline: none;
+}
+
+.newsText{
+  max-height: 70px;
+  overflow: auto;
+}
+.card-group{
+  margin: 5%;
 }

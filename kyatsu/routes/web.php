@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\UserManagementController;
+use App\Http\Controllers\NoticiasController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,7 @@ use App\Http\Controllers\ForoController;
 use App\Models\banReason;
 use Cog\Laravel\Ban\Models\Ban;
 use Doctrine\DBAL\Schema\Index;
+use App\Models\Heroes;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,13 +59,13 @@ Route::get("/user_paginator/{name}/{page}", function ($name, $page) {
   return view("user_paginator", ["name" => $name, "page" => $page]);
 })->name("user_paginator");
 
-Route::get("/", function () {
-  return view("mainpage");
-})->name("mainpage");
+Route::get("/", [NoticiasController::class , 'index']
+)->name("mainpage");
 
 Route::get("/gameinfo", function () {
   return view("gameinfo");
 })->name("gameinfo");
+
 
 Route::get('/redis', [RedisController::class, 'index'])->name("redis");
 
@@ -90,9 +92,30 @@ Route::get("/patchnotes", function () {
   return view("patchnotes");
 })->name("patchnotes");
 
+
+
 Route::get("/store", function () {
   return view("store");
 })->name("store");
+Route::get("/store/{status}", function () {
+  return view("store");
+})->name("store.status");
+
+Route::get("/extras", function () {
+  return view("extras");
+})->name("extras"); 
+
+
+
+//Route::get("/extras", [HeroesController::class , 'heroes4extra'])->name("extras"); 
+Route::get("extras", function () {
+      $heroesparaextras = heroes::orderBy('created_at', 'desc')->get();
+      return view('extras', ['getheroes' => $heroesparaextras]);
+});
+
+
+Route::resource('noticias', NoticiasController::class);
+Route::get("/noticias", [NoticiasController::class , 'notPerera'])->name("noticias");
 
 Route::get("/banned", function () {
  // $banned = Ban::latest(Auth::user()->uuid);
@@ -104,7 +127,17 @@ Route::get("/banned", function () {
 
 Route::resource('foro', ForoController::class);
 Route::get('/foro',[ForoController::class , 'index'])->name('foro');
-Route::get('/foro/create',[ForoController::class , 'create'])->name('foro.create');
+Route::post('/foro/post',[ForoController::class , 'post'])->name('foro.post');
+Route::get('/foro/hilo/{id}/create',[ForoController::class , 'create'])->name('foro.createonComment');
+Route::get('/foro/hilo/{id}',[ForoController::class , 'show'])->name('foro.hilo');
+
+Route::get('/token', function (Request $request) {
+  $token = $request->session()->token();
+
+  $token = csrf_token();
+
+  return $token;
+});
 
 Route::get("/como jugar", function () {
   return view("como jugar");

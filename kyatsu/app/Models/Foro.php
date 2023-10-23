@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Database\Factories\forumFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -21,6 +23,12 @@ class Foro extends Model
         'created_at',
         'reply_count',
         'like_count',
+        'updated_count',
         'deleted_at'
     ];
+    public static function newFactory(): Factory
+    {
+        return forumFactory::new();
+    }   
 }
+

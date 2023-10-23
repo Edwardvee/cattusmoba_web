@@ -59,12 +59,11 @@ export class HeroesPaginator extends Paginator {
     public override JSON: KyatsuProxyInterface = {
         page: 1,
         name: "null",
-        method: "uuid",
+        method: "name",
         date_method: "created_at",
         date_start: moment(0).format("DD/MM/YYYY"),
         date_end: moment().format("DD/MM/YYYY"),
-        order: OrderBy.DESC,
-
+        order: OrderBy.DESC,    
     };
     public constructor(capsulator?: string) {
         super(capsulator ?? "paginator_heroes");
@@ -101,9 +100,9 @@ export class HeroesPaginator extends Paginator {
             var answer: HTMLAnchorElement[] = [];
             Object.entries(response["data"]).forEach((element: any) => {
                 answer.push($(document.createElement("a")).on("click", () => {
-                    console.log(element[1]["uuid"]);
+                    console.log(element[1]["name"]);
                     Object.assign(this.information, {
-                        name: element[1]["uuid"]
+                        name: element[1]["name"]
                     });
                 }).append($(document.createElement("button")).addClass("heroes").attr("style",
                 "background-image: url(" + this.getIMGRoute(false) + "heros_img/" + element[1]["uuid"] + "_alt.png"

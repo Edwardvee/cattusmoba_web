@@ -1,14 +1,87 @@
-.html{
-    margin-top: 120px;
+body, html {
+    height: 100%;
+    scroll-padding-top: 30px;
 }
-.niggabackground{
-    color: white;
-    border-radius: 10px;
-    background-color: rgba(0,0,0,.5);
-  
+header{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    max-height: 1080px;
+    max-width: 1920px;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: auto;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
 }
-.playnow{
-    background-color: #ffffff;
-    color: black;
-    border-radius: 10px;
+section{
+    height: 100vh;
+    width: 100vw;
+    max-height: 1080px;
+    max-width: 1920px;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: auto;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+}
+h1{
+    font-size: 600%;
+}
+h3{
+    font-size: 300%;
+}
+    .hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../img/bg_how2play.png);
+    /* Set a specific height */
+    height: 100vh;
+    max-height: 1080px;
+    width: 100vw;
+    max-width: 1920px;
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+}
+.quees {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/bg_quees.png);
+
+}
+
+.reveal{
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: 2s all ease;
+  }
+.reveal.active{
+    transform: translateY(0);
+    opacity: 1;
+}
+.reveal-l{
+    position:relative;
+    transform: translateX(-150px);
+    opacity: 0;
+    transition: 2s all ease;
+}
+.reveal-l.active{
+    transform: translateX(0);
+    opacity: 1;
 }
