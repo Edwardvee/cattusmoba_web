@@ -55,6 +55,15 @@
 </div>
 </section>
 
+<section >
+<div class="hero-image base  reveal">
+  <div class="hero-text">
+      <h3> destruye la base </h3>
+      <p>El nexo es el corazón de las bases de los equipos. Para ganar la partida, hay que destruir el nexo enemigo.</p>
+  </div>
+</div>
+</section>
+
  
 </main>
 

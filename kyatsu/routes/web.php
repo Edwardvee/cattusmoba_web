@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\UserManagementController;
+use App\Http\Controllers\CheckoutMP;
 use App\Http\Controllers\NoticiasController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -94,9 +95,7 @@ Route::get("/patchnotes", function () {
 
 
 
-Route::get("/store", function () {
-  return view("store");
-})->name("store");
+Route::get("/store",CheckoutMP::class)->name("store");
 Route::get("/store/{status}", function () {
   return view("store");
 })->name("store.status");

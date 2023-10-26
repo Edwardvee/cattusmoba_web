@@ -17,19 +17,20 @@ class CheckoutMP extends Controller
         MercadoPago\SDK::setAccessToken($access_token);
         $preference=new MercadoPago\Preference();
         $preference->back_urls=array(
-        "success"=>"google.com",
-        "failure"=>"youtube.com",
-        "pending"=>"ornnhub.com"
+          "success"=>"localhost:8000/store/exito",
+          "failure"=>"localhost:8000/store/error",
+          "pending"=>"localhost:8000/store/pendiente"
         );
         $productos=[];
         $item = new MercadoPago\Item();
         $item->title="Quirocoins";
-        $item->quantity=1;
-        $item->unit_price=1500;
+        $item->unit_price=1;
+        $item->quantity=20;
         array_push($productos, $item);
         $preference->id;
         $preference->items=$productos;
-        $preference->save();
+        $preference->save(); 
+        return view("store", ['preference' => $preference]);
 
     }
 }
