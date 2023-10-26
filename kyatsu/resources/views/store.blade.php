@@ -146,7 +146,7 @@ $preference->back_urls=array(
 $productos=[];
 $item = new MercadoPago\Item();
 $item->title="Quirocoins";
-$item->quantity=1;
+$item->quantity=200;
 $item->unit_price=1;
 array_push($productos, $item);
 $preference->id;
@@ -326,4 +326,7 @@ document.addEventListener("DOMContentLoaded", function() {
    
 
 </script>
+
+
+
 

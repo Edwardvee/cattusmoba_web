@@ -139,9 +139,7 @@ Route::get('/token', function (Request $request) {
   return $token;
 });
 
-Route::get("/como jugar", function () {
-  return view("como jugar");
-})->name("como jugar");
+
 
 Route::get("/isBanned", function () {
   return  (Auth::check()) ? (var_dump(User::findOrFail(Auth::user()?->uuid)->isBanned())) : ("No logueado");

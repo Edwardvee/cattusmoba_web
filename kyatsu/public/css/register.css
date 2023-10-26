@@ -16,7 +16,7 @@
 }
 .main{
 	width: 350px;
-	height: 550px;
+	height: 600px;
 	background: rgba(51, 43, 129, 0.5);
 	opacity: 0.8;
 	overflow: hidden;
@@ -37,7 +37,6 @@
 	font-size: 1em;
 	justify-content: center;
 	display: flex;
-	margin:10px
 }
 label{
 	color: #fff;
@@ -82,9 +81,9 @@ button:hover{
 	background: #6d44b8;
 }
 .login{
-	height: 450px;
+	height: 500px;
 	background: #eee;
-	border-radius: 25% / 10%;
+	border-radius: 15% / 10%;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
 }
