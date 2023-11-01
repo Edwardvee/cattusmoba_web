@@ -41,11 +41,30 @@ class ForoController extends Controller
             'updated_at' => now(),
             'deleted_at' => NULL
         ));
+        if($request->isChildOf != 0){
+        Foro::where('id', $request->isChildOf)->increment('reply_count', 1);
+        }
         return back();
     }
 
     }
-
+    public function reply(Request $request)
+    {
+        if($request->token){
+        Foro::insert(array(
+            'user_poster' => auth()->user()->name,
+            'isChildOf' => $request->isChildOf,
+            'content' => $request->content,
+            'reply_count' => 0,
+            'like_count' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'deleted_at' => NULL
+        ));
+        Foro::where('id', $request->isChildOf)->update(['reply_count' => 'reply_count' + 1]);
+        return back();
+    }
+    }
     /**
      * Store a newly created resource in storage.
      */

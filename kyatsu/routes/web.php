@@ -127,6 +127,8 @@ Route::get("/banned", function () {
 Route::resource('foro', ForoController::class);
 Route::get('/foro',[ForoController::class , 'index'])->name('foro');
 Route::post('/foro/post',[ForoController::class , 'post'])->name('foro.post');
+
+
 Route::get('/foro/hilo/{id}/create',[ForoController::class , 'create'])->name('foro.createonComment');
 Route::get('/foro/hilo/{id}',[ForoController::class , 'show'])->name('foro.hilo');
 
