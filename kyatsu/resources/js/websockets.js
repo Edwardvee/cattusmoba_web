@@ -46,6 +46,18 @@ server.on('connection', socket =>{
                 ));
             })
         }
+
+        if(jsondata.type == 3){
+        
+            console.log("Status")
+            server.clients.forEach(function each(socket){
+                socket.send(JSON.stringify({
+                    type:3, message:"Termino el Juego!"}
+                ));
+                socket.close();
+                jugadores = [];
+            })
+        }
         
       });
 })

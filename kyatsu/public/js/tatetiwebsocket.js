@@ -5,7 +5,12 @@ const socket = new WebSocket("ws://localhost:8080")
 const heroButtons = document.querySelectorAll(".heroes");
 const player1Hero = document.getElementById("player1-hero");
   const player2Hero = document.getElementById("player2-hero");
+  const resetButton = document.getElementById("reset-button");
+  const turno_h1 = document.getElementById("turno_h1");
 
+  resetButton.addEventListener("click", () => {
+    location.reload();
+  });
 const winConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -29,24 +34,39 @@ let gameEnded = false;
 yourturn = false;
 let cellOccupied = Array(9).fill(false);
 
+
 function playMove(index, player){
     if (gameEnded || cellOccupied[index]) {
         return;
       }
       cells[index].style.backgroundImage = player.url; 
       cellOccupied[index] = true;
-      if (checkWin()) { 
+      if (checkWin(player)) { 
         gameEnded = true;
         alert(player.name + ' es el ganador!');
-        socket.send("w")
+        socket.send(JSON.stringify({
+          type:3,
+          message:"Hay un ganador!"
+        }))
         showResetButton();
       } else if (checkTie()) {
         gameEnded = true;
         alert("Excelente juego, es un empate!");
-        socket.send("e")
+        socket.send(JSON.stringify({
+          type:3,
+          message:"Hay un Empate!"
+        }))
         showResetButton();
       }
+    
+      
       yourturn = false
+      if(yourturn == true){
+        turno_h1.innerText = "Tu turno"
+      }
+      if(yourturn == false ){
+        turno_h1.innerText = "Turno del oponente"
+      }
 };
 
 function selectPlayer(player, btn_index){
@@ -101,16 +121,13 @@ cells.forEach((cell, index) => {
   });
 });
 
-const resetButton = document.getElementById("reset-button");
-resetButton.addEventListener("click", () => {
-  resetGame();
-});
 
 
-function checkWin() {
+
+function checkWin(player) {
   return winConditions.some(condition => {
     return condition.every(index => {
-      return cellOccupied[index] && cells[index].style.backgroundImage === currentPlayer.url;
+      return cellOccupied[index] && cells[index].style.backgroundImage === player.url;
     });
   });
 }
@@ -159,6 +176,11 @@ socket.onmessage = ({ data }) => {
                 }
                 else{
                   yourturn = false;
+                }  if(yourturn == true){
+                  turno_h1.innerText = "Tu turno"
+                }
+                if(yourturn == false ){
+                  turno_h1.innerText = "Turno del oponente"
                 }
 
 

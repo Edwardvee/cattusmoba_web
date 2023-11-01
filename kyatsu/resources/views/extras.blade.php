@@ -24,12 +24,14 @@
           <div class="cells player"></div>
           <div class="cells player"></div>
           <div class="cells player"></div>
-          <button id="reset-button">Reiniciar Juego</button>
+          <button id="reset-button" style="display: none" onclick="location.reload();">Reiniciar Juego</button>
         </div>
     </div>
     <div id="player2-hero" class="col hero-image d-flex justify-content-center">
     </div>
   </div>
+  <div class="turno_div">
+    <center><h1 id="turno_h1"></h1></center>  </div>
   <div class="col-12 d-flex justify-content-center ">
     @foreach ($getheroes as $heroes)
     <a><button class="heroes" style="background-image: url('img/heros_img/@php echo $heroes["uuid"];@endphp.png')"></a>
