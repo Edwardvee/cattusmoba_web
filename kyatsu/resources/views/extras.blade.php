@@ -1,3 +1,5 @@
+@extends("maintemplate")
+
 <head>
   <title>Ta Te Ti</title>
   
@@ -6,14 +8,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body style="background-color: ">
+<body style="margin-top: 90px">
   <div class="container">
-    <h1 class="text-center">Ta Te Ti</h1>
+    <h1 class="text-center" >Ta Te Ti</h1>
   <div class="row">
-
     <div id="player1-hero"  class="col hero-image d-flex justify-content-center ">
+      <h1>Player1</h1>
     </div>
-    <div class="col-md-4 d-flex justify-content-center ">
+    <div class="col-md-4 d-flex justify-content-center text-center ">
     <div id="board">
           <div class="cells player"></div>
           <div class="cells player"></div>
@@ -24,10 +26,11 @@
           <div class="cells player"></div>
           <div class="cells player"></div>
           <div class="cells player"></div>
-          <button id="reset-button" style="display: none" onclick="location.reload();">Reiniciar Juego</button>
-        </div>
+          <center><button class="justify-self-center btn btn-primary" id="reset-button" style="display:none" onclick="location.reload();">Reiniciar Juego</button> </center>
+        </div> 
     </div>
     <div id="player2-hero" class="col hero-image d-flex justify-content-center">
+      <h1>Player2</h1>
     </div>
   </div>
   <div class="turno_div">
@@ -124,15 +127,19 @@
   }
   #board {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     width: 300px;
     height: 300px;
   }
 
   .cells {
+    display: flex;
+  justify-content: center;
+  align-items: center;
     width: 30%;
     height: 100px;
-    border: 1px solid black;
+    border: 2px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,6 +148,22 @@
     background-size: cover;
   }
 
+  .cells:nth-of-type(-n + 3){
+  border-top: none;
+  
+}
+.cells:nth-of-type(7), .cells:nth-of-type(8), .cells:nth-of-type(9) {
+  border-bottom: none;
+}
+.cells:nth-of-type(1), .cells:nth-of-type(4), .cells:nth-of-type(7) {
+  border-left: none;
+}
+/* .cells:nth-of-type(3), .cells:nth-of-type(6), .cells:nth-of-type(9) {
+  border-left: none;
+} */
+.cells:nth-of-type(3n){
+  border-right: none;
+}
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
