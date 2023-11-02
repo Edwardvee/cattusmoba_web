@@ -74,6 +74,7 @@ function selectPlayer(player, btn_index){
  
     player1 = new Player("player1", heroButtons[btn_index].style.backgroundImage);
     player1Hero.style.backgroundImage = heroButtons[btn_index].style.backgroundImage; // Muestra el héroe del jugador 1
+    player1Hero.classList.add("slide-in-left");
     currentPlayer = player1;
     heroButtons[btn_index].style.display = "none"; 
     if(you === 'player1'){
@@ -84,6 +85,7 @@ function selectPlayer(player, btn_index){
   else if (player == 'player2' && player2 == null) {
       player2 = new Player("player2", heroButtons[btn_index].style.backgroundImage);
       player2Hero.style.backgroundImage =  heroButtons[btn_index].style.backgroundImage; // Muestra el héroe del jugador 2
+      player2Hero.classList.add("slide-in-right");
       heroButtons[btn_index].style.display = "none"; 
       if(you === 'player2'){
         you = player2
