@@ -19,6 +19,7 @@ class Foro extends Model
         'id',
         'isChildOf',
         'user_poster',
+        'uuid_user',
         'content',
         'created_at',
         'reply_count',

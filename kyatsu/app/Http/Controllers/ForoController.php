@@ -33,6 +33,7 @@ class ForoController extends Controller
         if($request->token){
         Foro::insert(array(
             'user_poster' => auth()->user()->name,
+            'user_poster' => auth()->user()->uuid,
             'isChildOf' => $request->isChildOf,
             'content' => $request->content,
             'reply_count' => 0,

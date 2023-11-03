@@ -72,7 +72,7 @@
                             foroDiv.empty();
                             forum_results.forEach(post => {
                                     console.log(post)
-                                    $($(document.createElement('div')).addClass(
+                                    $($(document.createElement('div')).attr('foroid',Object.values(post)[0]).addClass(
                                         "container-fluid post border").append($(document
                                             .createElement('div')).addClass('row').append($(
                                             document
@@ -160,7 +160,9 @@
                                             'col-12 mt-3').append($(document
                                                 .createElement('i')).addClass(
                                                 'bi bi-flag').attr('onclick',
-                                                'flag()')
+                                                'window.location = "' + (route("postreport.create", {
+                                                    uuid: String(Object.values(post)[0])
+                                                }) ) + '"')
                                             .attr('onmouseover',
                                                 'this.className = "bi bi-flag-fill"'
                                             )

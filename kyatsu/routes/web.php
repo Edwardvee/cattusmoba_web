@@ -18,6 +18,7 @@ use App\Models\Foro;
 
 use App\Http\Controllers\HeroesController;
 use App\Http\Controllers\ForoController;
+use App\Http\Controllers\PostReportController;
 use App\Models\banReason;
 use Cog\Laravel\Ban\Models\Ban;
 use Doctrine\DBAL\Schema\Index;
@@ -113,6 +114,7 @@ Route::get("extras", function () {
       return view('extras', ['getheroes' => $heroesparaextras]);
 });
 
+Route::resource("/postreport", PostReportController::class);
 
 Route::resource('noticias', NoticiasController::class);
 Route::get("/noticias", [NoticiasController::class , 'notPerera'])->name("noticias");
