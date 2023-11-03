@@ -9,5 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostReport extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids, SoftDeletes, HasUuids;
+    protected $primaryKey = "uuid";
+    public $incrementing = false;
 }

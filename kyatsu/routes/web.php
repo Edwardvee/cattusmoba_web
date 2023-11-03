@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\UserManagementController;
+use App\Http\Controllers\CheckoutMP;
 use App\Http\Controllers\NoticiasController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -95,9 +96,7 @@ Route::get("/patchnotes", function () {
 
 
 
-Route::get("/store", function () {
-  return view("store");
-})->name("store");
+Route::get("/store",CheckoutMP::class)->name("store");
 Route::get("/store/{status}", function () {
   return view("store");
 })->name("store.status");
@@ -114,7 +113,7 @@ Route::get("extras", function () {
       return view('extras', ['getheroes' => $heroesparaextras]);
 });
 
-Route::resource("/postreport", PostReportController::class);
+Route::resource("/postreport", PostReportController::class)->middleware("auth");
 
 Route::resource('noticias', NoticiasController::class);
 Route::get("/noticias", [NoticiasController::class , 'notPerera'])->name("noticias");
@@ -130,6 +129,8 @@ Route::get("/banned", function () {
 Route::resource('foro', ForoController::class);
 Route::get('/foro',[ForoController::class , 'index'])->name('foro');
 Route::post('/foro/post',[ForoController::class , 'post'])->name('foro.post');
+
+
 Route::get('/foro/hilo/{id}/create',[ForoController::class , 'create'])->name('foro.createonComment');
 Route::get('/foro/hilo/{id}',[ForoController::class , 'show'])->name('foro.hilo');
 
@@ -141,9 +142,7 @@ Route::get('/token', function (Request $request) {
   return $token;
 });
 
-Route::get("/como jugar", function () {
-  return view("como jugar");
-})->name("como jugar");
+
 
 Route::get("/isBanned", function () {
   return  (Auth::check()) ? (var_dump(User::findOrFail(Auth::user()?->uuid)->isBanned())) : ("No logueado");

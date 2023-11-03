@@ -14,7 +14,9 @@
         <div class="textbox_n">
             <form id="post_something">
                 @csrf
+                
                 <input type="text" name="parentPost" id="parentPost" value="0" style="display: none">
+                <p id="replier"></p>
                 <textarea class="form-control" name="content" id="content_post" rows="10"></textarea>
                 <div class="d-flex my-3 justify-content-end">
                     <button type="submit" onclick="forumButton()" id="submit_comment" class="btn btn-primary"><i class="bi bi-send"></i>
@@ -43,6 +45,18 @@
                     textboxforum.className = "textbox_n";
 
                 }
+            }
+            function reply(n){
+                let textboxforum = document.getElementsByClassName('textbox_n')[0];
+                if (textboxforum) {
+                    textboxforum.className = "textbox_f";
+                }
+                topFunction();
+                replier = document.getElementById("replier");
+                replier.innerText = "Respondiendo al post " + n;
+                parentPost = document.getElementById("parentPost");
+                parentPost.value = n;
+
             }
            @php 
            if(!auth()->user()){
@@ -134,7 +148,7 @@
                                                 'col-12 mt-3').append($(document
                                                     .createElement('i')).addClass(
                                                     'bi bi-chat').attr('onclick',
-                                                    'reply()')
+                                                    'reply('+ Object.values(post)[0]+')')
                                                 .attr('onmouseover',
                                                     'this.className = "bi bi-chat-fill"'
                                                 )
@@ -193,6 +207,7 @@
                 var content_text = $("#content_post").val();
                 var isChildOf = $("#parentPost").val();
                 var _token = $("[name='_token']").val();
+               
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': _token
@@ -210,10 +225,14 @@
                         $("#content_post").val('');
                         $("#foro").append($(document.createElement("div")).addClass("spinner-border"));
                         callAjax();
+                        $("#parentPost").val('0');
+
 
                     },
                     error: function() {
                         console.log("error")
+                        $("#parentPost").val('0');
+
                     }
                 })
             });

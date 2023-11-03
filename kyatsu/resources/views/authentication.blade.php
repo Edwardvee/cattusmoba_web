@@ -5,6 +5,9 @@
   <script src="{{ url('js/auth.js') }}"></script>
   <link href="css/register.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  
   @endsection
   @section("http_body")
   <body>
@@ -65,7 +68,18 @@
               <input class="Auth_input" type="email" name="email" placeholder="Email" required="">
               <input class="Auth_input" type="text" name="password" placeholder="Contraseña" required="">
               <input class="Auth_input" type="text" name="password_confirmation" placeholder="Confirmar contraseña" required="">
-              <input class="Auth_input" type="checkbox" name="remember" value="1"> 
+   <!--            <input class="Auth_input" type="checkbox" name="remember" value="1">  -->
+              
+
+        
+
+              <div class="d-flex justify-content-center g-recaptcha" data-sitekey="6LedxM8oAAAAANpr6zo9I7lCYEYi7L9fTmRQKsnK"></div>
+
+
+
+
+
+
               <button type="submit">Registrate</button>
             </form>
           </div>

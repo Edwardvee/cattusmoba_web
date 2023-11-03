@@ -15,20 +15,21 @@
             @endforeach
         </ul>
     </div>
+    @endif
 @endsection
 @section("http_body")
 <div class="card">
         <div class="card-body">
-            <form method="POST" , action="{{route('admin.bannable.store')}}">
+            <form method="POST" , action="{{route('postreport.store')}}">
                 @csrf
                 <div class="row">
                     <div class="mb-2 col-12">
                     <p class="text-center">Post UUID:</p>
-                        <input type="text" name="post_uuid" class="form-control" id="uuid" readonly value="{{$post['uuid']}}"></input>
+                        <input type="text" name="post_uuid" class="form-control" id="uuid" readonly value="{{$post['id']}}"></input>
                     </div>
                     <div class="mb-2 col-12">
                     <p class="text-center">Nombre de usuario:</p>
-                        <input type="text" class="form-control" id="name" readonly value="{{$user['name']}}"></input>
+                        <input type="text" class="form-control" id="name" readonly value="{{$post['user_poster']}}"></input>
                     </div>
                     <div class="mb-2 col-12">
                     <p class="text-center">Razon:</p>

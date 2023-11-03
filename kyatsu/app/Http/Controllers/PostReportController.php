@@ -7,7 +7,8 @@ use App\Models\PostReport;
 use Illuminate\Http\Request;
 use App\Models\banReason;
 use App\Models\User;
-
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 class PostReportController extends Controller
 {
     /**
@@ -28,11 +29,10 @@ class PostReportController extends Controller
             "uuid" => ["required"]
         ]);
         $foro = Foro::FindOrFail($request->uuid);
-        $user = User::FindOrFail(die(dd($foro->toArray())));
+      //  $user = User::FindOrFail(die(dd($foro->toArray())));
         return view("reportable", [
             "post" => Foro::FindOrFail($request->uuid),
-            "banReasons" => banReason::all(),
-            "user" => $user
+            "banReasons" => banReason::all()
         ]);
     }
 
@@ -42,7 +42,7 @@ class PostReportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "post_uuid" => ["required", "uuid", "exists:" . Foro::class . ",uuid"],
+            "post_uuid" => ["required", "exists:" . Foro::class . ",id"],
             "reason" => ["required", "uuid", "exists:" . banReason::class . ",uuid"],
             "message" => ["required", "string", "min:32", "max:512"]
         ]);
@@ -51,7 +51,6 @@ class PostReportController extends Controller
             $table->uuid("banReason_uuid")->references("uuid")->on(banReason::class);
             $table->foreignId("post_uuid")->references("id")->on(Foro::class);
         */
-        $validated = $request->validated();
         $post_report = new PostReport;
         $post_report->reporter_uuid = auth()->user()->uuid;
         $post_report->banReason_uuid = $request->reason;

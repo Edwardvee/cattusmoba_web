@@ -18,7 +18,8 @@ return new class extends Migration
             $table->uuid()->primary();
             $table->uuid("reporter_uuid")->references("uuid")->on(User::class);
             $table->uuid("banReason_uuid")->references("uuid")->on(banReason::class);
-            $table->foreignId("post_uuid")->references("id")->on(Foro::class);
+            $table->foreignId("post_uuid")->references("id")->on("foro");
+            $table->string("message");
             $table->timestamps();
         });
     }
