@@ -24,7 +24,7 @@
             <p>Fecha de bloqueo: {{$user["banned_at"]}} </p>
             <div class="row">
                 <div class="col-auto me-auto">
-                <a class="btn btn-primary" id="edit_user_url">Editar este usuario</a>
+                <a class="btn btn-primary" href="{{route('admin.admin_users.edit', ['admin_user' => $user['uuid']])}}">Editar este usuario</a>
                 </div>
                 <div class="col-auto me-auto">
                 <a class="btn btn-primary" href="{{route('admin.bannable.create', ['uuid' => $user['uuid']])}}">Banear este usuario</a>
@@ -40,4 +40,4 @@
 
 
 
-    @endsection
+@endsection
