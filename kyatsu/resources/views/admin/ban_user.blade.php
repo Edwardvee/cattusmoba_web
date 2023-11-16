@@ -1,6 +1,15 @@
 @extends("admin.admintemplate")
 
 @section("http_headers")
+<!--
+<script type="text/javascript">
+    $(document).ready(() => {
+        $("#edit_user_url").attr("href", route("admin.admin_users.edit", {
+            admin_user: "{{$user['uuid']}}"
+        }))
+    });
+</script>
+-->
 @endsection
 @section("http_body")
 <br>

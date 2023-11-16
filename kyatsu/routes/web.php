@@ -151,4 +151,5 @@ Route::get("/isBanned", function () {
 // Al lado le colocas una coma y definis una funcion sin nombre  (Funciones anonima)-
 // El view es una funcion normal, la cual tiene un parametro.
 require __DIR__ . '/auth.php';
+require __DIR__ . '/chat.php';
 require __DIR__ . "/admin.php";

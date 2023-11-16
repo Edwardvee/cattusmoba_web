@@ -15,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Cog\Contracts\Ban\Bannable as BannableInterface;
 use Cog\Laravel\Ban\Traits\Bannable;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class User extends Authenticatable implements BannableInterface
 {
@@ -54,5 +55,15 @@ class User extends Authenticatable implements BannableInterface
     public static function newFactory(): Factory
     {
         return UserFactory::new();
+    }
+    public function chats() {
+        return $this->belongsToMany(Chat::class)->using(new class extends Pivot {
+            protected $primaryKey = "uuid";
+            public $incrementing = false;
+            use HasUuids;
+        });
+    }
+    public function messages() {
+        return $this->hasMany(Message::class);
     }
 }
