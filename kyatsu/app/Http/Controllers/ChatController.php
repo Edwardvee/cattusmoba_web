@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chat;
+use App\Models\ChatUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -16,9 +17,10 @@ class ChatController extends Controller
         //policies, request, observers.
         $chat = Chat::FindOrFail($uuid);
         abort_unless($chat->users->contains(auth()->user()), 403);
-        //dd($chat->users->contains(auth()->user()));
+        $chat_user = $chat->hasOne(ChatUser::class)->getRelated()->first();
         return view("chat", [
-            "chat" => $chat
+            "chat" => $chat,
+            "chat_user" => $chat_user->uuid
         ]);
     }
     public function chat_with(string $user) {

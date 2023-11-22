@@ -1,3 +1,25 @@
+
+
+//import * as LaravelWeb from 'https://cdn.jsdelivr.net/npm/laravel-echo@1.15.3/dist/echo.min.js"';
+//const { Channel, Connector, EventFormatter, default: Echo } = LaravelWeb;
+/*
+async function importEcho() {
+  const LaravelWeb = await import('https://cdn.jsdelivr.net/npm/laravel-echo@1.15.3/dist/echo.min.js');
+
+  const { Echo, Channel, Connector, EventFormatter } = LaravelWeb;
+
+  for (const key in LaravelWeb) {
+    window[key] = LaravelWeb[key];
+  }
+
+  return Echo;
+}
+
+importEcho().then(
+  console.log("LARAVEL ECHO CARGANDO EXITOSAMENTE")
+);*/
+
+
 window.addEventListener("load", () => {
     const msgerForm = document.getElementById("form");
 const msgerInput = get(".msger-input");
@@ -8,8 +30,9 @@ const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const BOT_NAME = "BOT";
 const PERSON_NAME = "Sajad";
-const CSRF = document.getElementById("csrf-parent").lastChild.value;
+const CHAT_UUID = new URL(window.location.href).pathname.split("/")[2];
 
+const CSRF = document.getElementById("csrf-parent").lastChild.value;
     document.getElementById("form").addEventListener("submit", event => {
         event.preventDefault();
       
@@ -27,6 +50,7 @@ const CSRF = document.getElementById("csrf-parent").lastChild.value;
         body: JSON.stringify({
           content: msgText,
           chat_uuid: new URL(window.location.href).pathname.split("/")[2],
+          chat_user: chat_user_uuid,
           _token: CSRF
         })
       })

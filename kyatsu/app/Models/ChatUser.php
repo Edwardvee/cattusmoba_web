@@ -13,31 +13,45 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Banreason
+ * Class ChatUser
  * 
  * @property string $uuid
- * @property string $name
+ * @property string $user_uuid
+ * @property string $chat_uuid
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * 
- * @property Collection|Ban[] $bans
+ * @property Chat $chat
+ * @property User $user
+ * @property Collection|Message[] $messages
  *
  * @package App\Models
  */
-class Banreason extends Model
+class ChatUser extends Model
 {
 	use SoftDeletes, HasUuids;
-	protected $table = 'banreasons';
+	protected $table = 'chat_user';
 	protected $primaryKey = 'uuid';
 	public $incrementing = false;
 
 	protected $fillable = [
-		'name'
+		'user_uuid',
+		'chat_uuid'
 	];
 
-	public function bans()
+	public function chat()
 	{
-		return $this->hasMany(Ban::class, 'ban_reason_uuid');
+		return $this->belongsTo(Chat::class, 'chat_uuid');
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'user_uuid');
+	}
+
+	public function messages()
+	{
+		return $this->hasMany(Message::class, 'chat_user_uuid');
 	}
 }

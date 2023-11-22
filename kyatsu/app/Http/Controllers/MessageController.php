@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chat;
+use App\Events\MessageSent;
 use Illuminate\Http\Request;
-use App\Models\Message;
 
 class MessageController extends Controller
 {
@@ -15,21 +14,12 @@ class MessageController extends Controller
     public function sent(Request $request) {
         $user = auth()->user();
         if ($user !== null && $user instanceof \App\Models\User) {
-            $request->validate([
-                "content" => ["required", "string"],
-                "chat_uuid" => ["required", "uuid", "exists:" . Chat::class]
-            ]);
-          /*  $message = Message::create([
-                "user_uuid" => $user->uuid,
-                "content" => $request->content,
-                "chat_uuid" => $request->chat_uuid 
-            ])->toSql();*/
             $message = $user->messages()->create([
-                "user_uuid" => $user->uuid,
                 "content" => $request->content,
-                "chat_uuid" => $request->chat_uuid
-            ])->toSql();
-            dd($message); //->load("user");
+                //"chat_user_uuid" => '9aa09db4-eac0-4e29-a21c-aa2052fc05f8'//$request->chat_uuid
+                "chat_user_uuid" => $request->chat_user
+            ]);
+            broadcast(new MessageSent($message))->toOthers();
             return $message;
         }
     }

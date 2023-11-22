@@ -1,69 +1,74 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use Database\Factories\UserFactory;
+use Carbon\Carbon;
+use Cog\Laravel\Ban\Traits\Bannable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 use Cog\Contracts\Ban\Bannable as BannableInterface;
-use Cog\Laravel\Ban\Traits\Bannable;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 
+use Spatie\Permission\Traits\HasRoles;
+
+/**
+ * Class User
+ * 
+ * @property string $uuid
+ * @property string $name
+ * @property string $email
+ * @property Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property Carbon|null $banned_at
+ * 
+ * @property Collection|Chat[] $chats
+ *
+ * @package App\Models
+ */
 class User extends Authenticatable implements BannableInterface
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasUuids, HasRoles, Bannable;
+	use HasFactory, SoftDeletes, HasUuids, HasRoles, Bannable;
+	protected $table = 'users';
+	protected $primaryKey = 'uuid';
+	public $incrementing = false;
 
-    protected $primaryKey = "uuid";
-    public $incrementing = false;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+		'banned_at' => 'datetime'
+	];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	protected $hidden = [
+		'password',
+		'remember_token'
+	];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-    public static function newFactory(): Factory
-    {
-        return UserFactory::new();
-    }
-    public function chats() {
-        return $this->belongsToMany(Chat::class)->using(new class extends Pivot {
-            protected $primaryKey = "uuid";
-            public $incrementing = false;
-            use HasUuids;
-        });
-    }
-    public function messages() {
-        return $this->hasMany(Message::class);
-    }
+	protected $fillable = [
+		'name',
+		'email',
+		'email_verified_at',
+		'password',
+		'remember_token',
+		'banned_at'
+	];
+
+	public function chats()
+	{
+		return $this->belongsToMany(Chat::class, 'chat_user', 'user_uuid', 'chat_uuid')
+					->withPivot('uuid', 'deleted_at')
+					->withTimestamps();
+	}
+	public function messages() {
+		return $this->hasManyThrough(Message::class, ChatUser::class);
+	}
 }

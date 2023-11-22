@@ -7,37 +7,38 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Banreason
+ * Class Hero
  * 
  * @property string $uuid
  * @property string $name
+ * @property string $voice_actor
+ * @property string $description
+ * @property Carbon $birthdate
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
- * 
- * @property Collection|Ban[] $bans
  *
  * @package App\Models
  */
-class Banreason extends Model
+class Hero extends Model
 {
-	use SoftDeletes, HasUuids;
-	protected $table = 'banreasons';
-	protected $primaryKey = 'uuid';
+	use SoftDeletes;
+	protected $table = 'heroes';
+	protected $primaryKey = 'name';
 	public $incrementing = false;
 
-	protected $fillable = [
-		'name'
+	protected $casts = [
+		'birthdate' => 'datetime'
 	];
 
-	public function bans()
-	{
-		return $this->hasMany(Ban::class, 'ban_reason_uuid');
-	}
+	protected $fillable = [
+		'uuid',
+		'voice_actor',
+		'description',
+		'birthdate'
+	];
 }

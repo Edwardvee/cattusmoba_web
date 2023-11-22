@@ -19,6 +19,18 @@ class UserSeeder extends Seeder
             'email' => "nico205@gmail.com",
             'password' => Hash::make("auuha73277egFDA")
         ]);
+        
+        User::create([
+            'name' => "tomoko",
+            'email' => "tomoko@watamote.com",
+            'password' => Hash::make("auuha73277egFDA")
+        ]);
+        
+        User::create([
+            'name' => "megumin",
+            'email' => "megumin@konosuba.com",
+            'password' => Hash::make("auuha73277egFDA")
+        ]);
         UserFactory::new()->trashed()->count(500)->create();
         UserFactory::new()->count(500)->create();
     }
