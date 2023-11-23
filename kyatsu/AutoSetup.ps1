@@ -229,6 +229,9 @@ if (Get-Command npm) {
         Write-Host("Compilando Typescript...") -ForegroundColor Yellow
         tsc -p tsconfig.json
         Write-Host("TypeScript compilado exitosamente...") -ForegroundColor Green
+        Write-Host("Compilando scripts VITE") -ForegroundColor Yellow
+        npm run build
+        Write-Host("VITE compilado exitosamente") -ForegroundColor Green
     } else {
         throw ("La version de NPM es imcompatible...");
     }

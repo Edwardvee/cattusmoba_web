@@ -11,6 +11,7 @@ window.addEventListener("load", () => {
     const PERSON_IMG: String = "https://image.flaticon.com/icons/svg/145/145867.svg";
     //const BOT_NAME: String = "BOT";
     const PERSON_NAME: String = "Sajad";
+    //@ts-ignore
     const CHAT_UUID: String = new URL(window.location.href).pathname.split("/")[2];
 
     const CSRF: String = document.getElementById("csrf-parent")!.lastChild!.nodeValue!;
