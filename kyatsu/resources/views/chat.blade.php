@@ -165,7 +165,7 @@ body {
 }
 
 </style>
-<script src="{{ url('js/chat.js');}}"></script>
+<script src="{{ url('js/build/chat.js');}}"></script>
 
 </head>
 
