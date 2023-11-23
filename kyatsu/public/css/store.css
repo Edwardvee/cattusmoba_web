@@ -68,7 +68,7 @@ color: rgba(255,255,25,0.05)
         }
 
 
-        .container .t .card:after{
+        .container .e .card:after{
             content: '👑';
             position: absolute;
             top: 30%;
