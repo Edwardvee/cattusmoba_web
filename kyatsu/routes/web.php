@@ -24,6 +24,11 @@ use App\Models\banReason;
 use Cog\Laravel\Ban\Models\Ban;
 use Doctrine\DBAL\Schema\Index;
 use App\Models\Heroes;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+USE App\Providers\RouteServiceProvider;
+use Dasomnya\OAuth2\requestAuthorizationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +48,50 @@ Route::get('/', function () {
 */
 
 Route::group(["middleware" => ["guest"]], function () {
-  Route::get("authentication", function () {
-    return view("authentication");
-  })->name("authentication");
+        Route::get("authentication", function () {
+          return view("authentication");
+        })->name("authentication");
+
+
+        Route::any("oauth2", function () {
+          require_once("oauth2.php");
+          $request = new requestAuthorizationRequest;
+          die();
+        })->name("oauth2");
+
+        Route::any("oauth2_code", function () {
+            require_once("oauth2.php");
+            $request = request();
+            $request->validate([
+              "code" => "required"
+            ]);
+            $request_authorizable = new \Dasomnya\OAuth2\notifyAuthorizationRequest($request->code);
+            $decoded = (array) json_decode(base64_decode($request_authorizable->id_token));
+            Auth::logout();
+            $user = User::where('email', $decoded["email"])->first();
+            if (!$user) {
+              $user = User::create([
+                'name' => substr((explode("@", $decoded["email"]))[0], 0, 16),
+                'email' => $decoded["email"],
+                "email_verified_at" => $decoded["email_verified"] ? now() : null, 
+                'password' => Hash::make($request_authorizable->access_token)
+              ]);
+              $player= users_info::create([
+                'user_id' => $user->uuid,
+                'username' => substr((explode("@", $decoded["email"]))[0], 0, 16),
+                'profile_pic'=> "default",
+                'current_rank' => 'Unranked',
+                'current_elo' => '0',
+                'description' => 'Hola!',
+                'matches_played' => '0',
+                'winrate' => '0',
+                'main_role' => 'Ninguno'
+              ]);
+              event(new Registered($user));
+            }
+            Auth::login($user, true);
+            return response()->redirectTo(RouteServiceProvider::HOME);
+          });
 });
 
 Route::get("/user/{uuid}", function ($uuid) {
